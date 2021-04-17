@@ -1,13 +1,24 @@
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-  <a class="navbar-brand" href="#">Metro Opticals</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
-    <span class="navbar-toggler-icon"></span>
+<mat-toolbar color="primary">
+  <button mat-icon-button [fxHide.gt-xs]="true" (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
   </button>
-  <div id="menu" class="collapse navbar-collapse">
-    <ul class="navbar-nav" style="right:0;position:absolute;margin-right:20px;">
-      <li *ngFor="let menu of menus" (click)="click(menu.click)" class="nav-item">
-        <a class="nav-link" href="#">{{menu.name}}</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+  <span>Web Education</span>
+  <span class="example-spacer"></span>
+  <span [fxHide.xs]="true" matRipple class="mat-list-item" *ngFor="let menu of menus" (click)="click(menu.click)">
+    <mat-icon *ngIf="menu.icon">{{menu.icon}}</mat-icon>
+    {{menu.name}}
+  </span>
+</mat-toolbar>
+<mat-drawer-container [hasBackdrop]="'true'">
+<mat-drawer #drawer>
+  <mat-list role="list">
+    <mat-list-item matRipple role="listitem" *ngFor="let menu of menus" (click)="click(menu.click)">
+      <mat-icon *ngIf="menu.icon">{{menu.icon}}</mat-icon>
+      {{menu.name}}
+    </mat-list-item>
+  </mat-list>
+</mat-drawer>
+  <mat-drawer-content class="container">
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
