@@ -1,0 +1,36 @@
+<mat-card *ngIf="firestore.user" class="profile-card">
+  <mat-card-header>
+    <mat-card-title>User Profile</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div fxFlex fxLayout="column" fxLayout.sm="row" fxLayoutAligmnet="space-between center" fxLayoutGap="20px">
+      <div>
+        <img mat-card-image [src]="firestore.user.pic" alt="Profile Pic">
+      </div>
+      <div>
+        <table>
+          <tbody *ngIf="!editing">
+            <tr><th>Name</th><td>{{firestore.user.name}}</td></tr>
+            <tr><th>Email</th><td>{{firestore.user.email}}</td></tr>
+            <tr><th>Phone</th><td>{{firestore.user.phone}}</td></tr>
+            <tr><th>Role</th><td>{{firestore.user.role}}</td></tr>
+            <tr><th>Address</th><td>{{firestore.user.address}}</td></tr>
+          </tbody>
+          <tbody *ngIf="editing">
+            <tr><th>Name</th><td><input matInput [(ngModel)]="firestore.user.name" disabled></td></tr>
+            <tr><th>Email</th><td><input matInput [(ngModel)]="firestore.user.email" disabled></td></tr>
+            <tr><th>Phone</th><td><input matInput [(ngModel)]="firestore.user.phone"></td></tr>
+            <tr><th>Role</th><td><input matInput [(ngModel)]="firestore.user.role" disabled></td></tr>
+            <tr><th>Address</th><td><textarea matInput rows="3" [(ngModel)]="firestore.user.address"></textarea></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button *ngIf="editing" mat-raised-button color="primary">Save</button>
+    <button mat-stroked-button color="accent" (click)="editing=!editing">{{editing?"Cancel":"Edit Profile"}}</button>
+  </mat-card-actions>
+</mat-card>

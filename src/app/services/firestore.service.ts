@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Menu } from '../models/models';
+import { User } from '../models/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreService {
-  menuRef:AngularFirestoreCollection<Menu>;
+  user:User;
+  userRef:AngularFirestoreCollection<User>;
   constructor(firestore:AngularFirestore) {
-    this.menuRef = firestore.collection<Menu>('menus', ref => ref.orderBy('order'));
+    this.userRef = firestore.collection<User>('users');
   }
 }

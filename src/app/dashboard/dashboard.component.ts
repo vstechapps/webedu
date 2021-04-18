@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { FirestoreService } from '../services/firestore.service';
+import { User } from '../models/models';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,14 +8,10 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./dashboard.component.less']
 })
 export class DashboardComponent implements OnInit {
-  user:any=undefined;
+  user:User=undefined;
 
-  constructor(public auth: AngularFireAuth) {
-     this.auth.authState.subscribe(res=>{
-      if(res!=null){
-        this.user=res;
-      }
-   });
+  constructor(public firestore: FirestoreService) {
+     this.user=this.firestore.user;
   }
 
   ngOnInit(): void {
