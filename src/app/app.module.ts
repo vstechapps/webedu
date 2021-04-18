@@ -20,6 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule} from '@angular/material/expansion';
 import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
@@ -38,7 +39,7 @@ import { ProfileComponent } from './profile/profile.component';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,
-    MatSidenavModule,MatIconModule,MatToolbarModule,MatButtonModule,MatListModule,MatRippleModule,MatCardModule
+    MatSidenavModule,MatIconModule,MatToolbarModule,MatButtonModule,MatListModule,MatRippleModule,MatCardModule,MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,1 +1,46 @@
 <h3 *ngIf="firestore.user">Welcome {{firestore.user.name}}</h3>
+
+<div class="row">
+  <div class="col-12 col-sm-6 user-courses">
+    <div class="col-12 title">Your Courses</div>
+    <div class="col-12 col-sm-6" *ngFor="let courses of userCourses | keyvalue">
+      <mat-card class="example-card">
+        <mat-card-content>
+          <div class="course-count">{{courses.value.length}}</div>
+          <div class="course-status">{{courses.key}}</div>
+        </mat-card-content>
+        <mat-card-actions>
+          <mat-nav-list role="list">
+            <mat-list-item *ngFor="let course of courses.value" role="listitem">{{course.name}}</mat-list-item>
+          </mat-nav-list>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  <div class="col-12 col-sm-6 user-activity">
+    <div class="col-12 title">Your Activity</div>
+    <div class="col-12 col-sm-6" *ngFor="let activity of userActivity | keyvalue">
+      <mat-card class="example-card">
+        <mat-card-content>
+          <div class="gauge-wrapper">
+  <div class="gauge four rischio3">
+    <div class="slice-colors">
+      <div class="st slice-item"></div>
+      <div class="st slice-item"></div>
+      <div class="st slice-item"></div>
+      <div class="st slice-item"></div>
+    </div>
+    <div class="needle"></div>
+    <div class="gauge-center">
+      <div class="label">{{activity.key}}</div>
+      <div class="number">{{activity.value}}</div>
+    </div>
+  </div>
+</div>
+        </mat-card-content>
+        <mat-card-actions>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
