@@ -11,4 +11,6 @@ export class FirestoreService {
   constructor(firestore:AngularFirestore) {
     this.userRef = firestore.collection<User>('users');
   }
+
+
 }

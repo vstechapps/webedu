@@ -8,10 +8,9 @@ import { User } from '../models/models';
   styleUrls: ['./dashboard.component.less']
 })
 export class DashboardComponent implements OnInit {
-  user:User=undefined;
 
   constructor(public firestore: FirestoreService) {
-     this.user=this.firestore.user;
+
   }
 
   ngOnInit(): void {

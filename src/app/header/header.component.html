@@ -1,22 +1,24 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button [fxHide.gt-xs]="true" (click)="drawer.toggle()">
+  <button mat-icon-button class="d-block d-sm-none" (click)="drawer.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
   <span>WebEdu</span>
   <span class="example-spacer"></span>
-  <span [fxHide.xs]="true" matRipple class="mat-list-item" [routerLinkActive]="['active']" *ngFor="let menu of menus"
-    (click)="click(menu.click)" [routerLink]="[menu.route]">
+  <div class="d-none d-sm-block">
+    <span matRipple class="mat-list-item" [routerLinkActive]="['active']" *ngFor="let menu of menus"
+      (click)="click(menu.click)" [routerLink]="[menu.route]">
       <mat-icon *ngIf="menu.icon">{{menu.icon}}</mat-icon>
       <span>{{menu.name}}</span>
-  </span>
+    </span>
+  </div>
 </mat-toolbar>
 <mat-drawer-container [hasBackdrop]="'true'">
   <mat-drawer #drawer>
     <mat-list role="list">
       <mat-list-item matRipple role="listitem" *ngFor="let menu of menus" [routerLinkActive]="['active']"
         (click)="click(menu.click)" [routerLink]="[menu.route]">
-          <mat-icon *ngIf="menu.icon">{{menu.icon}}</mat-icon>
-          <span>{{menu.name}}</span>
+        <mat-icon *ngIf="menu.icon">{{menu.icon}}</mat-icon>
+        <span>{{menu.name}}</span>
       </mat-list-item>
     </mat-list>
   </mat-drawer>

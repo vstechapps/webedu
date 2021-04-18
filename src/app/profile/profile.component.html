@@ -3,12 +3,12 @@
     <mat-card-title>User Profile</mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    <div fxFlex fxLayout="column" fxLayout.sm="row" fxLayoutAligmnet="space-between center" fxLayoutGap="20px">
-      <div>
+    <div class="row">
+      <div class="col-12 col-md-6">
         <img mat-card-image [src]="firestore.user.pic" alt="Profile Pic">
       </div>
-      <div>
-        <table>
+      <div class="col-12 col-md-6">
+        <table class="table">
           <tbody *ngIf="!editing">
             <tr><th>Name</th><td>{{firestore.user.name}}</td></tr>
             <tr><th>Email</th><td>{{firestore.user.email}}</td></tr>

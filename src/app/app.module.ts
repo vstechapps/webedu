@@ -12,7 +12,6 @@ import { QuizComponent } from './quiz/quiz.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule} from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -39,7 +38,6 @@ import { ProfileComponent } from './profile/profile.component';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,
-    FlexLayoutModule,
     MatSidenavModule,MatIconModule,MatToolbarModule,MatButtonModule,MatListModule,MatRippleModule,MatCardModule
   ],
   providers: [],
