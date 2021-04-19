@@ -44,7 +44,7 @@ export class HeaderComponent implements OnInit {
       console.log("User value Changed ", user)
       if (this.firebaseUser != null) {
         if (user != null) {
-          this.firestore.user = user;
+          this.firestore.setUser(user);
           this.user = this.firestore.user;
           console.log("User Logged In Success : ", this.user);
           this.refresh();

@@ -1,0 +1,30 @@
+<mat-card class="subjects-card">
+  <mat-card-header>
+    <mat-card-title>Course Subjects</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="col-12 table-responsive">
+      <table class="table">
+        <tbody>
+          <tr *ngFor="let subject of subjects">
+            <td>{{subject.name}}</td>
+            <td><i class="material-icons text-danger pointer" (click)="deleteSubject(subject)">delete</i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </mat-card-content>
+  <mat-card-actions class="row m-2">
+    <div class="col-8 d-inline-block subject-input">
+      <mat-form-field>
+        <mat-label>Subject</mat-label>
+        <input matInput placeholder="Ex. Physics,Chemistry..." [(ngModel)]="subject.name">
+      </mat-form-field>
+    </div>
+    <div class="col-4 d-inline-block align-middle">
+      <button class="float-right" mat-mini-fab color="primary" (click)="addSubject()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </mat-card-actions>
+</mat-card>

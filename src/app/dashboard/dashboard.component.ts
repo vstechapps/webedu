@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from '../services/firestore.service';
-import { User, UserCourse } from '../models/models';
+import { User, UserCourse, CourseSubject } from '../models/models';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,10 +14,19 @@ export class DashboardComponent implements OnInit {
     if(firestore.user.role=="USER" && firestore.user.courses!=null){
       this.loadUserDashboard(firestore.user.courses);
     }
+    if(firestore.user.role=="ADMIN"){
+      this.loadAdminDashboard();
+    }
   }
 
   ngOnInit(): void {
   }
+
+  loadAdminDashboard(){
+
+  }
+
+
 
   loadUserDashboard(courses:UserCourse[]){
     let averageDuration=0;

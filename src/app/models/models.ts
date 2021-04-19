@@ -58,4 +58,7 @@ export class Page{
   number:number;
 }
 
-
+export class CourseSubject{
+  id?:string;
+  name:string;
+}

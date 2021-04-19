@@ -21,7 +21,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule} from '@angular/material/expansion';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import { ProfileComponent } from './profile/profile.component';
+import { SubjectsCardComponent } from './subjects-card/subjects-card.component';
+import { CustomCardComponent } from './custom-card/custom-card.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,9 @@ import { ProfileComponent } from './profile/profile.component';
     QuizComponent,
     HeaderComponent,
     FooterComponent,
-    ProfileComponent
+    ProfileComponent,
+    SubjectsCardComponent,
+    CustomCardComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +45,7 @@ import { ProfileComponent } from './profile/profile.component';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,
-    MatSidenavModule,MatIconModule,MatToolbarModule,MatButtonModule,MatListModule,MatRippleModule,MatCardModule,MatExpansionModule
+    MatSidenavModule,MatIconModule,MatToolbarModule,MatButtonModule,MatListModule,MatRippleModule,MatCardModule,MatExpansionModule,MatFormFieldModule,MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
