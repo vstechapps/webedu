@@ -1,7 +1,7 @@
 <h3 *ngIf="firestore.user">Welcome {{firestore.user.name}}</h3>
-
-<div class="row">
-  <div class="col-12 col-sm-6 user-courses">
+<!-- User Dashboard -->
+<div class="row" *ngIf="firestore.user.role=='USER'">
+  <div class="col-12 col-sm-6 user-courses" *ngIf="userCourses">
     <div class="col-12 title">Your Courses</div>
     <div class="col-12 col-sm-6" *ngFor="let courses of userCourses | keyvalue">
       <mat-card class="example-card">
@@ -17,30 +17,35 @@
       </mat-card>
     </div>
   </div>
-  <div class="col-12 col-sm-6 user-activity">
+  <div class="col-12 col-sm-6 user-activity" *ngIf="userActivity">
     <div class="col-12 title">Your Activity</div>
     <div class="col-12 col-sm-6" *ngFor="let activity of userActivity | keyvalue">
       <mat-card class="example-card">
         <mat-card-content>
           <div class="gauge-wrapper">
-  <div class="gauge four rischio3">
-    <div class="slice-colors">
-      <div class="st slice-item"></div>
-      <div class="st slice-item"></div>
-      <div class="st slice-item"></div>
-      <div class="st slice-item"></div>
-    </div>
-    <div class="needle"></div>
-    <div class="gauge-center">
-      <div class="label">{{activity.key}}</div>
-      <div class="number">{{activity.value}}</div>
-    </div>
-  </div>
-</div>
+            <div class="gauge four rischio3">
+              <div class="slice-colors">
+                <div class="st slice-item"></div>
+                <div class="st slice-item"></div>
+                <div class="st slice-item"></div>
+                <div class="st slice-item"></div>
+              </div>
+              <div class="needle"></div>
+              <div class="gauge-center">
+                <div class="label">{{activity.key}}</div>
+                <div class="number">{{activity.value}}</div>
+              </div>
+            </div>
+          </div>
         </mat-card-content>
         <mat-card-actions>
         </mat-card-actions>
       </mat-card>
     </div>
   </div>
+</div>
+
+<!-- Admin Dashboard -->
+<div class="row" *ngIf="firestore.user.role=='ADMIN'">
+
 </div>

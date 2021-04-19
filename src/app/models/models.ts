@@ -10,7 +10,8 @@ export enum Role{
   admin="ADMIN"
 }
 
-export type User={
+export class User{
+  id:string;
   name:string;
   email:string;
   pic:string;
@@ -19,7 +20,6 @@ export type User={
   address:string;
   created:string;
   updated:string;
-  courses:UserCourse[];
 }
 
 export enum CourseStatus{
@@ -29,16 +29,19 @@ export enum CourseStatus{
 }
 
 export class UserCourse{
-  id:string;
+  user:string;
+  course:string;
   subject:string;
   category:string;
   status:string;
   started:string;
   completed:string;
   score:number;
+  duration:number;
 }
 
 export class Course{
+  id:string;
   name:string;
   subject:string;
   topics:Topic[];

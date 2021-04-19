@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵɵqueryRefresh } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from '../services/firestore.service';
 import { User, UserCourse } from '../models/models';
 
@@ -8,14 +8,33 @@ import { User, UserCourse } from '../models/models';
   styleUrls: ['./dashboard.component.less']
 })
 export class DashboardComponent implements OnInit {
-  userCourses:any;
-  userActivity:any;
+  userCourses:any={};
+  userActivity:any={};
   constructor(public firestore: FirestoreService) {
-    this.userCourses={"InProgress":[{name:"Bull shit1"},{name:"Bull shit2"}],"Completed":[{name:"Bull shit3"},{name:"Bull shit4"},{name:"Bull shit5"}]}
-    this.userActivity={"Daily":25,"Weekly":50};
+    if(firestore.user.role=="USER" && firestore.user.courses!=null){
+      this.loadUserDashboard(firestore.user.courses);
+    }
   }
 
   ngOnInit(): void {
+  }
+
+  loadUserDashboard(courses:UserCourse[]){
+    let averageDuration=0;
+      courses.forEach((course:UserCourse)=>{
+        if(this.userCourses[course.status]==null){
+          this.userCourses[course.status]=[course];
+        }else{
+          this.userCourses[course.status].push(course);
+        }
+        if(course.status=="COMPLETED"){
+          let deviation=course.duration-(Math.abs(new Date(course.completed).getTime()-new Date(course.started).getTime())/(1000 * 3600 * 24));
+          if(deviation<0)deviation=0;
+          averageDuration+=deviation;
+        }
+      });
+      if(this.userCourses["COMPLETED"]!=null)
+      this.userActivity["OnTime"]=averageDuration/this.userCourses["COMPLETED"].length;
   }
 
 }
