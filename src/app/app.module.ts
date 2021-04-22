@@ -19,7 +19,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatRippleModule } from '@angular/material/core';
-import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -45,7 +44,7 @@ import { CustomCardComponent } from './custom-card/custom-card.component';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,
-    MatSidenavModule,MatIconModule,MatToolbarModule,MatButtonModule,MatListModule,MatRippleModule,MatCardModule,MatExpansionModule,MatFormFieldModule,MatInputModule
+    MatSidenavModule,MatIconModule,MatToolbarModule,MatButtonModule,MatListModule,MatRippleModule,MatExpansionModule,MatFormFieldModule,MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

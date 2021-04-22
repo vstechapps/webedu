@@ -4,24 +4,24 @@
   <div class="col-12 col-sm-6 user-courses" *ngIf="userCourses">
     <div class="col-12 title">Your Courses</div>
     <div class="col-12 col-sm-6" *ngFor="let courses of userCourses | keyvalue">
-      <mat-card class="example-card">
-        <mat-card-content>
+      <app-custom-card class="example-card">
+        <div class="card-content">
           <div class="course-count">{{courses.value.length}}</div>
           <div class="course-status">{{courses.key}}</div>
-        </mat-card-content>
-        <mat-card-actions>
+        </div>
+        <div lass="card-actions">
           <mat-nav-list role="list">
             <mat-list-item *ngFor="let course of courses.value" role="listitem">{{course.name}}</mat-list-item>
           </mat-nav-list>
-        </mat-card-actions>
-      </mat-card>
+        </div>
+      </app-custom-card>
     </div>
   </div>
   <div class="col-12 col-sm-6 user-activity" *ngIf="userActivity">
     <div class="col-12 title">Your Activity</div>
     <div class="col-12 col-sm-6" *ngFor="let activity of userActivity | keyvalue">
-      <mat-card class="example-card">
-        <mat-card-content>
+      <app-custom-card>
+        <div class="card-content">
           <div class="gauge-wrapper">
             <div class="gauge four rischio3">
               <div class="slice-colors">
@@ -37,10 +37,10 @@
               </div>
             </div>
           </div>
-        </mat-card-content>
-        <mat-card-actions>
-        </mat-card-actions>
-      </mat-card>
+        </div>
+        <div class="card-actions">
+        </div>
+      </app-custom-card>
     </div>
   </div>
 </div>
