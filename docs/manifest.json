@@ -2,8 +2,8 @@
    "name": "WebEdu",
    "short_name": "WebEdu",
    "start_url": "./",
-   "theme_color": "#008080",
-   "background_color": "#008B8B",
+   "theme_color": "#f44336",
+   "background_color": "#f44336",
    "display": "standalone",
    "description": "Webedu PWA",
    "icons": [

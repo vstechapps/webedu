@@ -16,7 +16,7 @@
   <mat-drawer #drawer>
     <mat-list role="list">
       <mat-list-item matRipple role="listitem" *ngFor="let menu of menus" [routerLinkActive]="['active']"
-        (click)="click(menu.click)" [routerLink]="[menu.route]">
+        (click)="click(menu.click);drawer.toggle();" [routerLink]="[menu.route]">
         <mat-icon *ngIf="menu.icon">{{menu.icon}}</mat-icon>
         <span>{{menu.name}}</span>
       </mat-list-item>
