@@ -41,7 +41,7 @@ export class UserCourse{
 }
 
 export class Course{
-  id:string;
+  id?:string;
   name:string;
   subject:string;
   topics:Topic[];

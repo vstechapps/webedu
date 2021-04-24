@@ -1,0 +1,25 @@
+<app-card>
+  <div class="row">
+    <div class="col-12 header">Users</div>
+    <div class="col-12 table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Courses</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.role}}</td>
+            <td>{{user.courses!=null?user.courses.length:0}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</app-card>

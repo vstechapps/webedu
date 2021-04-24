@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { User, UserCourse, CourseSubject } from '../models/models';
+import { User, UserCourse, CourseSubject, Course } from '../models/models';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +10,13 @@ export class FirestoreService {
   userRef:AngularFirestoreCollection<User>;
   userCourseRef:AngularFirestoreCollection<UserCourse>;
   subjectRef:AngularFirestoreCollection<CourseSubject>;
+  courseRef:AngularFirestoreCollection<Course>;
 
   constructor(public firestore:AngularFirestore) {
     this.userRef = this.firestore.collection<User>('users');
     this.userCourseRef= this.firestore.collection<UserCourse>('user-courses');
     this.subjectRef=this.firestore.collection<CourseSubject>("subjects");
+    this.courseRef=this.firestore.collection<Course>("courses");
   }
 
   setUser(user:User){

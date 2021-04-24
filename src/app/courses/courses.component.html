@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-12 header">Courses</div>
+  <div class="col-12" *ngIf="firestore.user.role=='ADMIN'">
+    <app-card>
+      <div class="row mt-2">
+        <app-input class="col-12 col-sm-4 col-md-4" type="text" label="Course name" [(value)]="course.name"></app-input>
+        <app-input class="col-12 col-sm-4 col-md-4" type="select" label="Subject" [options]="subjects"
+          [(value)]="course.subject"></app-input>
+        <button class="float-right" mat-mini-fab color="primary" (click)="addCourse()" title="Add Course">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-12 row mt-2">
+      <app-card *ngFor="let course of courses" class="col-12 col-sm-4 col-md-3 p-0 mx-2">
+        <p>{{course.name}}</p>
+        <p>{{course.subject}}</p>
+      </app-card>
+  </div>
+</div>

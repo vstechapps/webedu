@@ -16,6 +16,9 @@ export class InputComponent implements OnInit {
   @Input()
   value:string="";
 
+  @Input()
+  options:string[]=[];
+
   @Output() valueChange = new EventEmitter();
 
   constructor() { }

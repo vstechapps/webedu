@@ -26,6 +26,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { InputComponent } from './input/input.component';
 import { CardComponent } from './card/card.component';
 import { SubjectsComponent } from './subjects/subjects.component';
+import { UsersComponent } from './users/users.component';
+import { CoursesComponent } from './courses/courses.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { SubjectsComponent } from './subjects/subjects.component';
     ProfileComponent,
     InputComponent,
     CardComponent,
-    SubjectsComponent
+    SubjectsComponent,
+    UsersComponent,
+    CoursesComponent
   ],
   imports: [
     BrowserModule,

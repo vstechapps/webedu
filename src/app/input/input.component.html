@@ -1,6 +1,13 @@
-<div class="input-container">
+<div *ngIf="type!='select'" class="input-container">
   <input [type]="type" [(ngModel)]="value" required (ngModelChange)="valueChange.emit(value)">
   <span class="highlight"></span>
   <span class="bar"></span>
   <label>{{label}}</label>
+</div>
+
+<div *ngIf="type=='select'" class="input-container">
+  <select class="form-control" [(ngModel)]="value" (ngModelChange)="valueChange.emit(value)" required>
+    <option value="" disabled selected hidden>{{label}}</option>
+    <option value="{{option}}" *ngFor="let option of options">{{option}}</option>
+  </select>
 </div>
