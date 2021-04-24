@@ -3,12 +3,13 @@ import { CourseSubject } from '../models/models';
 import { FirestoreService } from '../services/firestore.service';
 
 @Component({
-  selector: 'app-subjects-card',
-  templateUrl: './subjects-card.component.html',
-  styleUrls: ['./subjects-card.component.less']
+  selector: 'app-subjects',
+  templateUrl: './subjects.component.html',
+  styleUrls: ['./subjects.component.less']
 })
-export class SubjectsCardComponent implements OnInit {
-  subject:CourseSubject={name:""};
+export class SubjectsComponent implements OnInit {
+
+ subject:CourseSubject={name:""};
   subjects:CourseSubject[];
   constructor(public firestore:FirestoreService) {
     this.firestore.subjectRef.snapshotChanges().subscribe(res=>{
@@ -22,7 +23,12 @@ export class SubjectsCardComponent implements OnInit {
   }
 
   addSubject(){
-    this.firestore.subjectRef.add(this.subject);
+    if(this.validate(this.subject.name))this.firestore.subjectRef.add(this.subject);
+  }
+
+  validate(subjectName){
+    return subjectName!=null && subjectName!="";
+
   }
 
   deleteSubject(subject:CourseSubject){

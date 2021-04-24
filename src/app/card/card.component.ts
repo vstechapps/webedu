@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-custom-card',
-  templateUrl: './custom-card.component.html',
-  styleUrls: ['./custom-card.component.less']
+  selector: 'app-card',
+  templateUrl: './card.component.html',
+  styleUrls: ['./card.component.less']
 })
-export class CustomCardComponent implements OnInit {
+export class CardComponent implements OnInit {
 
   @Input()
   background:string;

@@ -1,0 +1,6 @@
+<div class="input-container">
+  <input [type]="type" [(ngModel)]="value" required (ngModelChange)="valueChange.emit(value)">
+  <span class="highlight"></span>
+  <span class="bar"></span>
+  <label>{{label}}</label>
+</div>

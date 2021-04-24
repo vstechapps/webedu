@@ -23,8 +23,9 @@ import { MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { ProfileComponent } from './profile/profile.component';
-import { SubjectsCardComponent } from './subjects-card/subjects-card.component';
-import { CustomCardComponent } from './custom-card/custom-card.component';
+import { InputComponent } from './input/input.component';
+import { CardComponent } from './card/card.component';
+import { SubjectsComponent } from './subjects/subjects.component';
 
 @NgModule({
   declarations: [
@@ -35,8 +36,9 @@ import { CustomCardComponent } from './custom-card/custom-card.component';
     HeaderComponent,
     FooterComponent,
     ProfileComponent,
-    SubjectsCardComponent,
-    CustomCardComponent
+    InputComponent,
+    CardComponent,
+    SubjectsComponent
   ],
   imports: [
     BrowserModule,
