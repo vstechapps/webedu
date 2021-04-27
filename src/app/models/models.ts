@@ -44,7 +44,8 @@ export class Course{
   id?:string;
   name:string;
   subject:string;
-  topics:Topic[];
+  topics?:Topic[];
+  quiz?:Quiz;
 }
 
 export class Topic{
@@ -61,4 +62,19 @@ export class Page{
 export class CourseSubject{
   id?:string;
   name:string;
+}
+
+export class Quiz{
+  course:string;
+  questions:Question[];
+}
+
+export class Question{
+  text:string;
+  options:Option[];
+}
+
+export class Option{
+  text:string;
+  correct:boolean;
 }

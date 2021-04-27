@@ -28,6 +28,7 @@ import { CardComponent } from './card/card.component';
 import { SubjectsComponent } from './subjects/subjects.component';
 import { UsersComponent } from './users/users.component';
 import { CoursesComponent } from './courses/courses.component';
+import { CourseComponent } from './course/course.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { CoursesComponent } from './courses/courses.component';
     CardComponent,
     SubjectsComponent,
     UsersComponent,
-    CoursesComponent
+    CoursesComponent,
+    CourseComponent
   ],
   imports: [
     BrowserModule,

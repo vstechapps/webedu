@@ -13,9 +13,7 @@ export class SubjectsComponent implements OnInit {
   subjects:CourseSubject[];
   constructor(public firestore:FirestoreService) {
     this.firestore.subjectRef.snapshotChanges().subscribe(res=>{
-      console.log(res);
       this.subjects=res.map(a=>{let d:CourseSubject=a.payload.doc.data();d.id=a.payload.doc.id;return d;});
-      console.log(this.subjects);
     })
    }
 

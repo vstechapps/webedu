@@ -1,21 +1,40 @@
 <div class="row">
-  <div class="col-12 header">Courses</div>
-  <div class="col-12" *ngIf="firestore.user.role=='ADMIN'">
-    <app-card>
-      <div class="row mt-2">
-        <app-input class="col-12 col-sm-4 col-md-4" type="text" label="Course name" [(value)]="course.name"></app-input>
-        <app-input class="col-12 col-sm-4 col-md-4" type="select" label="Subject" [options]="subjects"
-          [(value)]="course.subject"></app-input>
-        <button class="float-right" mat-mini-fab color="primary" (click)="addCourse()" title="Add Course">
-          <mat-icon>add</mat-icon>
-        </button>
+  <div class="col-12 header">Courses
+    <button *ngIf="firestore.user.role=='ADMIN'" class="float-right" mat-mini-fab color="primary" data-toggle="modal"
+      data-target="#addCourse" title="Add New Course">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div class="col-12 row mt-3">
+    <app-card *ngFor="let course of courses" class="col-12 col-sm-4 col-md-3 p-0 m-2">
+      <div class="pointer" [routerLink]="'/course/'+course.id">
+        <span class="course-title" title="{{course.name}}">{{course.name}}</span>
+        <i class="material-icons float-right">open_in_new</i>
       </div>
     </app-card>
   </div>
-  <div class="col-12 row mt-2">
-      <app-card *ngFor="let course of courses" class="col-12 col-sm-4 col-md-3 p-0 mx-2">
-        <p>{{course.name}}</p>
-        <p>{{course.subject}}</p>
-      </app-card>
+</div>
+
+<div class="modal" id="addCourse">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-dark">New Course</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <app-card>
+          <div class="row mt-2">
+            <app-input class="col-12 col-sm-4 col-md-4" type="text" label="Course Name" [(value)]="course.name">
+            </app-input>
+            <app-input class="col-12 col-sm-4 col-md-4" type="select" label="Subject" [options]="subjects"
+              [(value)]="course.subject"></app-input>
+            <button class="float-right" mat-mini-fab color="primary" (click)="addCourse()" title="Add Course">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </app-card>
+      </div>
+    </div>
   </div>
 </div>
