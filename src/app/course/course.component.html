@@ -1,1 +1,14 @@
-<p>course works!</p>
+<div *ngIf="course">
+  <div class="row w-100 course-header">
+    <div class="col-xs-12 col-sm-6 col-md-6">
+      <span class="course-name">{{course.name}}</span>
+      <span class="course-subject">{{course.subject}}</span>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6 float-right">
+      <span class="course-score">{{course.score}}</span>
+      <span class="course-status">{{course.status}}</span>
+      <button *ngIf="course.status==null" class="course-status-toggle" mat-raised-button color="primary">Register</button>
+      <button *ngIf="course.status==CourseStatus.InProgress" class="course-status-toggle" mat-raised-button color="primary">Un Register</button>
+    </div>
+  </div>
+</div>

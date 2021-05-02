@@ -31,12 +31,10 @@ export enum CourseStatus{
 export class UserCourse{
   user:string;
   course:string;
-  subject:string;
-  category:string;
   status:string;
   started:string;
-  completed:string;
-  score:number;
+  completed?:string;
+  score?:number;
   duration:number;
 }
 
@@ -44,6 +42,7 @@ export class Course{
   id?:string;
   name:string;
   subject:string;
+  duration:number;
   topics?:Topic[];
   quiz?:Quiz;
 }

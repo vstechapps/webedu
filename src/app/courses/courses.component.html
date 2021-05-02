@@ -29,6 +29,8 @@
             </app-input>
             <app-input class="col-12 col-sm-4 col-md-4" type="select" label="Subject" [options]="subjects"
               [(value)]="course.subject"></app-input>
+            <app-input class="col-12 col-sm-4 col-md-4" type="number" label="Duration"
+              [(value)]="course.duration"></app-input>
             <button class="float-right" mat-mini-fab color="primary" (click)="addCourse()" title="Add Course">
               <mat-icon>add</mat-icon>
             </button>
