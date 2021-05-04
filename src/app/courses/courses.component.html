@@ -7,9 +7,10 @@
   </div>
   <div class="col-12 row mt-3">
     <app-card *ngFor="let course of courses" class="col-12 col-sm-4 col-md-3 p-0 m-2">
-      <div class="pointer" [routerLink]="'/course/'+course.id">
+      <div>
         <span class="course-title" title="{{course.name}}">{{course.name}}</span>
-        <i class="material-icons float-right">open_in_new</i>
+        <i class="material-icons text-danger float-right pointer ml-1" title="Delete" *ngIf="firestore.user.role=='ADMIN'" (click)="deleteCourse(course)">delete</i>
+        <i class="material-icons float-right pointer" title="Open" [routerLink]="'/course/'+course.id">open_in_new</i>
       </div>
     </app-card>
   </div>

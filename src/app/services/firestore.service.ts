@@ -23,9 +23,9 @@ export class FirestoreService {
     this.user=user;
     if(this.user!=null && this.user.id!=null){
       this.firestore.collection<UserCourse>("user-courses",ref=>ref.where("user","==",this.user.id))
-      .valueChanges().subscribe(res=>{
+      .snapshotChanges().subscribe(res=>{
         console.log("Refreshing the Courses for User "+this.user.id);
-        this.user.courses=res;
+        this.user.courses=res.map(a=>{let d:UserCourse=a.payload.doc.data();d.id=a.payload.doc.id;return d;});;
       });
     }
   }

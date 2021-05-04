@@ -1,14 +1,17 @@
 <div *ngIf="course">
   <div class="row w-100 course-header">
-    <div class="col-xs-12 col-sm-6 col-md-6">
-      <span class="course-name">{{course.name}}</span>
-      <span class="course-subject">{{course.subject}}</span>
+    <div class="col-xs-12 col-sm-6 col-md-6 align-middle">
+      <div class="course-name p-2">{{course.subject}} > {{course.name}}</div>
     </div>
-    <div class="col-xs-12 col-sm-6 col-md-6 float-right">
-      <span class="course-score">{{course.score}}</span>
-      <span class="course-status">{{course.status}}</span>
-      <button *ngIf="course.status==null" class="course-status-toggle" mat-raised-button color="primary">Register</button>
-      <button *ngIf="course.status==CourseStatus.InProgress" class="course-status-toggle" mat-raised-button color="primary">Un Register</button>
+    <div *ngIf="userCourse!=null" class="col-xs-12 col-sm-6 col-md-6 text-right">
+      <div class="p-2">
+        <span class="mx-2 text-info">Course Status : {{userCourse.status}}</span>
+        <span class="mx-2 text-light">Quiz Score : {{userCourse.score?userCourse.score:0}}</span>
+        <button class="mx-2" mat-raised-button color="accent" (click)="unregister()">Un Register</button>
+      </div>
+    </div>
+    <div *ngIf="userCourse==null" class="col-xs-12 col-sm-6 col-md-6 text-right">
+      <button mat-raised-button color="primary" (click)="register()">Register</button>
     </div>
   </div>
 </div>

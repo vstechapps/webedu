@@ -22,11 +22,21 @@ export class CourseComponent implements OnInit {
     this.courseId=this.route.snapshot.paramMap.get('id')
     if(this.courseId==null)this.router.navigate(["dashboard"]);
     this.firestore.courseRef.doc(this.courseId).valueChanges().subscribe((course:Course)=>this.course=course);
-    this.firestore.user.courses.filter(usercourse=>usercourse.course==this.courseId).map(course=>this.userCourse=course);
+    this.refresh();
   }
 
   register(){
-    this.firestore.userCourseRef.add({user:this.firestore.user.id,course:this.courseId,status:CourseStatus.InProgress,started:(new Date()).toLocaleDateString(),duration:this.course.duration});
+    this.firestore.userCourseRef.add({user:this.firestore.user.id,course:this.courseId,status:CourseStatus.InProgress,started:(new Date()).toLocaleDateString(),duration:this.course.duration})
+    .then(()=>this.refresh());
+  }
+
+  unregister(){
+    this.firestore.userCourseRef.doc(this.userCourse.id).delete()
+    .then(()=>this.refresh());
+  }
+
+  refresh(){
+    this.userCourse=this.firestore.user.courses.filter(usercourse=>usercourse.course==this.courseId)[0];
   }
 
 

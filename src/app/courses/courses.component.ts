@@ -25,6 +25,10 @@ export class CoursesComponent implements OnInit {
     if(this.validate())this.firestore.courseRef.add(this.course);
   }
 
+  deleteCourse(course:Course){
+    this.firestore.courseRef.doc(course.id).delete();
+  }
+
   validate(){
     console.log(this.course);
     return this.course.name!="" && this.course.subject!="" && this.subjects.indexOf(this.course.subject)>-1;

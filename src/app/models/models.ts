@@ -29,6 +29,7 @@ export enum CourseStatus{
 }
 
 export class UserCourse{
+  id?:string;
   user:string;
   course:string;
   status:string;
