@@ -36,15 +36,15 @@ export class UserCourse{
   started:string;
   completed?:string;
   score?:number;
-  duration:number;
+  topic:number;
 }
 
 export class Course{
   id?:string;
   name:string;
   subject:string;
-  duration:number;
-  topics?:Topic[];
+  duration:string;
+  topics:Topic[];
   quiz?:Quiz;
 }
 

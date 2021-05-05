@@ -1,67 +1,67 @@
 <div *ngIf="firestore.user">
-<h3>Welcome {{firestore.user.name}}</h3>
-<!-- User Dashboard -->
-<div class="row">
-  <div class="col-12 col-sm-6 user-courses" *ngIf="firestore.user.courses">
-    <div class="col-12 title">Your Courses</div>
-    <div class="col-12 col-sm-6">
-      <app-card class="example-card">
-        <div class="card-content">
-          <div class="course-count">{{courseCount(firestore.user.courses,"INPROGRESS")}}</div>
-          <div class="course-status">{{"In Progress"}}</div>
-        </div>
-      </app-card>
+  <h3>Welcome {{firestore.user.name}}</h3>
+  <!-- User Dashboard -->
+  <div class="row">
+    <div class="col-12 col-sm-6 user-courses" *ngIf="firestore.user.courses">
+      <div class="col-12 title">Your Courses</div>
+      <div class="col-12 col-sm-6">
+        <app-card class="example-card">
+          <div class="card-content">
+            <div class="course-count">{{courseCount(firestore.user.courses,"INPROGRESS")}}</div>
+            <div class="course-status">{{"In Progress"}}</div>
+          </div>
+        </app-card>
+      </div>
+      <div class="col-12 col-sm-6">
+        <app-card class="example-card">
+          <div class="card-content">
+            <div class="course-count">{{courseCount(firestore.user.courses,"COMPLETED")}}</div>
+            <div class="course-status">{{"Completed"}}</div>
+          </div>
+        </app-card>
+      </div>
     </div>
-    <div class="col-12 col-sm-6">
-      <app-card class="example-card">
-        <div class="card-content">
-          <div class="course-count">{{courseCount(firestore.user.courses,"COMPLETED")}}</div>
-          <div class="course-status">{{"Completed"}}</div>
-        </div>
-      </app-card>
-    </div>
-  </div>
-  <div class="col-12 col-sm-6 user-activity" *ngIf="userActivity">
-    <div class="col-12 title">Your Activity</div>
-    <div class="col-12 col-sm-6" *ngFor="let activity of userActivity | keyvalue">
-      <app-card>
-        <div class="card-content">
-          <div class="gauge-wrapper">
-            <div class="gauge four rischio3">
-              <div class="slice-colors">
-                <div class="st slice-item"></div>
-                <div class="st slice-item"></div>
-                <div class="st slice-item"></div>
-                <div class="st slice-item"></div>
-              </div>
-              <div class="needle"></div>
-              <div class="gauge-center">
-                <div class="label">{{activity.key}}</div>
-                <div class="number">{{activity.value}}</div>
+    <div class="col-12 col-sm-6 user-activity" *ngIf="userActivity">
+      <div class="col-12 title">Your Activity</div>
+      <div class="col-12 col-sm-6" *ngFor="let activity of userActivity | keyvalue">
+        <app-card>
+          <div class="card-content">
+            <div class="gauge-wrapper">
+              <div class="gauge four rischio3">
+                <div class="slice-colors">
+                  <div class="st slice-item"></div>
+                  <div class="st slice-item"></div>
+                  <div class="st slice-item"></div>
+                  <div class="st slice-item"></div>
+                </div>
+                <div class="needle"></div>
+                <div class="gauge-center">
+                  <div class="label">{{activity.key}}</div>
+                  <div class="number">{{activity.value}}</div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="card-actions">
-        </div>
-      </app-card>
+          <div class="card-actions">
+          </div>
+        </app-card>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Admin Dashboard -->
-<div class="row" *ngIf="firestore.user.role=='ADMIN'">
-  <div class="col-12 col-sm-6 col-md-4">
-    <app-subjects></app-subjects>
+  <div class="row">
+    <div class="col-12">
+      <app-courses></app-courses>
+    </div>
   </div>
-  <div class="col-12 col-sm-6 col-md-8">
-    <app-users></app-users>
-  </div>
-</div>
 
-<div class="row">
-  <div class="col-12">
-    <app-courses></app-courses>
+  <!-- Admin -->
+  <div class="row" *ngIf="firestore.user.role=='ADMIN'">
+    <div class="col-12 col-sm-6 col-md-4">
+      <app-subjects></app-subjects>
+    </div>
+    <div class="col-12 col-sm-6 col-md-8">
+      <app-users></app-users>
+    </div>
   </div>
-</div>
 </div>

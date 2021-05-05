@@ -9,25 +9,22 @@ import { User, UserCourse } from '../models/models';
 })
 export class UsersComponent implements OnInit {
 
-  users:UserData[];
-  constructor(public firestore:FirestoreService) {
-    this.firestore.userRef.valueChanges().subscribe(res=>{
-      this.users=res;
-      this.firestore.userCourseRef.valueChanges().subscribe(res=>{
-        let usercourses:UserCourse[]=res;
-        usercourses.forEach(usercourse=>{
-          this.users.forEach(user=>{
-            if(usercourse.user==user.id){
-              if(user.courses==null)user.courses=[];
-              user.courses.push(usercourse);
-            }
-          });
-        });
-      })
+  users: UserData[];
+  userCourses: UserCourse[]=[];
+  constructor(public firestore: FirestoreService) {
+    this.firestore.userRef.valueChanges().subscribe(res => {
+      this.users = res;
     });
-   }
+    this.firestore.userCourseRef.valueChanges().subscribe(res => {
+      this.userCourses = res;
+    });
+  }
 
   ngOnInit(): void {
+  }
+
+  courseCount(user:UserData){
+    return this.userCourses.filter(usercourse=>usercourse.user==user.id).length;
   }
 
 }

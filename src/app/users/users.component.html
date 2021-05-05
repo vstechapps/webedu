@@ -16,7 +16,7 @@
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
             <td>{{user.role}}</td>
-            <td>{{user.courses!=null?user.courses.length:0}}</td>
+            <td>{{courseCount(user)}}</td>
           </tr>
         </tbody>
       </table>

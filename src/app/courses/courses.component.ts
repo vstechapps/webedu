@@ -11,7 +11,7 @@ export class CoursesComponent implements OnInit {
 
   courses:Course[];
   subjects:string[]=[];
-  course:Course={name:"",subject:"",duration:7};
+  course:Course={name:"",subject:"",duration:"",topics:[]};
   constructor(public firestore:FirestoreService) {
     this.firestore.courseRef.snapshotChanges().subscribe(res=>
       this.courses=res.map(a=>{let d:Course=a.payload.doc.data();d.id=a.payload.doc.id;return d;}));

@@ -26,7 +26,7 @@ export class CourseComponent implements OnInit {
   }
 
   register(){
-    this.firestore.userCourseRef.add({user:this.firestore.user.id,course:this.courseId,status:CourseStatus.InProgress,started:(new Date()).toLocaleDateString(),duration:this.course.duration})
+    this.firestore.userCourseRef.add({user:this.firestore.user.id,course:this.courseId,status:CourseStatus.InProgress,started:(new Date()).toLocaleDateString(),topic:0})
     .then(()=>this.refresh());
   }
 
