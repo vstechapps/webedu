@@ -1,5 +1,6 @@
 <div class="row">
-  <div class="col-12 header">Courses
+  <div class="col-12 header">
+    <span>All Courses</span>
     <button *ngIf="firestore.user.role=='ADMIN'" class="float-right" mat-mini-fab color="primary" data-toggle="modal"
       data-target="#addCourse" title="Add New Course">
       <mat-icon>add</mat-icon>
@@ -8,7 +9,7 @@
   <div class="col-12 row mt-3">
     <app-card *ngFor="let course of courses" class="col-12 col-sm-4 col-md-3 p-0 m-2">
       <div>
-        <span class="course-title" title="{{course.name}}">{{course.name}}</span>
+        <span class="course-title pointer" title="{{course.name}}">{{course.name}}</span>
         <i class="material-icons text-danger float-right pointer ml-1" title="Delete" *ngIf="firestore.user.role=='ADMIN'" (click)="deleteCourse(course)">delete</i>
         <i class="material-icons float-right pointer" title="Open" [routerLink]="'/course/'+course.id">open_in_new</i>
       </div>
