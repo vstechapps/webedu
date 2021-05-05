@@ -33,36 +33,20 @@ export class Course{
   name:string;
   subject:string;
   duration:string;
-  topics:Topic[];
-  quiz?:Quiz;
+  questions:Question[];
 }
 
-export class Topic{
-  name:string;
-  type:string;
-  content:string;
-  url:string;
-  order:number;
-}
 
 export class CourseSubject{
   id?:string;
   name:string;
 }
 
-export class Quiz{
-  course:string;
-  questions:Question[];
-}
-
 export class Question{
   text:string;
-  options:Option[];
-}
-
-export class Option{
-  text:string;
-  correct:boolean;
+  options:string[];
+  correct?:number;
+  select?:number;
 }
 
 export enum CourseStatus{

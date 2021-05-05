@@ -1,108 +1,89 @@
 <div *ngIf="course">
   <div class="row w-100 my-2 course-header">
-    <div class="col-6 align-middle">
-      <div class="course-name p-2">{{course.subject}} > {{course.name}}</div>
+    <div class="col-8 align-middle">
+      <div class="course-name p-2">
+        <span>{{course.subject}} > {{course.name}}</span>
+        <span *ngIf="userCourse float-right">({{userCourse.status}})</span></div>
     </div>
-    <div *ngIf="userCourse!=null" class="col-6 text-right">
-      <button class="mx-2" mat-raised-button color="accent" (click)="unregister()">Un Register</button>
-    </div>
-    <div *ngIf="userCourse==null" class="col-6 text-right">
-      <button mat-raised-button color="accent" (click)="register()">Register</button>
-    </div>
-  </div>
-  <div class="row my-2">
-    <div class="col-6" *ngIf="userCourse">
-      <div class="mx-2 text-info p-2">Status : {{userCourse.status}}</div>
-    </div>
-    <div class="col-6 text-right" *ngIf="firestore.user.role=='ADMIN'">
-      <button mat-mini-fab color="primary" data-toggle="modal" data-target="#addTopic" title="Add New Topic">
-      <mat-icon>add</mat-icon>
-    </button>
-    <button *ngIf="course.topics[topicIndex]" mat-mini-fab color="accent" data-toggle="modal" data-target="#editTopic" title="Edit Topic">
-      <mat-icon>edit</mat-icon>
-    </button>
-    <button *ngIf="course.topics[topicIndex]" mat-mini-fab color="warn" (click)="deleteTopic()" title="Delete Topic">
-      <mat-icon>delete</mat-icon>
-    </button>
-    </div>
-  </div>
-  <div class="row mt-2" *ngIf="userCourse && course.topics[topicIndex]">
     <div class="col-4 text-right">
-      <button mat-mini-fab color="accent" title="Prev" (click)="prev()" [disabled]="topicIndex==0">
-      <mat-icon>chevron_left</mat-icon>
-    </button>
+      <button *ngIf="userCourse!=null" mat-raised-button color="accent" (click)="unregister()">Un Register</button>
+      <button *ngIf="userCourse==null" mat-raised-button color="accent" (click)="register()">Register</button>
     </div>
-    <div class="col-4 text-center p-2">
-      <b>{{course.topics[topicIndex].name}}</b>
-    </div>
-    <div class="col-4 text-left">
-      <button mat-mini-fab color="accent" title="Next" (click)="next()" [disabled]="topicIndex==course.topics.length-1">
-      <mat-icon>chevron_right</mat-icon>
-    </button>
+  </div>
+  <div class="row mt-2" *ngIf="(userCourse || firestore.user.role=='ADMIN') && course.questions[questionIndex]">
+    <div class="col-12 text-center">
+      <button class="float-left" mat-mini-fab color="accent" title="Prev" (click)="prev()"
+        [disabled]="questionIndex==0">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <b>Question {{questionIndex+1}}</b>
+      <button class="float-right" mat-mini-fab color="accent" title="Next" (click)="next()"
+        [disabled]="questionIndex==course.questions.length-1">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
     </div>
     <div class="col-12">
-    <app-card>
-      {{course.topics[topicIndex] | json}}
-    </app-card>
-  </div>
-  </div>
-</div>
-
-
-
-<div class="modal" id="addTopic">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title text-dark">New Topic</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <app-card>
-          <div class="row mt-2">
-            <app-input class="col-12 col-sm-4 col-md-4" type="text" label="Topic Name" [(value)]="newTopic.name">
-            </app-input>
-            <app-input class="col-12 col-sm-4 col-md-4" type="select" label="Content Type" [options]="contentTypes"
-              [(value)]="newTopic.type"></app-input>
-            <textarea *ngIf="newTopic.type=='HTML'"  class="w-100" [(ngModel)]="newTopic.content"
-              rows=10></textarea>
-            <app-input *ngIf="newTopic.type!='HTML'" class="col-12 col-sm-4 col-md-4" type="text"
-              label="Content URL" [(value)]="newTopic.url"></app-input>
-            <div class="w-100">
-              <button class="float-right" mat-mini-fab color="primary" (click)="addTopic()" title="Add Course">
-                <mat-icon>add</mat-icon>
-              </button>
-            </div>
+      <app-card>
+        <div class="p-1">{{(questionIndex+1)+"Q) "+course.questions[questionIndex].text}}</div>
+        <div class="p-3">
+          <div *ngFor="let option of course.questions[questionIndex].options; let i=index;">
+            <input type="radio" name="soption" [(ngModel)]="course.questions[questionIndex].select" [value]="i+1" />
+            <span class="mx-3" style="vertical-align: text-bottom;">{{(i+1)+") "+option}}</span>
           </div>
-        </app-card>
-      </div>
+        </div>
+        <button class="float-right" mat-raised-button color="warn" title="Submit" (click)="evaluate()"
+          *ngIf="questionIndex==course.questions.length-1">
+          Evaluate
+        </button>
+      </app-card>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div *ngIf="firestore.user.role=='ADMIN'" class="col-12 text-center">
+      <button mat-mini-fab class="mx-3" color="primary" (click)="addQuestion()" title="Add New Question">
+        <mat-icon>add</mat-icon>
+      </button>
+      <button *ngIf="course.questions[questionIndex]" class="mx-3" mat-mini-fab color="accent" data-toggle="modal"
+        data-target="#editQuestion" title="Edit Question">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button *ngIf="course.questions[questionIndex]" class="mx-3" mat-mini-fab color="warn" (click)="deleteQuestion()"
+        title="Delete Question">
+        <mat-icon>delete</mat-icon>
+      </button>
     </div>
   </div>
 </div>
 
 
-<div class="modal" id="editTopic">
+<div class="modal" id="editQuestion" *ngIf="course.questions[questionIndex]">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title text-dark">Edit Topic</h4>
+        <h4 class="modal-title text-dark">Question {{questionIndex+1}}</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <app-card>
-          <div class="row mt-2" *ngIf="course.topics[topicIndex]">
-            <app-input class="col-12 col-sm-4 col-md-4" type="text" label="Topic Name" [(value)]="course.topics[topicIndex].name">
-            </app-input>
-            <app-input class="col-12 col-sm-4 col-md-4" type="select" label="Content Type" [options]="contentTypes"
-              [(value)]="course.topics[topicIndex].type"></app-input>
-            <textarea *ngIf="course.topics[topicIndex].type=='HTML'" placeholder="Content" class="w-100" [(ngModel)]="course.topics[topicIndex].content" rows=10></textarea>
-            <app-input *ngIf="course.topics[topicIndex].type!='HTML'" class="col-12 col-sm-4 col-md-4" type="text"
-              label="Content URL" [(value)]="course.topics[topicIndex].url"></app-input>
-            <div class="w-100">
-              <button class="float-right" mat-mini-fab color="primary" (click)="updateTopic()" title="SAve">
-                <mat-icon>save</mat-icon>
-              </button>
-            </div>
+        <app-card class="row mt-2">
+          <app-input class="col-12" type="text" label="Question Text" [(value)]="course.questions[questionIndex].text">
+          </app-input>
+          <div class=" row col-12 p-2" *ngFor="let option of course.questions[questionIndex].options; let i=index;">
+            <input class="col-2 p-0" type="radio" name="coption" [(ngModel)]="course.questions[questionIndex].correct"
+              [value]="i+1" />
+            <app-input class="col-8 p-0" type="text" [label]="'Option '+(i+1)"
+              [(value)]="course.questions[questionIndex].options[i]"></app-input>
+            <i class="col-2 p-0 material-icons pointer"
+              (click)="course.question[questionIndex].options.splice(i,1)">delete</i>
+          </div>
+          <div class="row col-10 text-right">
+            <button mat-mini-fab color="accent" title="Add Option"
+              (click)="course.questions[questionIndex].options.push('')"
+              [disabled]="course.questions[questionIndex].options.length==4">
+              <mat-icon>add</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" (click)="updateQuestion()" title="Save">
+              <mat-icon>save</mat-icon>
+            </button>
           </div>
         </app-card>
       </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Course, UserCourse, CourseStatus, Topic, ContentType, Role } from '../models/models';
+import { Course, UserCourse, CourseStatus, ContentType, Question } from '../models/models';
 import { FirestoreService } from '../services/firestore.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -13,13 +13,10 @@ export class CourseComponent implements OnInit {
   courseId:string;
   course:Course;
   userCourse:UserCourse;
-  topicIndex=0;
-  newTopic:Topic;
-  contentTypes:any[];
-  ContentType=ContentType;
+  questionIndex=0;
+  newQuestion:Question;
 
   constructor(public firestore:FirestoreService,private route: ActivatedRoute,private router:Router) {
-    this.contentTypes=Object.values(ContentType);
    }
 
   ngOnInit(): void {
@@ -28,7 +25,6 @@ export class CourseComponent implements OnInit {
     this.firestore.courseRef.doc(this.courseId).valueChanges().subscribe((course:Course)=>{
       console.log("Course Refreshed : ",course)
       this.course=course;
-      this.course.topics=this.course.topics.sort((a,b)=>a.order-b.order);
       this.refresh();
     });
   }
@@ -45,33 +41,46 @@ export class CourseComponent implements OnInit {
 
   refresh(){
     this.userCourse=this.firestore.user.courses.filter(usercourse=>usercourse.course==this.courseId)[0];
-    if(this.userCourse)this.topicIndex=this.userCourse.topic;
-    this.newTopic={name:"",type:ContentType.HTML,content:"",url:"",order:0};
-    this.newTopic.order=this.course.topics.length;
+    if(this.userCourse)this.questionIndex=this.userCourse.topic;
+    this.newQuestion={text:"",options:[]};
   }
 
-  addTopic(){
-    this.course.topics.push(this.newTopic);
+  addQuestion(){
+    this.course.questions.push(this.newQuestion);
+    this.questionIndex=this.course.questions.length-1;
+  }
+
+  updateQuestion(){
     this.firestore.courseRef.doc(this.courseId).set(this.course).then(()=>this.refresh());
   }
 
-  updateTopic(){
-    this.firestore.courseRef.doc(this.courseId).set(this.course).then(()=>this.refresh());
-  }
-
-  deleteTopic(){
-    this.course.topics.slice(this.topicIndex,1);
+  deleteQuestion(){
+    this.course.questions.splice(this.questionIndex,1);
     this.firestore.courseRef.doc(this.courseId).set(this.course).then(()=>this.refresh());
   }
 
   next(){
-    if(this.topicIndex==this.course.topics.length-1)return;
-    else this.topicIndex++;
+    if(this.questionIndex==this.course.questions.length-1)return;
+    else this.questionIndex++;
   }
 
   prev(){
-    if(this.topicIndex==0)return;
-    else this.topicIndex--;
+    if(this.questionIndex==0)return;
+    else this.questionIndex--;
+  }
+
+  evaluate(){
+    let correct=this.course.questions.filter(q=>q.select==q.correct).length;
+    let total=this.course.questions.length;
+    let score=Math.round(correct/total*100);
+    alert("Score : "+score);
+    if(this.userCourse){
+      this.userCourse.score=score;
+      if(this.userCourse.score==100){
+        this.userCourse.status=CourseStatus.Completed;
+      }
+    }
+    this.firestore.userCourseRef.doc(this.userCourse.id).set(this.userCourse).then(()=>this.refresh());
   }
 
 
