@@ -9,8 +9,10 @@
   <div class="col-12 row mt-3">
     <app-card *ngFor="let course of courses" class="col-12 col-sm-4 col-md-3 p-0 m-2">
       <div>
-        <span class="course-title pointer" title="{{course.name}}">{{course.name}}</span>
-        <i class="material-icons text-danger float-right pointer ml-1" title="Delete" *ngIf="firestore.user.role=='ADMIN'" (click)="deleteCourse(course)">delete</i>
+        <span class="course-title pointer" [routerLink]="'/course/'+course.id"
+          title="{{course.name}}">{{course.name}}</span>
+        <i class="material-icons text-danger float-right pointer ml-1" title="Delete"
+          *ngIf="firestore.user.role=='ADMIN'" (click)="deleteCourse(course)">delete</i>
         <i class="material-icons float-right pointer" title="Open" [routerLink]="'/course/'+course.id">open_in_new</i>
       </div>
     </app-card>
@@ -31,11 +33,13 @@
             </app-input>
             <app-input class="col-12 col-sm-4 col-md-4" type="select" label="Subject" [options]="subjects"
               [(value)]="course.subject"></app-input>
-            <app-input class="col-12 col-sm-4 col-md-4" type="number" label="Duration"
-              [(value)]="course.duration"></app-input>
-            <button class="float-right" mat-mini-fab color="primary" (click)="addCourse()" title="Add Course">
-              <mat-icon>add</mat-icon>
-            </button>
+            <app-input class="col-12 col-sm-4 col-md-4" type="text" label="Duration" [(value)]="course.duration">
+            </app-input>
+            <div class="w-100">
+              <button class="float-right" mat-mini-fab color="primary" (click)="addCourse()" title="Add Course">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
           </div>
         </app-card>
       </div>

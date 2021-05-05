@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit {
         }
         else {
           var date = new Date().toDateString();
-          this.user = { id: res.uid,name: res.displayName, email: res.email, pic: res.photoURL, phone: res.phoneNumber, role: Role.user, address: "", created: date, updated: date };
+          this.user = { id: res.uid,name: res.displayName, email: res.email, pic: res.photoURL, phone: res.phoneNumber, role: Role.USER, address: "", created: date, updated: date };
           console.log("Creatig the New User : ", this.user);
           this.firestore.userRef.doc(res.uid).set(this.user);
         }

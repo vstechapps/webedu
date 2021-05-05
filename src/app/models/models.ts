@@ -5,11 +5,6 @@ export type Menu={
   icon:string;
 }
 
-export enum Role{
-  user="USER",
-  admin="ADMIN"
-}
-
 export class User{
   id:string;
   name:string;
@@ -20,12 +15,6 @@ export class User{
   address:string;
   created:string;
   updated:string;
-}
-
-export enum CourseStatus{
-  InProgress="INPROGRESS",
-  Completed="COMPLETED",
-  Failed="FAILED"
 }
 
 export class UserCourse{
@@ -50,13 +39,10 @@ export class Course{
 
 export class Topic{
   name:string;
-  pages:Page[];
-}
-
-export class Page{
-  heading:string;
+  type:string;
   content:string;
-  number:number;
+  url:string;
+  order:number;
 }
 
 export class CourseSubject{
@@ -77,4 +63,22 @@ export class Question{
 export class Option{
   text:string;
   correct:boolean;
+}
+
+export enum CourseStatus{
+  InProgress="INPROGRESS",
+  Completed="COMPLETED",
+  Failed="FAILED"
+}
+
+export enum ContentType{
+  HTML="HTML",
+  PDF="PDF",
+  VIDEO="VIDEO",
+  DOCUMENT="DOCUMENT"
+}
+
+export enum Role{
+  USER="USER",
+  ADMIN="ADMIN"
 }

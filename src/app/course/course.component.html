@@ -1,22 +1,111 @@
 <div *ngIf="course">
-  <div class="row w-100 course-header">
-    <div class="col-xs-12 col-sm-6 col-md-6 align-middle">
+  <div class="row w-100 my-2 course-header">
+    <div class="col-6 align-middle">
       <div class="course-name p-2">{{course.subject}} > {{course.name}}</div>
     </div>
-    <div *ngIf="userCourse!=null" class="col-xs-12 col-sm-6 col-md-6 text-right">
-      <div class="p-2">
-        <span class="mx-2 text-info">Course Status : {{userCourse.status}}</span>
-        <span class="mx-2 text-light">Quiz Score : {{userCourse.score?userCourse.score:0}}</span>
-        <button class="mx-2" mat-raised-button color="accent" (click)="unregister()">Un Register</button>
-      </div>
+    <div *ngIf="userCourse!=null" class="col-6 text-right">
+      <button class="mx-2" mat-raised-button color="accent" (click)="unregister()">Un Register</button>
     </div>
-    <div *ngIf="userCourse==null" class="col-xs-12 col-sm-6 col-md-6 text-right">
-      <button mat-raised-button color="primary" (click)="register()">Register</button>
+    <div *ngIf="userCourse==null" class="col-6 text-right">
+      <button mat-raised-button color="accent" (click)="register()">Register</button>
+    </div>
+  </div>
+  <div class="row my-2">
+    <div class="col-6" *ngIf="userCourse">
+      <div class="mx-2 text-info p-2">Status : {{userCourse.status}}</div>
+    </div>
+    <div class="col-6 text-right" *ngIf="firestore.user.role=='ADMIN'">
+      <button mat-mini-fab color="primary" data-toggle="modal" data-target="#addTopic" title="Add New Topic">
+      <mat-icon>add</mat-icon>
+    </button>
+    <button *ngIf="course.topics[topicIndex]" mat-mini-fab color="accent" data-toggle="modal" data-target="#editTopic" title="Edit Topic">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button *ngIf="course.topics[topicIndex]" mat-mini-fab color="warn" (click)="deleteTopic()" title="Delete Topic">
+      <mat-icon>delete</mat-icon>
+    </button>
+    </div>
+  </div>
+  <div class="row mt-2" *ngIf="userCourse && course.topics[topicIndex]">
+    <div class="col-4 text-right">
+      <button mat-mini-fab color="accent" title="Prev" (click)="prev()" [disabled]="topicIndex==0">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    </div>
+    <div class="col-4 text-center p-2">
+      <b>{{course.topics[topicIndex].name}}</b>
+    </div>
+    <div class="col-4 text-left">
+      <button mat-mini-fab color="accent" title="Next" (click)="next()" [disabled]="topicIndex==course.topics.length-1">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+    </div>
+    <div class="col-12">
+    <app-card>
+      {{course.topics[topicIndex] | json}}
+    </app-card>
+  </div>
+  </div>
+</div>
+
+
+
+<div class="modal" id="addTopic">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-dark">New Topic</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <app-card>
+          <div class="row mt-2">
+            <app-input class="col-12 col-sm-4 col-md-4" type="text" label="Topic Name" [(value)]="newTopic.name">
+            </app-input>
+            <app-input class="col-12 col-sm-4 col-md-4" type="select" label="Content Type" [options]="contentTypes"
+              [(value)]="newTopic.type"></app-input>
+            <textarea *ngIf="newTopic.type=='HTML'"  class="w-100" [(ngModel)]="newTopic.content"
+              rows=10></textarea>
+            <app-input *ngIf="newTopic.type!='HTML'" class="col-12 col-sm-4 col-md-4" type="text"
+              label="Content URL" [(value)]="newTopic.url"></app-input>
+            <div class="w-100">
+              <button class="float-right" mat-mini-fab color="primary" (click)="addTopic()" title="Add Course">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </div>
+        </app-card>
+      </div>
     </div>
   </div>
 </div>
 
-<div *ngIf="firestore.user.role=='ADMIN'">
 
+<div class="modal" id="editTopic">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-dark">Edit Topic</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <app-card>
+          <div class="row mt-2" *ngIf="course.topics[topicIndex]">
+            <app-input class="col-12 col-sm-4 col-md-4" type="text" label="Topic Name" [(value)]="course.topics[topicIndex].name">
+            </app-input>
+            <app-input class="col-12 col-sm-4 col-md-4" type="select" label="Content Type" [options]="contentTypes"
+              [(value)]="course.topics[topicIndex].type"></app-input>
+            <textarea *ngIf="course.topics[topicIndex].type=='HTML'" placeholder="Content" class="w-100" [(ngModel)]="course.topics[topicIndex].content" rows=10></textarea>
+            <app-input *ngIf="course.topics[topicIndex].type!='HTML'" class="col-12 col-sm-4 col-md-4" type="text"
+              label="Content URL" [(value)]="course.topics[topicIndex].url"></app-input>
+            <div class="w-100">
+              <button class="float-right" mat-mini-fab color="primary" (click)="updateTopic()" title="SAve">
+                <mat-icon>save</mat-icon>
+              </button>
+            </div>
+          </div>
+        </app-card>
+      </div>
+    </div>
+  </div>
 </div>
-

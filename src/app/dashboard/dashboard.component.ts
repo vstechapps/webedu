@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from '../services/firestore.service';
-import { UserCourse, CourseStatus } from '../models/models';
+import { UserCourse, Role } from '../models/models';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,6 +9,7 @@ import { UserCourse, CourseStatus } from '../models/models';
 })
 export class DashboardComponent implements OnInit {
   userActivity:any={};
+  Role:Role;
   constructor(public firestore: FirestoreService) {
     this.userActivity["OnTime"]=70;
   }
