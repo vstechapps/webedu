@@ -65,25 +65,27 @@
       </div>
       <div class="modal-body">
         <app-card class="row mt-2">
-          <app-input class="col-12" type="textarea" label="Question Text" rows="1" [(value)]="course.questions[questionIndex].text">
+          <app-input class="col-12" type="textarea" label="Question Text" [rows]="rows" [(value)]="course.questions[questionIndex].text">
           </app-input>
           <div class=" row col-12 p-2" *ngFor="let option of course.questions[questionIndex].options; let i=index;">
             <input class="col-2 p-0" type="radio" name="coption" [(ngModel)]="course.questions[questionIndex].correct"
               [value]="i+1" />
-            <app-input class="col-8 p-0" type="textarea" rows="1" [label]="'Option '+(i+1)"
-              [(value)]="course.questions[questionIndex].options[i]"></app-input>
+            <app-input class="col-8 p-0" type="textarea" [rows]="rows" [label]="'Option '+(i+1)"
+              [value]="course.questions[questionIndex].options[i]" (change)="updateOption(i,$event)"></app-input>
             <i class="col-2 p-0 material-icons pointer"
               (click)="course.question[questionIndex].options.splice(i,1)">delete</i>
           </div>
-          <div class="row col-10 text-right">
-            <button mat-mini-fab color="accent" title="Add Option"
+          <div class="col-10 text-right">
+            <button mat-mini-fab class="mx-2"  color="accent" title="Add Option"
               (click)="course.questions[questionIndex].options.push('')"
               [disabled]="course.questions[questionIndex].options.length==4">
               <mat-icon>add</mat-icon>
             </button>
-            <button mat-mini-fab color="primary" (click)="updateQuestion()" title="Save">
+            <button mat-mini-fab class="mx-2" color="primary" (click)="updateQuestion()" title="Save">
               <mat-icon>save</mat-icon>
             </button>
+            <i class="material-icons align-middle pointer mx-1" *ngIf="rows!=10" (click)="rows=rows+1">zoom_in</i>
+            <i class="material-icons align-middle pointer mx-1" *ngIf="rows!=1" (click)="rows=rows-1">zoom_out</i>
           </div>
         </app-card>
       </div>

@@ -24,6 +24,8 @@ export class InputComponent implements OnInit {
 
   @Output() valueChange = new EventEmitter();
 
+  @Output() change = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {

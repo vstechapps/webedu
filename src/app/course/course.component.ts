@@ -15,6 +15,7 @@ export class CourseComponent implements OnInit {
   userCourse:UserCourse;
   questionIndex=0;
   newQuestion:Question;
+  rows:number=1;
 
   constructor(public firestore:FirestoreService,private route: ActivatedRoute,private router:Router) {
    }
@@ -81,6 +82,10 @@ export class CourseComponent implements OnInit {
       }
     }
     this.firestore.userCourseRef.doc(this.userCourse.id).set(this.userCourse).then(()=>this.refresh());
+  }
+
+  updateOption(optionIndex,event){
+    this.course.questions[this.questionIndex].options[optionIndex]=event;
   }
 
 
