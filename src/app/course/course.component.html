@@ -1,57 +1,69 @@
 <div *ngIf="course">
   <div class="row w-100 my-2 course-header">
-    <div class="col-8 align-middle">
-      <div class="course-name p-2">
-        <span>{{course.subject}} > {{course.name}}</span>
-        <span *ngIf="userCourse float-right">({{userCourse.status}})</span></div>
+    <div class="col-12 col-md-4 align-middle course-name">
+      <span>{{course.subject}} > {{course.name}}</span>
     </div>
-    <div class="col-4 text-right">
+    <div class="col-6 col-md-4" *ngIf="userCourse" style="font-size:10px">
+      <div>{{"STATUS : "+userCourse.status}}</div>
+      <div>{{"SCORE : "+(userCourse.score?userCourse.score:0)}}</div>
+    </div>
+    <div class="col-6 col-md-4 text-right">
       <button *ngIf="userCourse!=null" mat-raised-button color="accent" (click)="unregister()">Un Register</button>
       <button *ngIf="userCourse==null" mat-raised-button color="accent" (click)="register()">Register</button>
     </div>
   </div>
-  <div class="row mt-2" *ngIf="(userCourse || firestore.user.role=='ADMIN') && course.questions[questionIndex]">
-    <div class="col-12 text-center">
-      <button class="float-left" mat-mini-fab color="accent" title="Prev" (click)="prev()"
-        [disabled]="questionIndex==0">
-        <mat-icon>chevron_left</mat-icon>
-      </button>
-      <b>Question {{questionIndex+1}}</b>
-      <button class="float-right" mat-mini-fab color="accent" title="Next" (click)="next()"
-        [disabled]="questionIndex==course.questions.length-1">
-        <mat-icon>chevron_right</mat-icon>
-      </button>
-    </div>
-    <div class="col-12">
-      <app-card>
-        <div class="p-1">{{(questionIndex+1)+"Q) "}}<div class="d-inline-block" [innerHTML]="course.questions[questionIndex].text"></div></div>
-        <div class="p-3">
-          <div *ngFor="let option of course.questions[questionIndex].options; let i=index;">
-            <input type="radio" name="soption" [(ngModel)]="course.questions[questionIndex].select" [value]="i+1" />
-            <span class="mx-3" style="vertical-align: text-bottom;">{{(i+1)+") "}}<div class="d-inline-block" [innerHTML]="option"></div></span>
+  <div class="mt-2" *ngIf="(userCourse || firestore.user.role=='ADMIN') && course.questions[questionIndex]">
+    <app-card class="row">
+      <div class="col-2 text-right d-inline-block">
+        <button mat-mini-fab color="accent" title="Prev" (click)="prev()" [disabled]="questionIndex==0">
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+      </div>
+      <div class="col-8 text-center d-inline-block align-middle">
+        <div class="question-header">
+          <b>Question {{questionIndex+1}}</b>
+        </div>
+        <div class="question-body p-2">
+          <div class="d-inline-block text-left" style="width:fit-content">
+            <div class="question">
+              <span><b>{{(questionIndex+1)+"Q) "}}</b></span>
+              <div class="d-inline-block" [innerHTML]="course.questions[questionIndex].text"></div>
+            </div>
+            <div class="options ml-3">
+              <div class="option p-2 mt-2" *ngFor="let option of course.questions[questionIndex].options; let i=index;">
+                <input type="radio" name="soption" [(ngModel)]="course.questions[questionIndex].select" [value]="i+1" />
+                <span class="mx-3" style="vertical-align: text-bottom;">{{(i+1)+") "}}</span>
+                <div class="d-inline-block" [innerHTML]="option"></div>
+              </div>
+            </div>
           </div>
         </div>
-        <button class="float-right" mat-raised-button color="warn" title="Submit" (click)="evaluate()"
-          *ngIf="questionIndex==course.questions.length-1">
-          Evaluate
+        <div class="question-footer">
+          <button mat-raised-button color="warn" title="Submit" (click)="evaluate()"
+            [disabled]="questionIndex!=course.questions.length-1">
+            Evaluate
+          </button>
+        </div>
+      </div>
+      <div class="col-2 text-left d-inline-block">
+        <button mat-mini-fab color="accent" title="Next" (click)="next()" [disabled]="questionIndex==course.questions.length-1">
+          <mat-icon>chevron_right</mat-icon>
         </button>
-      </app-card>
-    </div>
-  </div>
-  <div class="row mt-2">
-    <div *ngIf="firestore.user.role=='ADMIN'" class="col-12 text-center">
-      <button mat-mini-fab class="mx-3" color="primary" (click)="addQuestion()" title="Add New Question">
-        <mat-icon>add</mat-icon>
-      </button>
-      <button *ngIf="course.questions[questionIndex]" class="mx-3" mat-mini-fab color="accent" data-toggle="modal"
-        data-target="#editQuestion" title="Edit Question">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button *ngIf="course.questions[questionIndex]" class="mx-3" mat-mini-fab color="warn" (click)="deleteQuestion()"
-        title="Delete Question">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
+      </div>
+      <div class="col-12 mt-2 text-center" *ngIf="firestore.user.role=='ADMIN'">
+        <button mat-mini-fab class="mx-3" color="primary" (click)="addQuestion()" title="Add New Question">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button *ngIf="course.questions[questionIndex]" class="mx-3" mat-mini-fab color="accent" data-toggle="modal"
+          data-target="#editQuestion" title="Edit Question">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button *ngIf="course.questions[questionIndex]" class="mx-3" mat-mini-fab color="warn" (click)="deleteQuestion()"
+          title="Delete Question">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </app-card>
   </div>
 </div>
 
@@ -65,7 +77,8 @@
       </div>
       <div class="modal-body">
         <app-card class="row mt-2">
-          <app-input class="col-12" type="textarea" label="Question Text" [rows]="rows" [(value)]="course.questions[questionIndex].text">
+          <app-input class="col-12" type="textarea" label="Question Text" [rows]="rows"
+            [(value)]="course.questions[questionIndex].text">
           </app-input>
           <div class=" row col-12 p-2" *ngFor="let option of course.questions[questionIndex].options; let i=index;">
             <input class="col-2 p-0" type="radio" name="coption" [(ngModel)]="course.questions[questionIndex].correct"
@@ -76,7 +89,7 @@
               (click)="course.question[questionIndex].options.splice(i,1)">delete</i>
           </div>
           <div class="col-10 text-right">
-            <button mat-mini-fab class="mx-2"  color="accent" title="Add Option"
+            <button mat-mini-fab class="mx-2" color="accent" title="Add Option"
               (click)="course.questions[questionIndex].options.push('')"
               [disabled]="course.questions[questionIndex].options.length==4">
               <mat-icon>add</mat-icon>

@@ -35,9 +35,4 @@ export class UsersComponent implements OnInit {
     this.firestore.userCourseRef.doc(userCourse.id).delete();
   }
 
-  getCourseName(userCourse:UserCourse){
-    let course=this.firestore.courses.filter(course=>course.id==userCourse.course)[0];
-    return course.name;
-  }
-
 }

@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit {
   userActivity:any={};
   Role:Role;
   constructor(public firestore: FirestoreService) {
-    this.userActivity["OnTime"]=70;
+    this.userActivity["OnTime"]=Math.floor(Math.random() * 100);
   }
 
   ngOnInit(): void {

@@ -25,7 +25,6 @@ export class UserCourse{
   started:string;
   completed?:string;
   score?:number;
-  topic:number;
 }
 
 export class Course{

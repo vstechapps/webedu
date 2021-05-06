@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Course, UserCourse, CourseStatus, ContentType, Question } from '../models/models';
 import { FirestoreService } from '../services/firestore.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-course',
@@ -17,7 +18,7 @@ export class CourseComponent implements OnInit {
   newQuestion:Question;
   rows:number=1;
 
-  constructor(public firestore:FirestoreService,private route: ActivatedRoute,private router:Router) {
+  constructor(public firestore:FirestoreService,private route: ActivatedRoute,private router:Router,private toaster:ToastrService) {
    }
 
   ngOnInit(): void {
@@ -27,11 +28,14 @@ export class CourseComponent implements OnInit {
       console.log("Course Refreshed : ",course)
       this.course=course;
       this.refresh();
+      if(this.firestore.user.role=='USER'){
+        this.shuffleQuestions();
+      }
     });
   }
 
   register(){
-    this.firestore.userCourseRef.add({user:this.firestore.user.id,course:this.courseId,status:CourseStatus.InProgress,started:(new Date()).toLocaleDateString(),topic:0})
+    this.firestore.userCourseRef.add({user:this.firestore.user.id,course:this.courseId,status:CourseStatus.InProgress,started:(new Date()).toLocaleDateString()})
     .then(()=>this.refresh());
   }
 
@@ -42,8 +46,38 @@ export class CourseComponent implements OnInit {
 
   refresh(){
     this.userCourse=this.firestore.user.courses.filter(usercourse=>usercourse.course==this.courseId)[0];
-    if(this.userCourse)this.questionIndex=this.userCourse.topic;
+    this.questionIndex=0;
     this.newQuestion={text:"",options:[]};
+  }
+
+  shuffleQuestions(){
+    var currentIndex = this.course.questions.length, temporaryValue, randomIndex;
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      // And swap it with the current element.
+      temporaryValue = this.course.questions[currentIndex];
+      this.course.questions[currentIndex] = this.course.questions[randomIndex];
+      this.course.questions[randomIndex] = temporaryValue;
+    }
+    // For Shuffling options of each question
+    this.course.questions.forEach(q=>{
+      var currentIndex = q.options.length, temporaryValue, randomIndex;
+      while (0 !== currentIndex) {
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      // And swap it with the current element.
+      if(currentIndex+1==q.correct){q.correct=randomIndex+1;}
+      else if(randomIndex+1==q.correct){q.correct=currentIndex+1;}
+      temporaryValue = q.options[currentIndex];
+      q.options[currentIndex] = q.options[randomIndex];
+      q.options[randomIndex] = temporaryValue;
+    }
+    });
+    console.log(this.course.questions);
   }
 
   addQuestion(){
@@ -74,7 +108,8 @@ export class CourseComponent implements OnInit {
     let correct=this.course.questions.filter(q=>q.select==q.correct).length;
     let total=this.course.questions.length;
     let score=Math.round(correct/total*100);
-    alert("Score : "+score);
+    if(score<100)this.toaster.error("You scored "+score+" out of 100, Retry","Result : FAILED");
+    else this.toaster.success("You scored "+score+" out of 100, Congrats","Result : PASS");
     if(this.userCourse){
       this.userCourse.score=score;
       if(this.userCourse.score==100){

@@ -13,8 +13,9 @@
         </thead>
         <tbody *ngFor="let user of users">
             <tr>
-              <td><i class="material-icons pointer align-middle text-primary"
-                  (click)="temp=temp==user.id?null:user.id">{{temp==user.id?"expand_less":"expand_more"}}</i>{{user.name}}</td>
+              <td><i class="material-icons pointer align-middle"
+                  (click)="temp=temp==user.id?null:user.id">{{temp==user.id?"expand_less":"expand_more"}}</i></td>
+              <td>{{user.name}}</td>
               <td>{{user.email}}</td>
               <td>{{user.role}}</td>
               <td>{{user.courses?user.courses.length:0}}</td>
@@ -22,8 +23,9 @@
             <tr *ngIf="temp==user.id">
               <td colspan="4">
                 <table  class="table">
-                  <tr *ngFor="let userCourse of user.courses">
-                    <td>{{getCourseName(userCourse)}}</td>
+                  <tr *ngFor="let userCourse of user.courses; let i=index">
+                    <td>{{i+"."}}</td>
+                    <td>{{firestore.getCourseName(userCourse)}}</td>
                     <td>{{userCourse.status}}</td>
                     <td>{{userCourse.started}}</td>
                     <td>{{userCourse.score?userCourse.score:0}}</td>

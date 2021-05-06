@@ -35,6 +35,11 @@ export class FirestoreService {
     this.subjectRef.valueChanges().subscribe(res => res.forEach(s => this.subjects.push(s.name)));
   }
 
+  getCourseName(userCourse:UserCourse){
+    let course=this.courses.filter(course=>course.id==userCourse.course)[0];
+    return course!=null?course.name:"";
+  }
+
 }
 
 export class UserData extends User {
