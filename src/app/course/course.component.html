@@ -24,11 +24,11 @@
     </div>
     <div class="col-12">
       <app-card>
-        <div class="p-1">{{(questionIndex+1)+"Q) "+course.questions[questionIndex].text}}</div>
+        <div class="p-1">{{(questionIndex+1)+"Q) "}}<div class="d-inline-block" [innerHTML]="course.questions[questionIndex].text"></div></div>
         <div class="p-3">
           <div *ngFor="let option of course.questions[questionIndex].options; let i=index;">
             <input type="radio" name="soption" [(ngModel)]="course.questions[questionIndex].select" [value]="i+1" />
-            <span class="mx-3" style="vertical-align: text-bottom;">{{(i+1)+") "+option}}</span>
+            <span class="mx-3" style="vertical-align: text-bottom;">{{(i+1)+") "}}<div class="d-inline-block" [innerHTML]="option"></div></span>
           </div>
         </div>
         <button class="float-right" mat-raised-button color="warn" title="Submit" (click)="evaluate()"
@@ -65,12 +65,12 @@
       </div>
       <div class="modal-body">
         <app-card class="row mt-2">
-          <app-input class="col-12" type="text" label="Question Text" [(value)]="course.questions[questionIndex].text">
+          <app-input class="col-12" type="textarea" label="Question Text" rows="1" [(value)]="course.questions[questionIndex].text">
           </app-input>
           <div class=" row col-12 p-2" *ngFor="let option of course.questions[questionIndex].options; let i=index;">
             <input class="col-2 p-0" type="radio" name="coption" [(ngModel)]="course.questions[questionIndex].correct"
               [value]="i+1" />
-            <app-input class="col-8 p-0" type="text" [label]="'Option '+(i+1)"
+            <app-input class="col-8 p-0" type="textarea" rows="1" [label]="'Option '+(i+1)"
               [(value)]="course.questions[questionIndex].options[i]"></app-input>
             <i class="col-2 p-0 material-icons pointer"
               (click)="course.question[questionIndex].options.splice(i,1)">delete</i>

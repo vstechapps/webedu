@@ -1,5 +1,6 @@
 <div *ngIf="type!='select'" class="input-container">
-  <input [type]="type" [(ngModel)]="value" required (ngModelChange)="valueChange.emit(value)">
+  <input *ngIf="type!='textarea'" [type]="type" [(ngModel)]="value" required (ngModelChange)="valueChange.emit(value)">
+  <textarea *ngIf="type=='textarea'" [(ngModel)]="value" [rows]="rows" required (ngModelChange)="valueChange.emit(value)"></textarea>
   <span class="highlight"></span>
   <span class="bar"></span>
   <label>{{label}}</label>

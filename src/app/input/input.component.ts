@@ -17,6 +17,9 @@ export class InputComponent implements OnInit {
   value:string="";
 
   @Input()
+  rows:number=2;
+
+  @Input()
   options:string[]=[];
 
   @Output() valueChange = new EventEmitter();

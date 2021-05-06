@@ -14,17 +14,30 @@ export class UsersComponent implements OnInit {
   constructor(public firestore: FirestoreService) {
     this.firestore.userRef.valueChanges().subscribe(res => {
       this.users = res;
+      this.refresh();
     });
-    this.firestore.userCourseRef.valueChanges().subscribe(res => {
-      this.userCourses = res;
+    this.firestore.userCourseRef.snapshotChanges().subscribe(res => {
+      this.userCourses = res.map(a=>{let d:UserCourse=a.payload.doc.data();d.id=a.payload.doc.id;return d;});
+      this.refresh();
     });
   }
 
   ngOnInit(): void {
   }
 
-  courseCount(user:UserData){
-    return this.userCourses.filter(usercourse=>usercourse.user==user.id).length;
+  refresh(){
+    this.users.forEach(user=>{
+      user.courses=this.userCourses.filter(course=>course.user==user.id);
+    });
+  }
+
+  resetCourse(userCourse:UserCourse){
+    this.firestore.userCourseRef.doc(userCourse.id).delete();
+  }
+
+  getCourseName(userCourse:UserCourse){
+    let course=this.firestore.courses.filter(course=>course.id==userCourse.course)[0];
+    return course.name;
   }
 
 }

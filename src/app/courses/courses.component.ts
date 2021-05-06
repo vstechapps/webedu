@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Course, CourseSubject } from '../models/models';
+import { Course } from '../models/models';
 import { FirestoreService } from '../services/firestore.service';
 
 @Component({
@@ -9,13 +9,10 @@ import { FirestoreService } from '../services/firestore.service';
 })
 export class CoursesComponent implements OnInit {
 
-  courses:Course[];
-  subjects:string[]=[];
+
   course:Course={name:"",subject:"",duration:"",questions:[]};
   constructor(public firestore:FirestoreService) {
-    this.firestore.courseRef.snapshotChanges().subscribe(res=>
-      this.courses=res.map(a=>{let d:Course=a.payload.doc.data();d.id=a.payload.doc.id;return d;}));
-    this.firestore.subjectRef.valueChanges().subscribe(res=>res.forEach(s=>this.subjects.push(s.name)));
+
    }
 
   ngOnInit(): void {
@@ -31,7 +28,7 @@ export class CoursesComponent implements OnInit {
 
   validate(){
     console.log(this.course);
-    return this.course.name!="" && this.course.subject!="" && this.subjects.indexOf(this.course.subject)>-1;
+    return this.course.name!="" && this.course.subject!="" && this.firestore.subjects.indexOf(this.course.subject)>-1;
   }
 
 }

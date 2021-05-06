@@ -7,7 +7,7 @@
     </button>
   </div>
   <div class="col-12 row mt-3">
-    <app-card *ngFor="let course of courses" class="col-12 col-sm-4 col-md-3 p-0 m-2">
+    <app-card *ngFor="let course of firestore.courses" class="col-12 col-sm-4 col-md-3 p-0 m-2">
       <div>
         <span class="course-title pointer" [routerLink]="'/course/'+course.id"
           title="{{course.name}}">{{course.name}}</span>
@@ -31,7 +31,7 @@
           <div class="row mt-2">
             <app-input class="col-12 col-sm-4 col-md-4" type="text" label="Course Name" [(value)]="course.name">
             </app-input>
-            <app-input class="col-12 col-sm-4 col-md-4" type="select" label="Subject" [options]="subjects"
+            <app-input class="col-12 col-sm-4 col-md-4" type="select" label="Subject" [options]="firestore.subjects"
               [(value)]="course.subject"></app-input>
             <app-input class="col-12 col-sm-4 col-md-4" type="text" label="Duration" [(value)]="course.duration">
             </app-input>
