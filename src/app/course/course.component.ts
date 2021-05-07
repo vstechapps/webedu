@@ -67,6 +67,7 @@ export class CourseComponent implements OnInit {
     }
     // For Shuffling options of each question
     this.course.questions.forEach(q=>{
+      q.select=null;
       var currentIndex = q.options.length, temporaryValue, randomIndex;
       while (0 !== currentIndex) {
       // Pick a remaining element...
