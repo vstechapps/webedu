@@ -18,6 +18,7 @@ export class CourseComponent implements OnInit {
   newQuestion:Question;
   rows:number=1;
   start:boolean=false;
+  bulkUploadText="";
   constructor(public firestore:FirestoreService,private route: ActivatedRoute,private router:Router,private toaster:ToastrService) {
    }
 
@@ -48,6 +49,7 @@ export class CourseComponent implements OnInit {
 
   startQuiz(){
     this.shuffleQuestions();
+    this.questionIndex=0;
     this.start=true;
   }
 
@@ -124,6 +126,22 @@ export class CourseComponent implements OnInit {
 
   updateOption(optionIndex,event){
     this.course.questions[this.questionIndex].options[optionIndex]=event;
+  }
+
+  processBulkUpload() {
+    let textLines = this.bulkUploadText.trim().split("\n");
+    let count=0;
+    try {
+      for (var i = 0; i < textLines.length; i += 6) {
+        let q: Question = { text: textLines[i], options: [textLines[i + 1], textLines[i + 2], textLines[i + 3], textLines[i + 4]], correct: parseInt(textLines[i + 5]) };
+        this.course.questions.push(q);
+        count++;
+      }
+      this.toaster.success(count+" questions uploaded.","SUCCESS");
+    } catch (error) {
+      console.error(error);
+      this.toaster.error("Unable to bulk upload", "FAILED");
+    }
   }
 
 

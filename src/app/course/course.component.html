@@ -9,7 +9,7 @@
     </div>
     <div class="col-6 col-md-4 text-right">
       <button *ngIf="userCourse!=null" mat-raised-button color="accent" (click)="unregister()">Un Register</button>
-      <button *ngIf="userCourse==null" mat-raised-button color="accent" (click)="register()">Register</button>
+      <button *ngIf="userCourse==null" [disabled]="course.questions.length<10" mat-raised-button color="accent" (click)="register()">Register</button>
     </div>
   </div>
   <app-card class="row">
@@ -25,7 +25,7 @@
           </button>
         </div>
         <div class="col-8 d-inline-block align-middle">
-          <b>Question {{questionIndex+1}}</b>
+          <b>Question {{questionIndex+1}} of {{course.questions.length}}</b>
         </div>
         <div class="col-2 text-left d-inline-block">
           <button mat-mini-fab color="accent" title="Next" (click)="next()"
@@ -64,9 +64,15 @@
         data-target="#editQuestion" title="Edit Question">
         <mat-icon>edit</mat-icon>
       </button>
-      <button *ngIf="course.questions[questionIndex]" class="mx-3" mat-mini-fab color="warn"
-        (click)="deleteQuestion()" title="Delete Question">
+      <button *ngIf="course.questions[questionIndex]" class="mx-3" mat-mini-fab color="warn" (click)="deleteQuestion()"
+        title="Delete Question">
         <mat-icon>delete</mat-icon>
+      </button>
+      <button mat-mini-fab class="mx-3" color="accent" data-toggle="modal" data-target="#bulkUpload" title="Bulk Upload">
+        <mat-icon>upload</mat-icon>
+      </button>
+      <button mat-mini-fab class="mx-3" color="primary" (click)="updateCourse()" title="Save">
+        <mat-icon>save</mat-icon>
       </button>
     </div>
   </app-card>
@@ -98,8 +104,33 @@
               [disabled]="course.questions[questionIndex].options.length==4">
               <mat-icon>add</mat-icon>
             </button>
-            <button mat-mini-fab class="mx-2" color="primary" (click)="updateQuestion()" title="Save">
-              <mat-icon>save</mat-icon>
+            <i class="material-icons align-middle pointer mx-1" *ngIf="rows!=10" (click)="rows=rows+1">zoom_in</i>
+            <i class="material-icons align-middle pointer mx-1" *ngIf="rows!=1" (click)="rows=rows-1">zoom_out</i>
+          </div>
+        </app-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal" id="bulkUpload" *ngIf="course.questions">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-dark">Bulk Upload Questions</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <app-card class="row mt-2">
+          <app-input class="col-12" type="textarea" label="Question Text" [rows]="20"
+            [(value)]="bulkUploadText">
+          </app-input>
+          <div class="col-10 text-right">
+            <button mat-mini-fab class="mx-2" color="accent" title="Upload"
+              (click)="processBulkUpload()">
+              <mat-icon>upload</mat-icon>
             </button>
             <i class="material-icons align-middle pointer mx-1" *ngIf="rows!=10" (click)="rows=rows+1">zoom_in</i>
             <i class="material-icons align-middle pointer mx-1" *ngIf="rows!=1" (click)="rows=rows-1">zoom_out</i>
