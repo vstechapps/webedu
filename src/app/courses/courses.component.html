@@ -1,9 +1,13 @@
 <div class="row">
   <div class="col-12 header">
     <span>All Courses</span>
-    <button *ngIf="firestore.user.role=='ADMIN'" class="float-right" mat-mini-fab color="primary" data-toggle="modal"
+    <button *ngIf="firestore.user.role=='ADMIN'" class="float-right mx-2" mat-mini-fab color="primary" data-toggle="modal"
       data-target="#addCourse" title="Add New Course">
       <mat-icon>add</mat-icon>
+    </button>
+    <button *ngIf="firestore.user.role=='ADMIN'" class="float-right mx-2" mat-mini-fab color="accent"
+      (click)="backupCourses()" title="Backup Courses">
+      <mat-icon>upload</mat-icon>
     </button>
   </div>
   <div class="col-12 row mt-3">

@@ -17,7 +17,7 @@ export class CourseComponent implements OnInit {
   questionIndex=0;
   newQuestion:Question;
   rows:number=1;
-
+  start:boolean=false;
   constructor(public firestore:FirestoreService,private route: ActivatedRoute,private router:Router,private toaster:ToastrService) {
    }
 
@@ -28,9 +28,6 @@ export class CourseComponent implements OnInit {
       console.log("Course Refreshed : ",course)
       this.course=course;
       this.refresh();
-      if(this.firestore.user.role=='USER'){
-        this.shuffleQuestions();
-      }
     });
   }
 
@@ -46,8 +43,12 @@ export class CourseComponent implements OnInit {
 
   refresh(){
     this.userCourse=this.firestore.user.courses.filter(usercourse=>usercourse.course==this.courseId)[0];
-    this.questionIndex=0;
     this.newQuestion={text:"",options:[]};
+  }
+
+  startQuiz(){
+    this.shuffleQuestions();
+    this.start=true;
   }
 
   shuffleQuestions(){
@@ -77,7 +78,6 @@ export class CourseComponent implements OnInit {
       q.options[randomIndex] = temporaryValue;
     }
     });
-    console.log(this.course.questions);
   }
 
   addQuestion(){
@@ -110,10 +110,13 @@ export class CourseComponent implements OnInit {
     let score=Math.round(correct/total*100);
     if(score<100)this.toaster.error("You scored "+score+" out of 100, Retry","Result : FAILED");
     else this.toaster.success("You scored "+score+" out of 100, Congrats","Result : PASS");
+    this.start=false;
     if(this.userCourse){
       this.userCourse.score=score;
       if(this.userCourse.score==100){
         this.userCourse.status=CourseStatus.Completed;
+      }else{
+        this.userCourse.status=CourseStatus.InProgress;
       }
     }
     this.firestore.userCourseRef.doc(this.userCourse.id).set(this.userCourse).then(()=>this.refresh());
