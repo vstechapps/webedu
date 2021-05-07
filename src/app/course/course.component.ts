@@ -87,13 +87,15 @@ export class CourseComponent implements OnInit {
     this.questionIndex=this.course.questions.length-1;
   }
 
-  updateQuestion(){
-    this.firestore.courseRef.doc(this.courseId).set(this.course).then(()=>this.refresh());
+  updateCourse(){
+    this.firestore.courseRef.doc(this.courseId).set(this.course).then(()=>{
+        this.refresh();
+        this.toaster.success("Course Updated","SUCCESS");
+    });
   }
 
   deleteQuestion(){
     this.course.questions.splice(this.questionIndex,1);
-    this.firestore.courseRef.doc(this.courseId).set(this.course).then(()=>this.refresh());
   }
 
   next(){
