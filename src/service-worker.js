@@ -16,21 +16,22 @@ self.addEventListener('push', function (event) {
 });
 
 self.addEventListener('user', function (event) {
-  user=event;
+  user = event;
 });
 
-var interval=setInterval(runEveryHour,60*60*1000);
+var interval = setInterval(runEveryHour, 60 * 60 * 1000);
 
 
-runEveryHour=function(){
-  if(user!=undefined){
-    notify("WebEdu","Hello "+user.name+" Please complete the courses")
+runEveryHour = function () {
+  if (user != undefined) {
+    notify("WebEdu", "Hello " + user.name + " Please complete the courses")
   }
 }
 
-notify=function(title,message){
-  self.registration.showNotification(title, {
-  body: message
-});
+notify = function (title, message) {
+  if (Notification.permission == 'granted')
+    self.registration.showNotification(title, {
+      body: message
+    });
 }
 
