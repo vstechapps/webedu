@@ -36,18 +36,20 @@ export class FirestoreService {
     this.updateServiceWorker();
   }
 
-  getCourseName(userCourse:UserCourse){
-    let course=this.courses.filter(course=>course.id==userCourse.course)[0];
-    return course!=null?course.name:"";
+  getCourseName(userCourse: UserCourse) {
+    let course = this.courses.filter(course => course.id == userCourse.course)[0];
+    return course != null ? course.name : "";
   }
 
-  updateServiceWorker(){
+  updateServiceWorker() {
     if (Notification.permission == 'granted') {
-    navigator.serviceWorker.getRegistration().then(function(reg) {
-      reg.showNotification(this.user.name+", WebEdu Welcomes you onboard");
-      reg.dispatchEvent(new Event("user",this.user));
-    });
-  }
+      navigator.serviceWorker.getRegistration().then(function (reg) {
+        if (reg) {
+          reg.showNotification(this.user.name + ", WebEdu Welcomes you onboard");
+          reg.dispatchEvent(new Event("user", this.user));
+        }
+      });
+    }
   }
 
 }

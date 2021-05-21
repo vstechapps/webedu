@@ -27,7 +27,8 @@
               "src/favicon.ico",
               "src/assets",
               "src/manifest.json",
-              "src/404.html"
+              "src/404.html",
+              "src/service-worker.js"
             ],
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.css",
