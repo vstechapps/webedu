@@ -20,9 +20,10 @@ export class ProfileComponent implements OnInit {
   }
 
   toggleNotifications() {
+    var a=this;
     Notification.requestPermission(function (status) {
       console.log('Notification permission status:', status);
-      Notification.permission == "granted" ? this.toaster.success("Success", "Notifications Enabled") : this.toaster.error("Failed", "Notifications Blocked");
+      Notification.permission == "granted" ? a.toaster.success("Success", "Notifications Enabled") : a.toaster.error("Failed", "Notifications Blocked");
     });
   }
 
