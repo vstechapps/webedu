@@ -1,5 +1,3 @@
-'use strict';
-
 var user;
 
 self.addEventListener('install', function (event) {
@@ -19,8 +17,12 @@ self.addEventListener('user', function (event) {
   user = event;
 });
 
-var interval = setInterval(runEveryHour, 60 * 60 * 1000);
-
+notify = function (title, message) {
+  if (Notification.permission == 'granted')
+    self.registration.showNotification(title, {
+      body: message
+    });
+}
 
 runEveryHour = function () {
   if (user != undefined) {
@@ -28,10 +30,8 @@ runEveryHour = function () {
   }
 }
 
-notify = function (title, message) {
-  if (Notification.permission == 'granted')
-    self.registration.showNotification(title, {
-      body: message
-    });
-}
+var interval = setInterval(runEveryHour, 60 * 60 * 1000);
+
+
+
 
