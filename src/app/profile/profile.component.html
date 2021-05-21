@@ -62,6 +62,16 @@
         <button mat-stroked-button color="accent" class="ml-2"
           (click)="editing=!editing">{{editing?"Cancel":"Edit Profile"}}</button>
       </div>
+      <div class="row">
+        <mat-slide-toggle
+          class="example-margin"
+          color="accent"
+          [checked]="notifications"
+          (toggleChange)="toggleNotifications()">
+        Notifications
+      </mat-slide-toggle>
+      </div>
+
     </app-card>
   </div>
 </div>
