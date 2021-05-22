@@ -42,19 +42,36 @@ export class FirestoreService {
   }
 
   updateServiceWorker() {
+    var a = this;
     if (Notification.permission == 'granted') {
-      navigator.serviceWorker.getRegistration().then(function (reg) {
-        if (reg) {
-          reg.showNotification(this.user.name + ", WebEdu Welcomes you onboard");
-          reg.dispatchEvent(new Event("user", this.user));
-        }
-      });
+    var interval = setInterval(function () {
+        navigator.serviceWorker.getRegistration().then(function (reg) {
+          if (reg) {
+            console.log("Firestore Service trying to update user to service worker", a.user);
+            reg.showNotification(a.user.name + ", WebEdu Welcomes you onboard");
+            reg.dispatchEvent(new Event("user", new UserEvent(a.user)));
+            clearInterval(interval);
+          }
+        });
+    }, 1000);
     }
   }
-
 }
 
 export class UserData extends User {
   courses?: UserCourse[];
 
+}
+
+class UserEvent implements EventInit {
+  bubbles?: boolean;
+  cancelable?: boolean;
+  composed?: boolean;
+  user?: UserData;
+  constructor(user: UserData) {
+    this.user = user;
+    this.bubbles=false;
+    this.cancelable=false;
+    this.composed=false;
+  }
 }

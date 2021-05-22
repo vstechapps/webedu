@@ -33,7 +33,6 @@ import { UsersComponent } from './users/users.component';
 import { CoursesComponent } from './courses/courses.component';
 import { CourseComponent } from './course/course.component';
 import { ToastrModule } from 'ngx-toastr';
-import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [

@@ -14,7 +14,8 @@ self.addEventListener('push', function (event) {
 });
 
 self.addEventListener('user', function (event) {
-  user = event;
+  console.log("Service worker : User Updated",event.user)
+  user = event.user;
 });
 
 notify = function (title, message) {
@@ -30,7 +31,7 @@ runEveryHour = function () {
   }
 }
 
-var interval = setInterval(runEveryHour, 60 * 60 * 1000);
+var interval = setInterval(runEveryHour, 10 * 1000);
 
 
 
