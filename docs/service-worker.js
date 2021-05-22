@@ -35,7 +35,7 @@ runEveryHour = function () {
   notifyToRegisterCourses();
 }
 
-var interval = setInterval(runEveryHour, 15 * 60 * 1000);
+var interval = setInterval(runEveryHour, 30 * 60 * 1000);
 
 notifyToRegisterCourses = function(){
   if(courses!=null && courses.length>0){
@@ -49,11 +49,19 @@ notifyToCompleteCourses = function(){
   if(user!=null && user.courses!=null && user.courses.length>0){
     coursesInProgress=user.courses.filter(course=>course.status=="INPROGRESS");
     if(coursesInProgress.length>0){
-      var course=coursesInProgress[Math.floor(Math.random()*user.courses.length)];
-      var message="Hello " + user.name + " Your course "+course.name+" is "+course.status+" with score "+course.score+". Complete this course";
+      var course=coursesInProgress[Math.floor(Math.random()*coursesInProgress.length)];
+      var message="Hello " + user.name + " Your course "+getCourseName(course.course)+" is "+course.status+" with score "+getScore(course.score)+". Complete this course";
       notify("VVSK WebEdu", message);
     }
   }
+}
+
+getCourseScore=function(score){
+  return score!=null?score:0;
+}
+
+getCourseName=function(id){
+  return courses.length>0?courses.filter(c=>c.id==id)[0].name:null;
 }
 
 

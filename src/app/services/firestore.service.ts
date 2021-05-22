@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { User, UserCourse, CourseSubject, Course } from '../models/models';
-import { MESSAGES_CONTAINER_ID } from '@angular/cdk/a11y';
 
 @Injectable({
   providedIn: 'root'
