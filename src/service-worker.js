@@ -20,6 +20,14 @@ self.addEventListener('message', function(event){
     console.log("Service worker : User Updated",user);
 });
 
+getCourseScore=function(score){
+  return score!=null?score:0;
+}
+
+getCourseName=function(id){
+  return courses.length>0?courses.filter(c=>c.id==id)[0].name:null;
+}
+
 
 notify = function (title, message) {
   if (user!=null && user.notifications==true && Notification.permission == 'granted')
@@ -50,18 +58,10 @@ notifyToCompleteCourses = function(){
     coursesInProgress=user.courses.filter(course=>course.status=="INPROGRESS");
     if(coursesInProgress.length>0){
       var course=coursesInProgress[Math.floor(Math.random()*coursesInProgress.length)];
-      var message="Hello " + user.name + " Your course "+getCourseName(course.course)+" is "+course.status+" with score "+getScore(course.score)+". Complete this course";
+      var message="Hello " + user.name + " Your course "+getCourseName(course.course)+" is "+course.status+" with score "+getCourseScore(course.score)+". Complete this course";
       notify("VVSK WebEdu", message);
     }
   }
-}
-
-getCourseScore=function(score){
-  return score!=null?score:0;
-}
-
-getCourseName=function(id){
-  return courses.length>0?courses.filter(c=>c.id==id)[0].name:null;
 }
 
 
