@@ -35,7 +35,7 @@ runEveryHour = function () {
   notifyToRegisterCourses();
 }
 
-var interval = setInterval(runEveryHour, 30 * 60 * 1000);
+var interval = setInterval(runEveryHour, 1 * 60 * 1000);
 
 notifyToRegisterCourses = function(){
   if(courses!=null && courses.length>0){
