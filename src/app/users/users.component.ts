@@ -35,4 +35,8 @@ export class UsersComponent implements OnInit {
     this.firestore.userCourseRef.doc(userCourse.id).delete();
   }
 
+  deleteUser(user:User){
+    this.firestore.userRef.doc(user.id).delete().then(()=>alert(user.name+" is deleted"));
+  }
+
 }

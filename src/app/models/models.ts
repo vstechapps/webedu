@@ -15,6 +15,7 @@ export class User{
   address:string;
   created:string;
   updated:string;
+  notifications:boolean;
 }
 
 export class UserCourse{

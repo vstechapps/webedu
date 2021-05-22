@@ -5,10 +5,12 @@
       <table class="table">
         <thead>
           <tr>
+            <th></th>
             <th>Name</th>
             <th>Email</th>
             <th>Role</th>
             <th>Courses</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody *ngFor="let user of users">
@@ -19,6 +21,7 @@
               <td>{{user.email}}</td>
               <td>{{user.role}}</td>
               <td>{{user.courses?user.courses.length:0}}</td>
+              <td><i class="material-icons pointer text-danger" (click)="deleteUser(user)">delete</i></td>
             </tr>
             <tr *ngIf="temp==user.id">
               <td colspan="4">

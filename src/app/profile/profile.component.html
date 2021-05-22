@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class="actions">
-        <button *ngIf="editing" mat-raised-button color="primary">Save</button>
+        <button *ngIf="editing" mat-raised-button color="primary" (click)="update()">Save</button>
         <button mat-stroked-button color="accent" class="ml-2"
           (click)="editing=!editing">{{editing?"Cancel":"Edit Profile"}}</button>
       </div>
@@ -66,7 +66,7 @@
         <mat-slide-toggle
           class="example-margin"
           color="accent"
-          [checked]="notifications"
+          [checked]="firestore.user.notifications"
           (toggleChange)="toggleNotifications()">
         Notifications
       </mat-slide-toggle>

@@ -10,21 +10,30 @@ import { ToastrService } from 'ngx-toastr';
 export class ProfileComponent implements OnInit {
 
   editing: boolean = false;
-  notifications: boolean = false;
 
   constructor(public firestore: FirestoreService, public toaster: ToastrService) {
-    this.notifications = Notification.permission == 'granted';
+
   }
 
   ngOnInit(): void {
   }
 
   toggleNotifications() {
-    var a=this;
-    Notification.requestPermission(function (status) {
-      console.log('Notification permission status:', status);
-      Notification.permission == "granted" ? a.toaster.success("Success", "Notifications Enabled") : a.toaster.error("Failed", "Notifications Blocked");
-    });
+    var a = this;
+    this.firestore.user.notifications=!this.firestore.user.notifications
+    if (!this.firestore.user.notifications) {
+      this.toaster.success("Success", "Notifications Disabled");
+    } else {
+      Notification.requestPermission(function (status) {
+        console.log('Notification permission status:', status);
+        Notification.permission == "granted" ? a.toaster.success("Success", "Notifications Enabled") : a.toaster.error("Failed", "Notifications Blocked");
+      });
+    }
+    this.update();
+  }
+
+  update() {
+    this.firestore.userRef.doc(this.firestore.user.id).set(this.firestore.user);
   }
 
 }

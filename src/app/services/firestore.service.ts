@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { User, UserCourse, CourseSubject, Course } from '../models/models';
+import { MESSAGES_CONTAINER_ID } from '@angular/cdk/a11y';
 
 @Injectable({
   providedIn: 'root'
@@ -47,9 +48,10 @@ export class FirestoreService {
     var interval = setInterval(function () {
         navigator.serviceWorker.getRegistration().then(function (reg) {
           if (reg) {
+            reg.showNotification("Hello "+a.user.name + ", WebEdu Welcomes you onboard");
             console.log("Firestore Service trying to update user to service worker", a.user);
-            reg.showNotification(a.user.name + ", WebEdu Welcomes you onboard");
-            reg.dispatchEvent(new Event("user", new UserEvent(a.user)));
+            let message={type:"DATA",user:a.user,courses:a.courses};
+            reg.active.postMessage(message);
             clearInterval(interval);
           }
         });
@@ -60,18 +62,4 @@ export class FirestoreService {
 
 export class UserData extends User {
   courses?: UserCourse[];
-
-}
-
-class UserEvent implements EventInit {
-  bubbles?: boolean;
-  cancelable?: boolean;
-  composed?: boolean;
-  user?: UserData;
-  constructor(user: UserData) {
-    this.user = user;
-    this.bubbles=false;
-    this.cancelable=false;
-    this.composed=false;
-  }
 }
