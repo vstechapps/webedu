@@ -10,16 +10,6 @@ self.addEventListener('activate', function (event) {
   console.log('Activated', event);
 });
 
-self.addEventListener('message', function(event){
-    message = event.data;
-    console.log("Service worker : Message Recieved",message);
-    if(message.type=="DATA"){
-      user=message.user;
-      courses=message.courses;
-    }
-    console.log("Service worker : User Updated",user);
-});
-
 getCourseScore=function(score){
   return score!=null?score:0;
 }
@@ -37,13 +27,6 @@ notify = function (title, message) {
       icon:user?user.pic:null
     });
 }
-
-runEveryHour = function () {
-  notifyToCompleteCourses();
-  notifyToRegisterCourses();
-}
-
-var interval = setInterval(runEveryHour, 1 * 60 * 1000);
 
 notifyToRegisterCourses = function(){
   if(courses!=null && courses.length>0){
@@ -64,4 +47,15 @@ notifyToCompleteCourses = function(){
   }
 }
 
+self.addEventListener('message', function(event){
+    message = event.data;
+    console.log("Service worker : Message Recieved",message);
+    if(message.type=="DATA"){
+      user=message.user;
+      courses=message.courses;
+      console.log("Service worker : User Updated",user);
+      notifyToCompleteCourses();
+      notifyToRegisterCourses();
+    }
+});
 
