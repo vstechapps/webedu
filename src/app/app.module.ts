@@ -18,15 +18,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { AwardsComponent } from './awards/awards.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { Simplify2Component } from './simplify2/simplify2.component';
-import { ProjectsComponent } from './projects/projects.component';
-import { ResumeComponent } from './resume/resume.component';
-import { LibraryComponent } from './library/library.component';
 import { StoreComponent } from './store/store.component';
 import { ConnectComponent } from './connect/connect.component';
 import { BookComponent } from './book/book.component';
-import { Library1Component } from './library1/library1.component';
-import { ImpulseComponent } from './impulse/impulse.component';
-import { ImpulseCardComponent } from './impulse-card/impulse-card.component';
 
 @NgModule({
   declarations: [
@@ -45,15 +39,9 @@ import { ImpulseCardComponent } from './impulse-card/impulse-card.component';
     AwardsComponent,
     CarouselComponent,
     Simplify2Component,
-    ProjectsComponent,
-    ResumeComponent,
-    LibraryComponent,
     StoreComponent,
     ConnectComponent,
-    BookComponent,
-    Library1Component,
-    ImpulseComponent,
-    ImpulseCardComponent
+    BookComponent
   ],
   imports: [
     BrowserModule,
