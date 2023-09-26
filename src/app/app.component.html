@@ -1,0 +1,16 @@
+<router-outlet></router-outlet>
+<div class="modal extended" *ngIf="showPopup">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Alert!</h4>
+          <button type="button" class="btn-close" (click)="showPopup=false" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <h5>This application is for demo purpose</h5>
+            <p> To integrate actual application with your <b>Business / Startup / Enterprise </b> 
+            <br/>Please write out to <a href="mailto:vvskchaitanya@gmail.com">vvskchaitanya@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,45 @@
+.txl{
+    font-weight: bolder;
+    font-size: 3rem;
+    color: darkgoldenrod;
+    padding: 5px;
+    border: 3px solid goldenrod;
+    border-radius: 10px;
+}
+.tl{
+    font-weight: bold;
+    font-size: 2rem;
+    color:red;
+}
+.tm{
+    font-weight: bold;
+    font-size: 2rem;
+    color: cadetblue;
+}
+.bg-card{
+    background:linear-gradient(45deg, cornsilk, white);
+}
+
+@keyframes spin {
+  from {transform: translate(-50%, -50%) rotate(0);}
+  to   {transform: translate(-50%, -50%) rotate(360deg);}
+}
+.a{
+    animation: fadeIn 4s;
+    animation-iteration-count: 7;
+    animation-direction: alternate;
+    transform-origin: 50% 50%;
+}
+
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.1);
+    }
+    50% {
+      transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+    }
+  }

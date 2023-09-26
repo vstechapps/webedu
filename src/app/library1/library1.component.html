@@ -1,0 +1,17 @@
+<div class="row m-0 px-2 r text-center">
+    <div class="col-12 text-center">
+        Library
+    </div>
+</div>
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-md-4 col-sm-6 col-xs-12 m-0 p-2 h-100" *ngFor="let b of books">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title fs-6 fw-bold pointer">{{b.name}}<i (click)="open(b)" class="material-icons align-middle mx-2 pointer float-end">open_in_new</i></h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{b.about}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

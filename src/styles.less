@@ -1,0 +1,55 @@
+/* You can add global styles to this file, and also import other style files */
+.pointer{
+    cursor:pointer;
+}
+
+iframe #document img{
+    width:200px;
+
+}
+
+.bot-message {
+    background-color: #1abc9c;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    max-width: 80%;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    float: right
+}
+
+.bot-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.user-message {
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    max-width: 10%;
+    width: auto; /* set width to auto */
+    clear: both;
+    word-break: break-word; 
+}
+
+@media only screen and (max-width: 600px) {
+
+    .user-message {
+        max-width: 50%;
+        word-wrap: break-word;
+    }
+    
+    .bot-message {
+        max-width: 80%;
+        margin-right: 0;
+        margin-left: auto;
+    }
+    
+}
+

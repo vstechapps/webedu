@@ -1,0 +1,11 @@
+<div class="c">
+    <div class="row m-0">
+        <div class="position-absolute col-2 p-2 m-1">
+            <button class="btn btn-default b" (click)="menu=!menu"><i class="material-icons text-light">menu</i></button>
+        </div>
+        <div class="col-12 p-0 text-center">
+            <div class="t a">V.V.S.K Chaitanya</div>
+        </div>
+    </div>
+</div>
+<app-menu *ngIf="menu" (close)="menu=false"></app-menu>

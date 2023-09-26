@@ -1,0 +1,22 @@
+<div class="floating-chat">
+    <button *ngIf="!chat" class="chat-button" (click)="chat=true"><i class="material-icons text-light align-middle">forum</i></button>  
+</div>
+<div class="modal d-block" *ngIf="chat" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <span class="mx-2 fs-5">Live Chat</span>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="chat=false"></button>
+        </div>
+        <div class="modal-body">
+            <div id="chat-container">
+                <div id="chat-log"></div>
+                <div id="user-input">
+                    <input type="text" id="input-field" [(ngModel)]="input" placeholder="Hello World!!...">
+                    <button id="send-button" (click)="send()">Send</button>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>  

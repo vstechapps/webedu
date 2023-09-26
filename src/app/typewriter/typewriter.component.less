@@ -1,0 +1,51 @@
+/* Google Fonts */
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
+.line-1{
+    position: relative;
+    font-size: 20px;
+    margin: 0 auto;
+    border-right: 2px solid transparent;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;   
+}
+
+/* Animation */
+.anim-typewriter1{
+  animation: typewriter1 4s steps(24) 0s 1 normal both,
+             blinkTextCursor 500ms steps(24) 0s 10 normal;
+}
+
+.anim-typewriter2{
+  animation: typewriter2 4s steps(24) 5s 1 normal both,
+             blinkTextCursor 500ms steps(24) 5s 10 normal;
+}
+
+.anim-typewriter3{
+  animation: typewriter3 4s steps(24) 10s 1 normal both,
+             blinkTextCursor 500ms steps(24) 10s 10 normal;
+}
+
+.anim-typewriter4{
+  animation: typewriter4 4s steps(24) 15s 1 normal both,
+             blinkTextCursor 500ms steps(24) 15s 10 normal;
+}
+@keyframes typewriter1{
+  from{width: 0;}
+  to{width: 6em;}
+}@keyframes typewriter2{
+  from{width: 0;}
+  to{width: 8em;}
+}@keyframes typewriter3{
+  from{width: 0;}
+  to{width: 10em;}
+}
+@keyframes typewriter4{
+  from{width: 0;}
+  to{width: 13em;}
+}
+@keyframes blinkTextCursor{
+  from{border-right-color: black;}
+  to{border-right-color: transparent;}
+}
