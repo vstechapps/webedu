@@ -17,6 +17,7 @@ import { Simplify2Component } from './simplify2/simplify2.component';
 import { StoreComponent } from './store/store.component';
 import { ConnectComponent } from './connect/connect.component';
 import { BookComponent } from './book/book.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { BookComponent } from './book/book.component';
     Simplify2Component,
     StoreComponent,
     ConnectComponent,
-    BookComponent
+    BookComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
