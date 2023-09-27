@@ -1,28 +1,35 @@
-.r {
-    overflow: hidden;
-    position: relative;
-    height: 50px;
-    color: white;
-    background-color: cornflowerblue;
-}
-span {
-    font-family: Arial, sans-serif;
-    font-size: 35px;
-    display: inline-block;
-    font-weight: bold;
-    position: relative;
-    white-space: nowrap;
+.bg1{
+    background: cornflowerblue;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    position:absolute;
     top:0px;
-    padding:0px;
-    width:-webkit-fill-available;
-    animation: move 5s;
-    animation-iteration-count: 4;
-    animation-delay: 1s;
-  }
-  
-  @keyframes move {
-  0%  { top: 0px; }
-  25% { top: -50px; }
-  50% { top: -100px; }
-  75% { top: -150px; }
-  }
+    height: 100px;
+    width:100%;
+    z-index: -1;
+}
+
+.h{
+    padding-top:50px;
+        img{
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;   
+    }
+    .edit{
+        position: relative;
+        top: 40px;
+        color: cornflowerblue;
+        border-radius: 15px;
+        cursor: pointer;
+    }
+    .name{
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .caption{
+        font-size: 16px;
+        font-weight: 500;
+    }
+    
+}
