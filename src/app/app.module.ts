@@ -11,6 +11,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FooterComponent } from './footer/footer.component';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FooterComponent } from './footer/footer.component';
     ProfileComponent,
     CarouselComponent,
     DashboardComponent,
-    FooterComponent
+    FooterComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,

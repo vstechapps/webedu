@@ -10,23 +10,10 @@ import { delay, filter } from 'rxjs';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  showPopup: boolean = false;
   
   constructor(private firestore:FirestoreService,router: Router, viewportScroller: ViewportScroller){
     this.firestore.log(Events.PAGE_VIEW);
     this.handleScroll(router,viewportScroller);
-    window.addEventListener(
-      "message",
-      (event) => {
-        // Do we trust the sender of this message?  
-        if (event.origin !== window.location.origin) return;
-        // Show popup with content
-        if(event.data=="DemoMessage") this.showPopup=true;
-        // return back control
-        return;
-      },
-      false,
-    );
   }
 
   handleScroll(router: Router, viewportScroller: ViewportScroller) {
