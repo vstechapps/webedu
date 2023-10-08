@@ -34,5 +34,6 @@ export interface Course{
     description:string,
     category:string,
     image:string,
-    route?:string
+    route?:string,
+    active:boolean
 }

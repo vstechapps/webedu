@@ -1,7 +1,7 @@
 <div class="row m-0 px-2 r text-center">
     <div class="col-12 text-center">
         <span>Courses</span>
-        <span class="text-right"><i class="material-icons pointer" (click)="addCourse=true">add</i></span>
+        <span class="text-right"><i class="material-icons pointer" (click)="addCourseModal=true">add</i></span>
     </div>
 </div>
 <div class="container">
@@ -20,12 +20,12 @@
 </div>
 
 
-<div class="modal extended" *ngIf="addCourse">
+<div class="modal extended" *ngIf="addCourseModal">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title">New Course</h4>
-          <button type="button" class="btn-close" (click)="addCourse=false" aria-label="Close"></button>
+          <button type="button" class="btn-close" (click)="addCourseModal=false" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <div class="row">
@@ -44,7 +44,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Add</button>
+            <button type="button" class="btn btn-primary" (click)="addCourse()">Add</button>
         </div>
       </div>
     </div>

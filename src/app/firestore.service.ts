@@ -3,16 +3,21 @@ import { Injectable } from '@angular/core';
 import { initializeApp } from "firebase/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
 
+import { CollectionReference, DocumentData, addDoc, collection, getFirestore} from "firebase/firestore";
+import { Course } from './app.model';
+
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreService {
   app = initializeApp(firebaseConfig);
   analytics = getAnalytics(this.app);
-  coursesCollection:any;
+  firestore = getFirestore(this.app);
+  coursesCollection:CollectionReference<DocumentData> = collection(this.firestore,"courses");
 
   constructor() {
-   }
+    
+  }
 
   logIn(){
     

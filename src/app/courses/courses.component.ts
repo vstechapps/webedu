@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Course } from '../app.model';
+import { DocumentReference, addDoc, getDocs, orderBy, query, where } from 'firebase/firestore';
+import { FirestoreService } from '../firestore.service';
 
 @Component({
   selector: 'app-courses',
@@ -8,43 +10,45 @@ import { Course } from '../app.model';
 })
 export class CoursesComponent {
 
-  addCourse:boolean=false;
-  course:Course = {id:"",name:"",description:"",image:"",category:""};
+  addCourseModal:boolean=false;
+  course:Course = {name:"",description:"",image:"",category:"",active:true};
 
-  courses:Course[]=[
-  {
-    id:"1",
-    name:"Physics",
-    description:"",
-    category:"",
-    image:""
-  },
-  {
-    id:"1",
-    name:"Physics",
-    description:"",
-    category:"",
-    image:""
-  },
-  {
-    id:"1",
-    name:"Physics",
-    description:"",
-    category:"",
-    image:""
-  },
-  {
-    id:"1",
-    name:"Physics",
-    description:"",
-    category:"",
-    image:""
-  }
-];
+  courses:Course[]=[];
 
-createCourse(){
+constructor(public firestore:FirestoreService){
+  const q = query(this.firestore.coursesCollection, where("active", "==", true));
+  getDocs(q).then(res=>
+    res.forEach(doc=>
+      {
+        let d:any = doc.data();
+        this.courses.push(d);
+      })
+  );
+    
   
+}
+
+addCourse(){
+  console.log(this.course);
+  if(this.validate()){
+    addDoc(this.firestore.coursesCollection,this.course).then((ref:DocumentReference)=>{
+      alert("Course has been added succesfully ID:"+ref.id);
+    });
+  }
+  else{
+    alert("Please enter name, description, category");
+  }
+  
+}
+
+validate(){
+  return this.isNotEmpty(this.course.name) && this.isNotEmpty(this.course.description) && this.isNotEmpty(this.course.category);
+}
+
+isNotEmpty(str:string){
+  return str!=null && str!="";
+}
+
 
 }
 
-}
