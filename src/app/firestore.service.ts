@@ -9,8 +9,10 @@ import { getAnalytics, logEvent } from "firebase/analytics";
 export class FirestoreService {
   app = initializeApp(firebaseConfig);
   analytics = getAnalytics(this.app);
+  coursesCollection:any;
 
-  constructor() { }
+  constructor() {
+   }
 
   logIn(){
     
@@ -41,11 +43,11 @@ export enum Events{
 }
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAa3aCpidnJ3MB3D2FlpkCHGuVcRyhfmb8",
-  authDomain: "vvskchaitanya-1.firebaseapp.com",
-  projectId: "vvskchaitanya-1",
-  storageBucket: "vvskchaitanya-1.appspot.com",
-  messagingSenderId: "683857452414",
-  appId: "1:683857452414:web:41b3da4368a3df73d5272f",
-  measurementId: "G-BCJ69CN9L7"
+  apiKey: "AIzaSyCKKFA4iBcqm_RaojG8mBCIwRwiP_caKCE",
+  authDomain: "impulse-develop.firebaseapp.com",
+  projectId: "impulse-develop",
+  storageBucket: "impulse-develop.appspot.com",
+  messagingSenderId: "946243191276",
+  appId: "1:946243191276:web:eed8ce767fa1d458aa40c9",
+  measurementId: "G-BDL31YG14K"
 };

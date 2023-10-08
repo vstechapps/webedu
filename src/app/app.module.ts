@@ -12,6 +12,10 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FooterComponent } from './footer/footer.component';
 import { AccountComponent } from './account/account.component';
+import { MyAssessmentsComponent } from './my-assessments/my-assessments.component';
+import { AssessmentsComponent } from './assessments/assessments.component';
+import { CoursesComponent } from './courses/courses.component';
+import { ClientsComponent } from './clients/clients.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +27,16 @@ import { AccountComponent } from './account/account.component';
     CarouselComponent,
     DashboardComponent,
     FooterComponent,
-    AccountComponent
+    AccountComponent,
+    MyAssessmentsComponent,
+    AssessmentsComponent,
+    CoursesComponent,
+    ClientsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
