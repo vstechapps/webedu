@@ -24,8 +24,6 @@ constructor(public firestore:FirestoreService){
         this.courses.push(d);
       })
   );
-    
-  
 }
 
 addCourse(){

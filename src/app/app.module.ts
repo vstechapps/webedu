@@ -16,6 +16,8 @@ import { MyAssessmentsComponent } from './my-assessments/my-assessments.componen
 import { AssessmentsComponent } from './assessments/assessments.component';
 import { CoursesComponent } from './courses/courses.component';
 import { ClientsComponent } from './clients/clients.component';
+import { CategoryComponent } from './category/category.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { ClientsComponent } from './clients/clients.component';
     MyAssessmentsComponent,
     AssessmentsComponent,
     CoursesComponent,
-    ClientsComponent
+    ClientsComponent,
+    CategoryComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,

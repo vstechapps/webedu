@@ -13,6 +13,7 @@ export class FirestoreService {
   app = initializeApp(firebaseConfig);
   analytics = getAnalytics(this.app);
   firestore = getFirestore(this.app);
+  categoryCollection:CollectionReference<DocumentData> = collection(this.firestore, "categories")
   coursesCollection:CollectionReference<DocumentData> = collection(this.firestore,"courses");
 
   constructor() {

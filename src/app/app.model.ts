@@ -36,4 +36,14 @@ export interface Course{
     image:string,
     route?:string,
     active:boolean
+    assessments?:Assessment[];
+}
+
+export interface Category{
+    id?:string;
+    name:string;
+    parent?:string;
+    courses?:Course[];
+    categories?:Category[];
+    active?:boolean;
 }
