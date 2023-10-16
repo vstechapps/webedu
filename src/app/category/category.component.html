@@ -1,5 +1,5 @@
 <div class="row m-0" *ngIf="category">
-    <div class="col-12" [ngClass]="{'active-node':current!=null && category.id==current.id}">
+    <div class="col-12 node" [ngClass]="{'active-node':current!=null && category.id==current.id}">
         <i class="material-icons mx-2 pointer align-middle" *ngIf="category.categories!=null && category.categories.length>=0" (click)="expand=!expand">{{expand?"expand_more":"chevron_right"}}</i>
         <span class="pointer text-uppercase" (click)="select.emit(category)">{{category.name}}</span>
     </div>
