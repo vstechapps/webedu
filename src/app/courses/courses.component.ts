@@ -36,6 +36,7 @@ addCourse(){
   if(this.validate()){
     addDoc(this.firestore.coursesCollection,this.course).then((ref:DocumentReference)=>{
       alert("Course has been added succesfully ID:"+ref.id);
+      this.firestore.refresh(Collections.COURSES);
     });
   }
   else{

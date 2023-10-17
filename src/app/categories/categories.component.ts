@@ -56,7 +56,7 @@ export class CategoriesComponent {
       if(this.category) c.parent=this.category.id;
       addDoc(this.firestore.categoryCollection,c).then((ref:DocumentReference)=>{
         alert("Category has been added succesfully ID:"+ref.id);
-        this.refresh();
+        this.firestore.refresh(Collections.CATEGORIES);
       });
     }
     else{
@@ -79,7 +79,7 @@ export class CategoriesComponent {
     deleteDoc(doc(this.firestore.firestore,"categories",this.category.id)).then(()=>{
       alert("Deleted category "+this.category?.name);
       this.category = undefined;
-      this.refresh();
+      this.firestore.refresh(Collections.CATEGORIES);
     });
   }
 
