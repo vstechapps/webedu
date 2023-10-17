@@ -19,8 +19,16 @@ export class CoursesComponent {
   deleteConfirm:boolean=false;
 
 constructor(public firestore:FirestoreService){
-  this.courses = this.firestore.data[Collections.COURSES];
-  this.categories = this.firestore.data[Collections.CATEGORIES];
+  this.categories=this.firestore.data[Collections.CATEGORIES];
+  this.courses=this.firestore.data[Collections.COURSES];
+  this.firestore.refreshEvent.subscribe(collection=>{
+    if(collection==Collections.CATEGORIES){
+      this.categories=this.firestore.data[Collections.CATEGORIES];
+    }
+    if(collection=Collections.COURSES){
+      this.courses=this.firestore.data[Collections.COURSES];
+    }
+  })
 }
 
 addCourse(){

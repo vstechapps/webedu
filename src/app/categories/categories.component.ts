@@ -22,6 +22,11 @@ export class CategoriesComponent {
 
   constructor(private firestore: FirestoreService){
     this.refresh();
+    this.firestore.refreshEvent.subscribe(collection=>{
+      if(collection==Collections.CATEGORIES){
+        this.refresh();
+      }
+    })
 
   }
 

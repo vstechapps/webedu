@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
@@ -18,12 +18,16 @@ export class FirestoreService {
 
   data:any = {};
 
+  refreshEvent:EventEmitter<Collections> = new EventEmitter<Collections>();
+
+  
+
   constructor() {
     this.refresh(Collections.CATEGORIES);
     this.refresh(Collections.COURSES);    
   }
 
-  refresh(key:string){
+  refresh(key:Collections){
     let collect =  collection(this.firestore, key);
     const q = query(collect);
     getDocs(q).then(res=>{
@@ -34,6 +38,7 @@ export class FirestoreService {
         d.id=doc.id;
         this.data[key].push(d);
       });
+      this.refreshEvent.emit(key);
     });
   }
 
@@ -60,7 +65,8 @@ export class FirestoreService {
 
 export enum Collections{
   CATEGORIES="categories",
-  COURSES="courses"
+  COURSES="courses",
+  ASSESSMENTS="assessments"
 }
 
 export enum Events{
