@@ -1,33 +1,29 @@
 <div class="c">
     <div class="text-end"><i class="material-icons pointer m-2" (click)="close.emit(true)">close</i></div>
     <div class="m">
-            <div class="pointer" [ngClass]="{'active':active=='app-profile'}" (click)="focus('app-profile')">
+            <div class="pointer" [ngClass]="{'active':active=='app-profile'}" (click)="focus('home')">
                 <i class="material-icons align-middle mx-2">home</i>
                 <span class="align-middle">Home</span>
             </div>
-            <div class="pointer" [ngClass]="{'active':active=='app-skills'}" (click)="focus('app-skills')">
-                <i class="material-icons align-middle mx-2">equalizer</i>
-                <span class="align-middle">Tech Stack</span>
+            <div class="pointer" [ngClass]="{'active':active=='/categories'}" (click)="focus('categories')">
+                <i class="material-icons align-middle mx-2">category</i>
+                <span class="align-middle">Categories</span>
             </div>
-            <div class="pointer" [ngClass]="{'active':active=='app-experience'}" (click)="focus('app-experience')">
-                <i class="material-icons align-middle mx-2">trending_up</i>
-                <span class="align-middle">Timeline</span>
+            <div class="pointer" [ngClass]="{'active':active=='/courses'}" (click)="focus('courses')">
+                <i class="material-icons align-middle mx-2">menu_book</i>
+                <span class="align-middle">Courses</span>
             </div>
-            <div class="pointer" [ngClass]="{'active':active=='app-awards'}" (click)="focus('app-awards')">
-                <i class="material-icons  align-middle mx-2">workspace_premium</i>
-                <span class="align-middle">Awards</span>
+            <div class="pointer" [ngClass]="{'active':active=='/assessments'}" (click)="focus('assessments')">
+                <i class="material-icons align-middle mx-2">assignment</i>
+                <span class="align-middle">Assessments</span>
             </div>
-            <div class="pointer" [ngClass]="{'active':active=='app-projects'}" (click)="focus('app-projects')">
-                <i class="material-icons align-middle mx-2">work_history</i>
-                <span class="align-middle">Projects</span>
+            <div class="pointer" [ngClass]="{'active':active=='/notifications'}" (click)="focus('notifications')">
+                <i class="material-icons  align-middle mx-2">notifications</i>
+                <span class="align-middle">Notifications</span>
             </div>
-            <div class="pointer" [ngClass]="{'active':active=='app-library1'}" (click)="focus('app-library1')">
-                <i class="material-icons  align-middle mx-2">menu_book</i>
-                <span class="align-middle">Library</span>
-            </div>
-            <div class="pointer" [ngClass]="{'active':active=='app-store'}" (click)="focus('app-store')">
-                <i class="material-icons  align-middle mx-2">storefront</i>
-                <span class="align-middle">App Store</span>
+            <div class="pointer" [ngClass]="{'active':active=='/logout'}" (click)="focus('logout')">
+                <i class="material-icons  align-middle mx-2">logout</i>
+                <span class="align-middle">Logout</span>
             </div>
     </div>
 </div>

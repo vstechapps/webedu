@@ -18,6 +18,8 @@ export class CategoriesComponent {
 
   categoryName:string="";
 
+  deleteConfirm:boolean=false;
+
   constructor(private firestore: FirestoreService){
     this.refresh();
 
@@ -77,6 +79,7 @@ export class CategoriesComponent {
   }
 
   deleteCategory(){
+    this.deleteConfirm=false;
     if(this.category && this.category.id)
     deleteDoc(doc(this.firestore.firestore,"categories",this.category.id)).then(()=>{
       alert("Deleted category "+this.category?.name);

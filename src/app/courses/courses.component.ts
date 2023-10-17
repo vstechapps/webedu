@@ -15,6 +15,8 @@ export class CoursesComponent {
 
   courses:Course[]=[];
 
+  deleteConfirm:boolean=false;
+
 constructor(public firestore:FirestoreService){
   const q = query(this.firestore.coursesCollection, where("active", "==", true));
   getDocs(q).then(res=>

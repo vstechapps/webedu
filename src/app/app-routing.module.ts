@@ -3,12 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AccountComponent } from './account/account.component';
 import { ProfileComponent } from './profile/profile.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { CoursesComponent } from './courses/courses.component';
 
 const routes: Routes = [
   {path:"",component:HomeComponent},
   {path:"home",redirectTo:""},
   {path:"account",component:AccountComponent},
-  {path:"profile",component:ProfileComponent}
+  {path:"profile",component:ProfileComponent},
+  {path:"categories", component:CategoriesComponent},
+  {path:"courses",component:CoursesComponent}
 ];
 
 @NgModule({

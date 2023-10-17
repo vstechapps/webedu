@@ -13,8 +13,10 @@
 </div>
 
 <div class="floating">
-    <button class="btn btn-info" (click)="addCategoryModal=true"><i class="material-icons pointer">add</i></button>
-        <button class="btn btn-danger" (click)="deleteCategory()" *ngIf="category!=undefined"><i class="material-icons pointer">delete</i></button>
+    <div class="d-flex flex-column bd-highlight mb-3">
+        <button class="btn btn-info" (click)="addCategoryModal=true"><i class="material-icons pointer">add</i></button>
+        <button class="btn btn-danger" (click)="deleteConfirm=true" *ngIf="category!=undefined"><i class="material-icons pointer">delete</i></button>
+    </div>
 </div>
 
 <div class="modal extended" *ngIf="addCategoryModal">
@@ -37,3 +39,25 @@
       </div>
     </div>
 </div>
+
+<div class="modal extended" *ngIf="deleteConfirm">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Delete Category</h4>
+          <button type="button" class="btn-close" (click)="deleteConfirm=false" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-12 my-2">
+                    Confirm to delete {{category?.name}}
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="deleteCategory()">Delete</button>
+        </div>
+      </div>
+    </div>
+</div>
+
