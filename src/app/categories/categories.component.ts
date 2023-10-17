@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Category } from '../app.model';
-import { FirestoreService } from '../firestore.service';
+import { Collections, FirestoreService } from '../firestore.service';
 import { DocumentReference, addDoc, deleteDoc, doc, getDocs, query } from 'firebase/firestore';
 
 @Component({
@@ -27,23 +27,13 @@ export class CategoriesComponent {
 
   refresh(){
     this.categories=[];
-    let allCategories:Category[]=[];
-    const q = query(this.firestore.categoryCollection);
-    getDocs(q).then(res=>{
-      res.forEach(doc=>
-        {
-          let d:any = doc.data();
-          d.id=doc.id;
-          allCategories.push(d);
-        });
+    let allCategories:Category[]= this.firestore.data[Collections.CATEGORIES];
 
-        allCategories.filter(c=>c.parent==null).forEach(c=>this.categories.push(c));
+    allCategories.filter(c=>c.parent==null).forEach(c=>this.categories.push(c));
 
-        this.categories.forEach(c=>this.linkCategories(c,allCategories));
+    this.categories.forEach(c=>this.linkCategories(c,allCategories));
 
-        console.log(this.categories);
-    });
-
+    console.log(this.categories);
   }
 
   linkCategories(cat:Category,a:Category[]){

@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { initializeApp } from "firebase/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
 
-import { CollectionReference, DocumentData, addDoc, collection, getFirestore} from "firebase/firestore";
-import { Course } from './app.model';
+import { CollectionReference, DocumentData, collection, getDocs, getFirestore, query} from "firebase/firestore";
+import { Category, Course } from './app.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +13,28 @@ export class FirestoreService {
   app = initializeApp(firebaseConfig);
   analytics = getAnalytics(this.app);
   firestore = getFirestore(this.app);
-  categoryCollection:CollectionReference<DocumentData> = collection(this.firestore, "categories")
+  categoryCollection:CollectionReference<DocumentData> = collection(this.firestore, "categories");
   coursesCollection:CollectionReference<DocumentData> = collection(this.firestore,"courses");
 
+  data:any = {};
+
   constructor() {
-    
+    this.refresh(Collections.CATEGORIES);
+    this.refresh(Collections.COURSES);    
+  }
+
+  refresh(key:string){
+    let collect =  collection(this.firestore, key);
+    const q = query(collect);
+    getDocs(q).then(res=>{
+    this.data[key] =[];
+    res.forEach(doc=>
+      {
+        let d:any = doc.data();
+        d.id=doc.id;
+        this.data[key].push(d);
+      });
+    });
   }
 
   logIn(){
@@ -39,6 +56,11 @@ export class FirestoreService {
   }
 
   
+}
+
+export enum Collections{
+  CATEGORIES="categories",
+  COURSES="courses"
 }
 
 export enum Events{

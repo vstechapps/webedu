@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Course } from '../app.model';
+import { Category, Course } from '../app.model';
 import { DocumentReference, addDoc, getDocs, orderBy, query, where } from 'firebase/firestore';
-import { FirestoreService } from '../firestore.service';
+import { Collections, FirestoreService } from '../firestore.service';
 
 @Component({
   selector: 'app-courses',
@@ -12,20 +12,15 @@ export class CoursesComponent {
 
   addCourseModal:boolean=false;
   course:Course = {name:"",description:"",image:"",category:"",active:true};
+  categories:Category[]=[];
 
   courses:Course[]=[];
 
   deleteConfirm:boolean=false;
 
 constructor(public firestore:FirestoreService){
-  const q = query(this.firestore.coursesCollection, where("active", "==", true));
-  getDocs(q).then(res=>
-    res.forEach(doc=>
-      {
-        let d:any = doc.data();
-        this.courses.push(d);
-      })
-  );
+  this.courses = this.firestore.data[Collections.COURSES];
+  this.categories = this.firestore.data[Collections.CATEGORIES];
 }
 
 addCourse(){
