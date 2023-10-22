@@ -18,6 +18,8 @@ import { CoursesComponent } from './courses/courses.component';
 import { ClientsComponent } from './clients/clients.component';
 import { CategoryComponent } from './category/category.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { CourseComponent } from './course/course.component';
+import { AssessmentComponent } from './assessment/assessment.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { CategoriesComponent } from './categories/categories.component';
     CoursesComponent,
     ClientsComponent,
     CategoryComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    CourseComponent,
+    AssessmentComponent
   ],
   imports: [
     BrowserModule,
