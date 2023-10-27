@@ -5,10 +5,12 @@ import { AccountComponent } from './account/account.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CoursesComponent } from './courses/courses.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {path:"",component:HomeComponent},
   {path:"home",redirectTo:""},
+  {path:"login",component:LoginComponent},
   {path:"account",component:AccountComponent},
   {path:"profile",component:ProfileComponent},
   {path:"categories", component:CategoriesComponent},

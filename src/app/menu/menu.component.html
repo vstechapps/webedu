@@ -1,29 +1,9 @@
 <div class="c">
     <div class="text-end"><i class="material-icons pointer m-2" (click)="close.emit(true)">close</i></div>
     <div class="m">
-            <div class="pointer" [ngClass]="{'active':active=='app-profile'}" (click)="focus('home')">
-                <i class="material-icons align-middle mx-2">home</i>
-                <span class="align-middle">Home</span>
-            </div>
-            <div class="pointer" [ngClass]="{'active':active=='/categories'}" (click)="focus('categories')">
-                <i class="material-icons align-middle mx-2">category</i>
-                <span class="align-middle">Categories</span>
-            </div>
-            <div class="pointer" [ngClass]="{'active':active=='/courses'}" (click)="focus('courses')">
-                <i class="material-icons align-middle mx-2">menu_book</i>
-                <span class="align-middle">Courses</span>
-            </div>
-            <div class="pointer" [ngClass]="{'active':active=='/assessments'}" (click)="focus('assessments')">
-                <i class="material-icons align-middle mx-2">assignment</i>
-                <span class="align-middle">Assessments</span>
-            </div>
-            <div class="pointer" [ngClass]="{'active':active=='/notifications'}" (click)="focus('notifications')">
-                <i class="material-icons  align-middle mx-2">notifications</i>
-                <span class="align-middle">Notifications</span>
-            </div>
-            <div class="pointer" [ngClass]="{'active':active=='/logout'}" (click)="focus('logout')">
-                <i class="material-icons  align-middle mx-2">logout</i>
-                <span class="align-middle">Logout</span>
-            </div>
+        <div *ngFor="let m of menus" class="pointer" [ngClass]="{'active':active=='/'+m.route}" (click)="focus(m.route)">
+            <i class="material-icons align-middle mx-2">{{m.icon}}</i>
+            <span class="align-middle">{{m.name}}</span>
+        </div>
     </div>
 </div>

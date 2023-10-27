@@ -1,24 +1,33 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
-import { initializeApp } from "firebase/app";
-import { getAnalytics, logEvent } from "firebase/analytics";
+import { FirebaseApp, initializeApp } from "firebase/app";
+import { Analytics, getAnalytics, logEvent } from "firebase/analytics";
 
-import { CollectionReference, DocumentData, collection, getDocs, getFirestore, query} from "firebase/firestore";
-import { Category, Course } from './app.model';
+import { Auth, getAuth } from "firebase/auth";
+
+import { CollectionReference, DocumentData, Firestore, collection, getDocs, getFirestore, query} from "firebase/firestore";
+import { Category, Course, User } from './app.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestoreService {
-  app = initializeApp(firebaseConfig);
-  analytics = getAnalytics(this.app);
-  firestore = getFirestore(this.app);
+  
+  app: FirebaseApp= initializeApp(firebaseConfig);
+  analytics: Analytics = getAnalytics(this.app);
+  firestore: Firestore = getFirestore(this.app);
+  auth: Auth = getAuth(this.app);
+  
+  user?:User;
+
+
   categoryCollection:CollectionReference<DocumentData> = collection(this.firestore, "categories");
   coursesCollection:CollectionReference<DocumentData> = collection(this.firestore,"courses");
 
   data:any = {};
 
   refreshEvent:EventEmitter<Collections> = new EventEmitter<Collections>();
+  refreshUser:EventEmitter<User> = new EventEmitter<User>();
 
   
 

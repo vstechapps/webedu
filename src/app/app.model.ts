@@ -5,7 +5,8 @@ export interface User{
     lastName:string,
     phoneNumber:string,
     email:string,
-    image:string
+    image:string,
+    role:string
 }
 
 export interface Assessment{
@@ -35,7 +36,8 @@ export interface Course{
     category:string,
     image:string,
     route?:string,
-    active:boolean
+    active:boolean,
+    pages?: string[];
     assessments?:Assessment[];
 }
 
@@ -46,4 +48,9 @@ export interface Category{
     courses?:Course[];
     categories?:Category[];
     active?:boolean;
+}
+
+export enum Role{
+    USER,
+    ADMIN
 }
