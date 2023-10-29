@@ -76,7 +76,9 @@ export class FirestoreService {
   }
 
   async logout(){
+    console.log("FirestoreService:logout:: Logging out user: "+this.user?.email);
     this.user=undefined;
+    this.log(Events.LOGOUT,this.user);
     this.refreshUser.emit(this.user);
   }
 
