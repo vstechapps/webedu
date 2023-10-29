@@ -1,12 +1,10 @@
 export interface User{
     id:string,
     name:string,
-    firstName:string,
-    lastName:string,
-    phoneNumber:string,
     email:string,
-    image:string,
-    role:string
+    image?:string,
+    contact?:string,
+    role:Role
 }
 
 export interface Assessment{
@@ -51,6 +49,6 @@ export interface Category{
 }
 
 export enum Role{
-    USER,
-    ADMIN
+    USER="USER",
+    ADMIN="ADMIN"
 }

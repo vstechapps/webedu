@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FirestoreService } from '../firestore.service';
-import { Firestore } from 'firebase/firestore';
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { Role, User } from '../app.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,12 +11,37 @@ import { Firestore } from 'firebase/firestore';
 })
 export class LoginComponent {
 
-  constructor(public fs: FirestoreService){
+  private provider = new GoogleAuthProvider();
 
+  constructor(private router:Router, private fs: FirestoreService){
+    fs.refreshUser.subscribe(user=>this.router.navigate(user?["dashboard"]:["home"]));
   }
 
   login(){
+    signInWithPopup(this.fs.auth, this.provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential?.accessToken;
+      // The signed-in user info.
+      let user:any = result.user;
+      // User has properties uid, email, displayName, phoneNumber, photoURL
+      let u: User = {id:user.uid,email:user.email,name:user.displayName,contact:user.phoneNumber,image:user.photoURL,role:Role.USER}
+      this.fs.login(u);
+
+
+    }).catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error(error);
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      // ...
+  });
     
-  }
+ }
 
 }

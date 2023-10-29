@@ -5,7 +5,7 @@ import { Analytics, getAnalytics, logEvent } from "firebase/analytics";
 
 import { Auth, getAuth } from "firebase/auth";
 
-import { CollectionReference, DocumentData, Firestore, collection, getDocs, getFirestore, query} from "firebase/firestore";
+import { CollectionReference, DocumentData, Firestore, collection, doc, getDoc, getDocs, setDoc, getFirestore, query} from "firebase/firestore";
 import { Category, Course, User } from './app.model';
 
 @Injectable({
@@ -51,11 +51,36 @@ export class FirestoreService {
     });
   }
 
-  logIn(){
-    
+  async login(user:User){
+    const docRef = doc(this.firestore, "users", user.id);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      // User already present in firestore
+      let d:any = docSnap.data();
+      console.log("FirestoreService:login:: Existing User :", d);
+      this.user = {id:d.id,name:d.name,email:d.email,contact:d.contact,role:d.role,image:d.image};
+      this.refreshUser.emit(this.user);
+      this.log(Events.LOGIN,this.user);
+    } else {
+      // Create new user in firestore
+      console.log("FirestoreService:login:: Create new user: "+user.email);
+      this.user = user;
+      await setDoc(doc(collection(this.firestore,"users"), user.id),this.user);
+      console.log("FirestoreService:login:: Created new user: "+user.email);
+      this.refreshUser.emit(this.user);
+      this.log(Events.SIGN_UP,this.user);
+
+    }
+
   }
 
-  log(event:string,data=null){
+  async logout(){
+    this.user=undefined;
+    this.refreshUser.emit(this.user);
+  }
+
+  log(event:string,data:any=null){
     let message:any={
       url:window.location.href,
       device:window.navigator.userAgent,
@@ -73,6 +98,7 @@ export class FirestoreService {
 }
 
 export enum Collections{
+  USERS="users",
   CATEGORIES="categories",
   COURSES="courses",
   ASSESSMENTS="assessments"
@@ -81,7 +107,8 @@ export enum Collections{
 export enum Events{
   PAGE_VIEW="PAGE_VIEW",
   LOGIN="login",
-  SIGN_UP="sign_up"
+  SIGN_UP="sign_up",
+  LOGOUT="logout"
 
 }
 
