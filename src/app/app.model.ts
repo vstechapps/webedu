@@ -50,5 +50,6 @@ export interface Category{
 
 export enum Role{
     USER="USER",
+    CLIENT="CLIENT",
     ADMIN="ADMIN"
 }
