@@ -11,18 +11,20 @@ export interface Assessment{
     id:string,
     name:string,
     course:string,
-    duration:number,
-    questions:Question[],
+    content:string,
+    duration?:number,
+    questions?:Question[],
 }
 
 export interface Question{
     id:string,
-    question:string,
+    text:string,
     options:Option[];
 }
 
 export interface Option{
     id:string,
+    text:string,
     correct:boolean,
     selected:boolean
 }

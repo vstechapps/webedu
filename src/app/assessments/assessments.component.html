@@ -1,1 +1,23 @@
-<p>assessments works!</p>
+<div class="container mt-3">
+    <h2>Assessments</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Course</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let a of assessments">
+                <td>{{a.name}}</td>
+                <td>{{a.course}}</td>
+                <td>
+                    <i class="material-icons mx-2 pointer" >open_in_new</i>
+                    <i class="material-icons mx-2 pointer text-info">edit</i>
+                    <i class="material-icons mx-2 pointer text-danger">delete</i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

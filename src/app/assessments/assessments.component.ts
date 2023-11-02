@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Assessment } from '../app.model';
 
 @Component({
   selector: 'app-assessments',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./assessments.component.less']
 })
 export class AssessmentsComponent {
+
+  assessments:Assessment[]=[];
+
+  constructor(){
+    this.assessments.push({id:"asdf",name:"Assess 1",course:"Course 1",content:""});
+  }
 
 }
