@@ -8,7 +8,7 @@
         <div class="col-md-4 col-sm-6 col-xs-12 m-0 p-2 h-100" *ngFor="let c of courses">
             <div class="card shadow">
                 <div class="card-body">
-                    <h5 class="card-title fs-3 fw-bold pointer">{{c.name}}<i [routerLink]="c.route" class="material-icons align-middle mx-2 pointer float-end">open_in_new</i></h5>
+                    <h5 class="card-title fs-3 fw-bold pointer">{{c.name}}<i [routerLink]="'/course/'+c.id" class="material-icons align-middle mx-2 pointer float-end">open_in_new</i></h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{c.description}}</h6>
                     <p class="card-text">     
                     </p>

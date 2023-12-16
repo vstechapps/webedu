@@ -10,6 +10,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AssessmentComponent } from './assessment/assessment.component';
 import { AssessmentsComponent } from './assessments/assessments.component';
+import { CourseComponent } from './course/course.component';
 
 const routes: Routes = [
   {path:"",redirectTo:"home",pathMatch:"full"},
@@ -21,8 +22,9 @@ const routes: Routes = [
   {path:"profile",component:ProfileComponent},
   {path:"categories", component:CategoriesComponent},
   {path:"courses",component:CoursesComponent},
+  {path:"course/:id",component:CourseComponent},
   {path:"assessments",component:AssessmentsComponent},
-  {path:"assessments/{{id}}",component:AssessmentComponent}
+  {path:"assessments/:id",component:AssessmentComponent}
 ];
 
 @NgModule({
