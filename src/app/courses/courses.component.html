@@ -18,7 +18,7 @@
     </div>
 </div>
 
-<div class="floating">
+<div class="floating" *ngIf="firestore.isAdmin">
     <div class="d-flex flex-column bd-highlight mb-3">
         <button class="btn btn-info" (click)="addCourseModal=true"><i class="material-icons pointer">add</i></button>
     </div>

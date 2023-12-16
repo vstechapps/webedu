@@ -31,12 +31,15 @@ export class CourseComponent implements OnInit, OnDestroy{
     window.postMessage("ToggleHeader");
     this.id = this.route.snapshot.paramMap.get('id');
     console.log("Course ID: "+this.id);
-    this.firestore.refreshEvent.subscribe(collection=>{
-      if(collection==Collections.COURSES){
-        this.refresh();
-      }
-    });
-    
+    if(this.firestore.data[Collections.COURSES]==null){
+      this.firestore.refreshEvent.subscribe(collection=>{
+        if(collection==Collections.COURSES){
+          this.refresh();
+        }
+      });
+    }else{
+      this.refresh();
+    }
   }
 
   refresh(){
@@ -74,19 +77,38 @@ export class CourseComponent implements OnInit, OnDestroy{
     this.page = this.course.pages[this.pageIndex];
   }
 
-  addPage(){
+  async addPage(){
     if(!this.course) return;
     if(this.course.pages==null) this.course.pages=[];
     this.course.pages.push(this.newPage);
-    this.save();
+    await this.save();
+    alert("Page Added");
+    this.pageIndex=this.course.pages.length-1;
+    this.page = this.course.pages[this.pageIndex];
+    this.addPageModal=false;
   }
 
-  editPage(){
+  async deletePage(){
+    if(!this.course) return;
+    if(this.course.pages==null) return;
+    if(!this.page) return;
+    this.course.pages.splice(this.pageIndex,1);
+    await this.save();
+    alert("Page Deleted");
+    this.pageIndex=0;
+    this.page = this.course.pages[this.pageIndex];
+    this.editPageModal=false;
+  }
+
+  async editPage(){
     if(!this.course) return;
     if(this.course.pages==null) return;
     if(!this.page) return;
     this.course.pages[this.pageIndex] = this.page;
-    this.save();
+    await this.save();
+    alert("Page Updated");
+    this.page = this.course.pages[this.pageIndex];
+    this.editPageModal=false;
   }
 
 }

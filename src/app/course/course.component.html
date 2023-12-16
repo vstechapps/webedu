@@ -20,7 +20,7 @@
     </div>
 </div>
 
-<div class="floating">
+<div class="floating" *ngIf="firestore.isAdmin">
     <div class="d-flex flex-column bd-highlight mb-3">
         <button class="btn btn-warning" *ngIf="page" (click)="editPageModal=true"><i class="material-icons pointer">edit</i></button>
         <button class="btn btn-info" (click)="addPageModal=true"><i class="material-icons pointer">add</i></button>
@@ -63,6 +63,7 @@
             </div>
         </div>
         <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="deletePage()">Delete</button>
             <button type="button" class="btn btn-primary" (click)="editPage()">Update</button>
         </div>
       </div>

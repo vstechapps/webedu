@@ -6,7 +6,7 @@ import { Analytics, getAnalytics, logEvent } from "firebase/analytics";
 import { Auth, getAuth } from "firebase/auth";
 
 import { CollectionReference, DocumentData, Firestore, collection, doc, getDoc, getDocs, setDoc, getFirestore, query} from "firebase/firestore";
-import { Category, Course, User } from './app.model';
+import { Category, Course, Role, User } from './app.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,7 @@ export class FirestoreService {
   auth: Auth = getAuth(this.app);
   
   user?:User;
+  isAdmin:boolean=false;
 
 
   categoryCollection:CollectionReference<DocumentData> = collection(this.firestore, "categories");
@@ -62,6 +63,7 @@ export class FirestoreService {
       this.user = {id:d.id,name:d.name,email:d.email,contact:d.contact,role:d.role,image:d.image};
       this.refreshUser.emit(this.user);
       this.log(Events.LOGIN,this.user);
+      this.isAdmin = this.user.role==Role.ADMIN;
     } else {
       // Create new user in firestore
       console.log("FirestoreService:login:: Create new user: "+user.email);
@@ -78,6 +80,7 @@ export class FirestoreService {
   async logout(){
     console.log("FirestoreService:logout:: Logging out user: "+this.user?.email);
     this.user=undefined;
+    this.isAdmin=false;
     this.log(Events.LOGOUT,this.user);
     this.refreshUser.emit(this.user);
   }
