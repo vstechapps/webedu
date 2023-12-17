@@ -11,10 +11,13 @@ import { LogoutComponent } from './logout/logout.component';
 import { AssessmentComponent } from './assessment/assessment.component';
 import { AssessmentsComponent } from './assessments/assessments.component';
 import { CourseComponent } from './course/course.component';
+import { PathComponent } from './path/path.component';
+import { LoginGuard } from './login.guard';
 
 const routes: Routes = [
   {path:"",redirectTo:"home",pathMatch:"full"},
   {path:"home",component:HomeComponent},
+  {path:"path/:id",component:PathComponent,canActivate:[LoginGuard]},
   {path:"login",component:LoginComponent},
   {path:"dashboard",component:DashboardComponent},
   {path:"logout",component:LogoutComponent},

@@ -14,7 +14,19 @@ export class LoginComponent {
   private provider = new GoogleAuthProvider();
 
   constructor(private router:Router, private fs: FirestoreService){
-    fs.refreshUser.subscribe(user=>this.router.navigate(user?["dashboard"]:["home"]));
+    fs.refreshUser.subscribe(user=>{
+      if(user){
+        var redirect:any = sessionStorage.getItem("redirect");
+        if(redirect){
+          sessionStorage.removeItem("redirect");
+          redirect = JSON.parse(redirect);
+          this.router.navigate(redirect);
+        }
+        this.router.navigate(["dashboard"]);
+      }
+      this.router.navigate(["home"]);
+      
+    });
   }
 
   login(){
