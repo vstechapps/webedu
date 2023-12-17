@@ -1,44 +1,45 @@
 export interface User{
-    id:string,
-    name:string,
-    email:string,
-    image?:string,
-    contact?:string,
+    id:string;
+    name:string;
+    email:string;
+    image?:string;
+    contact?:string;
     role:Role
 }
 
 export interface Assessment{
-    id:string,
-    name:string,
-    course:string,
-    content:string,
-    duration?:number,
-    questions?:Question[],
+    id:string;
+    name:string;
+    course:string;
+    content:string;
+    duration?:number;
+    questions?:Question[];
 }
 
 export interface Question{
-    id:string,
-    text:string,
+    id:string;
+    text:string;
     options:Option[];
 }
 
 export interface Option{
-    id:string,
-    text:string,
-    correct:boolean,
+    id:string;
+    text:string;
+    correct:boolean;
     selected:boolean
 }
 
 export interface Course{
-    id?:string,
-    name:string,
-    description:string,
-    category:string,
-    image:string,
-    route?:string,
-    active:boolean,
-    pages?: string[];
-    assessments?:Assessment[];
+    id?:string;
+    name:string;
+    description:string;
+    category:string;
+    active:boolean;
+    pages?:string[];
+    image?:string;
+    order:number;
+    topics?: string[];
+    assessments?:string[];
 }
 
 export interface Category{
@@ -55,18 +56,13 @@ export enum Role{
     CLIENT="CLIENT",
     ADMIN="ADMIN"
 }
-
-export interface Path{
-    id?:string;
-    order:number,
-    name:string;
-    tech:string;
-    topics:Topic[];
-  }
   
-  export interface Topic{
+export interface Topic{
+    id?:string;
     name:string;
-    course:string;
-    order:string;
+    description:string;
+    lock:boolean;
+    active:boolean;
+    pages?: string[];
   }
   

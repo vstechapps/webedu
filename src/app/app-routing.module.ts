@@ -11,21 +11,23 @@ import { LogoutComponent } from './logout/logout.component';
 import { AssessmentComponent } from './assessment/assessment.component';
 import { AssessmentsComponent } from './assessments/assessments.component';
 import { CourseComponent } from './course/course.component';
-import { PathComponent } from './path/path.component';
 import { LoginGuard } from './login.guard';
+import { TopicsComponent } from './topics/topics.component';
+import { TopicComponent } from './topic/topic.component';
 
 const routes: Routes = [
   {path:"",component:HomeComponent},
   {path:"home",component:HomeComponent},
-  {path:"path/:id",component:PathComponent,canActivate:[LoginGuard]},
   {path:"login",component:LoginComponent},
   {path:"dashboard",component:DashboardComponent},
   {path:"logout",component:LogoutComponent},
   {path:"account",component:AccountComponent},
   {path:"profile",component:ProfileComponent},
   {path:"categories", component:CategoriesComponent},
+  {path:"topics",component:TopicsComponent},
+  {path:"topics/:id",component:TopicComponent},
   {path:"courses",component:CoursesComponent},
-  {path:"course/:id",component:CourseComponent},
+  {path:"courses/:id",component:CourseComponent,canActivate:[LoginGuard]},
   {path:"assessments",component:AssessmentsComponent},
   {path:"assessments/:id",component:AssessmentComponent}
 ];

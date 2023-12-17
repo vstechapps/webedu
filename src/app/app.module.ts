@@ -22,8 +22,8 @@ import { CourseComponent } from './course/course.component';
 import { AssessmentComponent } from './assessment/assessment.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
-import { PathComponent } from './path/path.component';
-import { PathsComponent } from './paths/paths.component';
+import { TopicsComponent } from './topics/topics.component';
+import { TopicComponent } from './topic/topic.component';
 
 @NgModule({
   declarations: [
@@ -46,8 +46,8 @@ import { PathsComponent } from './paths/paths.component';
     AssessmentComponent,
     LoginComponent,
     LogoutComponent,
-    PathComponent,
-    PathsComponent
+    TopicsComponent,
+    TopicComponent
   ],
   imports: [
     BrowserModule,

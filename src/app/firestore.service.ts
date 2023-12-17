@@ -34,9 +34,9 @@ export class FirestoreService {
 
   constructor() {
     this.refreshUserSession();
-    this.refresh(Collections.PATHS);
     this.refresh(Collections.CATEGORIES);
     this.refresh(Collections.COURSES);
+    this.refresh(Collections.TOPICS);
     
   }
 
@@ -129,8 +129,8 @@ export enum Collections{
   USERS="users",
   CATEGORIES="categories",
   COURSES="courses",
-  ASSESSMENTS="assessments",
-  PATHS="paths"
+  TOPICS="topics",
+  ASSESSMENTS="assessments"
 }
 
 export enum Events{
