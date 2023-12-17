@@ -33,8 +33,26 @@ export class FirestoreService {
   
 
   constructor() {
+    this.refreshUserSession();
+    this.refresh(Collections.PATHS);
     this.refresh(Collections.CATEGORIES);
-    this.refresh(Collections.COURSES);    
+    this.refresh(Collections.COURSES);
+    
+  }
+
+  refreshUserSession(){
+    let u:any = sessionStorage.getItem("user");
+    let login:string | null = sessionStorage.getItem("login");
+    let check:boolean=false;
+    if(login!=null && login!=""){
+      let l = new Date(login).getTime();
+      let c = new Date().getTime();
+      check = c - l <= 15*30*30;
+    }
+    if(check && u){
+      u = JSON.parse(u);
+      this.user = u;
+    }
   }
 
   refresh(key:Collections){
@@ -62,6 +80,7 @@ export class FirestoreService {
       console.log("FirestoreService:login:: Existing User :", d);
       this.user = {id:d.id,name:d.name,email:d.email,contact:d.contact,role:d.role,image:d.image};
       this.refreshUser.emit(this.user);
+      sessionStorage.setItem("login",new Date().toISOString());
       this.log(Events.LOGIN,this.user);
       this.isAdmin = this.user.role==Role.ADMIN;
     } else {
@@ -71,6 +90,7 @@ export class FirestoreService {
       await setDoc(doc(collection(this.firestore,"users"), user.id),this.user);
       console.log("FirestoreService:login:: Created new user: "+user.email);
       this.refreshUser.emit(this.user);
+      sessionStorage.setItem("login",new Date().toISOString());
       this.log(Events.SIGN_UP,this.user);
 
     }
@@ -80,6 +100,7 @@ export class FirestoreService {
   async logout(){
     console.log("FirestoreService:logout:: Logging out user: "+this.user?.email);
     this.user=undefined;
+    sessionStorage.clear();
     this.isAdmin=false;
     this.log(Events.LOGOUT,this.user);
     this.refreshUser.emit(this.user);
@@ -106,7 +127,8 @@ export enum Collections{
   USERS="users",
   CATEGORIES="categories",
   COURSES="courses",
-  ASSESSMENTS="assessments"
+  ASSESSMENTS="assessments",
+  PATHS="paths"
 }
 
 export enum Events{

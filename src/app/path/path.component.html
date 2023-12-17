@@ -1,1 +1,18 @@
-<p>path works!</p>
+<div class="row m-0 text-center h">
+    <div class="he" *ngIf="firestore.user">
+        <img src="{{firestore.user.image}}" />
+        <div class="text-center">
+            <div class="name">{{firestore.user.name}}</div>
+            <div class="caption" *ngIf="path">{{path.name}}</div>
+        </div>
+    </div>
+</div>
+<div class="row m-0" *ngIf="path">
+    <div *ngFor="let t of path.topics" class="t">
+        {{t}}
+    </div>
+</div>
+
+<div class="row m-0" *ngIf="firestore && path">
+    <div class="b text-center mt-2"><button class="btn btn-primary">Register course</button></div> 
+</div>

@@ -55,3 +55,18 @@ export enum Role{
     CLIENT="CLIENT",
     ADMIN="ADMIN"
 }
+
+export interface Path{
+    id?:string;
+    order:number,
+    name:string;
+    tech:string;
+    topics:Topic[];
+  }
+  
+  export interface Topic{
+    name:string;
+    course:string;
+    order:string;
+  }
+  
