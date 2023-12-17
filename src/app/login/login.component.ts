@@ -15,16 +15,19 @@ export class LoginComponent {
 
   constructor(private router:Router, private fs: FirestoreService){
     fs.refreshUser.subscribe(user=>{
-      if(user){
+      if(user!=null){
         var redirect:any = sessionStorage.getItem("redirect");
         if(redirect){
           sessionStorage.removeItem("redirect");
-          redirect = JSON.parse(redirect);
-          this.router.navigate(redirect);
+          console.log('Redirecting to ', redirect);
+          this.router.navigateByUrl(redirect);
+        }else{
+          this.router.navigate(["dashboard"]);
         }
-        this.router.navigate(["dashboard"]);
+      }else{
+        this.router.navigate(["home"]);
       }
-      this.router.navigate(["home"]);
+
       
     });
   }

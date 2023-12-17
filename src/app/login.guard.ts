@@ -16,7 +16,11 @@ export class LoginGuard {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if(this.firestore.user==null){
-      sessionStorage.setItem("redirect",JSON.stringify(route.url));
+      if(route.url.length>0){
+        let s:string[] = [];
+        route.url.forEach(u=>s.push(u.path));
+        sessionStorage.setItem("redirect",s.join("/"));
+      }
       this.router.navigateByUrl("login");
     }
     return true;

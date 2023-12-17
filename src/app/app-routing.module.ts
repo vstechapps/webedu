@@ -15,7 +15,7 @@ import { PathComponent } from './path/path.component';
 import { LoginGuard } from './login.guard';
 
 const routes: Routes = [
-  {path:"",redirectTo:"home",pathMatch:"full"},
+  {path:"",component:HomeComponent},
   {path:"home",component:HomeComponent},
   {path:"path/:id",component:PathComponent,canActivate:[LoginGuard]},
   {path:"login",component:LoginComponent},
