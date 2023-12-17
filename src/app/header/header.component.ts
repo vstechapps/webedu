@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FirestoreService } from '../firestore.service';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   menu:boolean=false;
+
+  constructor(public firestore:FirestoreService){
+    
+  }
 }

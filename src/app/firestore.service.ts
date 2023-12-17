@@ -47,7 +47,7 @@ export class FirestoreService {
     if(login!=null && login!=""){
       let l = new Date(login).getTime();
       let c = new Date().getTime();
-      check = c - l <= 15*30*30;
+      check = (c - l) <= 15*60*60;
     }
     if(check && u){
       u = JSON.parse(u);
@@ -81,6 +81,7 @@ export class FirestoreService {
       this.user = {id:d.id,name:d.name,email:d.email,contact:d.contact,role:d.role,image:d.image};
       this.refreshUser.emit(this.user);
       sessionStorage.setItem("login",new Date().toISOString());
+      sessionStorage.setItem("user", JSON.stringify(this.user));
       this.log(Events.LOGIN,this.user);
       this.isAdmin = this.user.role==Role.ADMIN;
     } else {
@@ -91,6 +92,7 @@ export class FirestoreService {
       console.log("FirestoreService:login:: Created new user: "+user.email);
       this.refreshUser.emit(this.user);
       sessionStorage.setItem("login",new Date().toISOString());
+      sessionStorage.setItem("user", JSON.stringify(this.user));
       this.log(Events.SIGN_UP,this.user);
 
     }

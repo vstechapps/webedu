@@ -1,7 +1,10 @@
 <div class="c">
     <div class="row m-0">
         <div class="position-absolute col-2 p-2 m-1">
-            <button class="btn btn-default b" (click)="menu=!menu"><i class="material-icons text-light">menu</i></button>
+            <button class="btn btn-default b" (click)="menu=!menu">
+                <i *ngIf="!firestore.user" class="material-icons text-light">menu</i>
+                <img *ngIf="firestore.user && firestore.user.image" src="{{firestore.user.image}}" />
+            </button>
         </div>
         <div class="col-12 p-0 text-center">
             <div class="t a">IMPULSE</div>
