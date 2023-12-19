@@ -14,10 +14,12 @@ import { CourseComponent } from './course/course.component';
 import { LoginGuard } from './login.guard';
 import { TopicsComponent } from './topics/topics.component';
 import { TopicComponent } from './topic/topic.component';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   {path:"",component:HomeComponent},
   {path:"home",component:HomeComponent},
+  {path:"admin",component:AdminComponent},
   {path:"login",component:LoginComponent},
   {path:"dashboard",component:DashboardComponent},
   {path:"logout",component:LogoutComponent},

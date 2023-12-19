@@ -25,18 +25,24 @@ export class CourseComponent implements OnInit{
     if(this.firestore.data[Collections.COURSES]!=null){
       this.courses = this.firestore.data[Collections.COURSES];
       this.course = this.courses.filter(p=>p.id==this.id)[0];
+    }
+    if(this.firestore.data[Collections.TOPICS]!=null){
       this.setTopics();
     }
     this.firestore.refreshEvent.subscribe(collection=>{
       if(collection==Collections.COURSES){
         this.courses = this.firestore.data[Collections.COURSES];
         this.course = this.courses.filter(p=>p.id==this.id)[0];
+      }
+      if(collection ==Collections.TOPICS){
         this.setTopics();
       }
     });
   }
 
   setTopics(){
-    this.topics = this.firestore.data[Collections.TOPICS];
+    let topics:Topic[] = [];
+    topics = this.firestore.data[Collections.TOPICS];
+    this.topics = topics.filter(t=>t.id!=null && this.course?.topics?.includes(t.id));
   }
 }

@@ -24,6 +24,7 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { TopicsComponent } from './topics/topics.component';
 import { TopicComponent } from './topic/topic.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { TopicComponent } from './topic/topic.component';
     LoginComponent,
     LogoutComponent,
     TopicsComponent,
-    TopicComponent
+    TopicComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

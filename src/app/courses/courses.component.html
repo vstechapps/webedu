@@ -4,7 +4,7 @@
             <div class="m-2 p-3 border border-secondary bg-light">
                 <div class="n">{{c.name}}</div>
                 <div class="t"><b>Tech: </b>{{c.description}}</div>
-                <div class="v pointer"><a>View Topics</a></div>
+                <div class="v pointer" [routerLink]="'/courses/'+c.id"><a>View Topics</a></div>
                 <div class="b text-center mt-2"><button class="btn btn-primary" [routerLink]="'/courses/'+c.id">Launch course</button></div> 
             </div>
         </div>

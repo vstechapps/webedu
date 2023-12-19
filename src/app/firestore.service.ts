@@ -47,11 +47,12 @@ export class FirestoreService {
     if(login!=null && login!=""){
       let l = new Date(login).getTime();
       let c = new Date().getTime();
-      check = (c - l) <= 15*60*60;
+      check = (c - l) <= 20*60*60*1000;
     }
     if(check && u){
       u = JSON.parse(u);
       this.user = u;
+      this.isAdmin = this.user?.role==Role.ADMIN;
     }
   }
 
@@ -80,7 +81,7 @@ export class FirestoreService {
       console.log("FirestoreService:login:: Existing User :", d);
       this.user = {id:d.id,name:d.name,email:d.email,contact:d.contact,role:d.role,image:d.image};
       this.refreshUser.emit(this.user);
-      sessionStorage.setItem("login",new Date().toISOString());
+      sessionStorage.setItem("login",""+new Date().toLocaleString());
       sessionStorage.setItem("user", JSON.stringify(this.user));
       this.log(Events.LOGIN,this.user);
       this.isAdmin = this.user.role==Role.ADMIN;
