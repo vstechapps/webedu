@@ -26,6 +26,8 @@ import { TopicsComponent } from './topics/topics.component';
 import { TopicComponent } from './topic/topic.component';
 import { AdminComponent } from './admin/admin.component';
 import { LogoComponent } from './logo/logo.component';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { PdfviewerComponent } from './pdfviewer/pdfviewer.component';
 
 @NgModule({
   declarations: [
@@ -51,12 +53,14 @@ import { LogoComponent } from './logo/logo.component';
     TopicsComponent,
     TopicComponent,
     AdminComponent,
-    LogoComponent
+    LogoComponent,
+    PdfviewerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    NgxExtendedPdfViewerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
