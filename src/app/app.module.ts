@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { PdfViewerComponent, PdfViewerModule } from 'ng2-pdf-viewer';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,8 +27,7 @@ import { TopicsComponent } from './topics/topics.component';
 import { TopicComponent } from './topic/topic.component';
 import { AdminComponent } from './admin/admin.component';
 import { LogoComponent } from './logo/logo.component';
-import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
-import { PdfviewerComponent } from './pdfviewer/pdfviewer.component';
+import { ViewerComponent } from './viewer/viewer.component';
 
 @NgModule({
   declarations: [
@@ -54,13 +54,13 @@ import { PdfviewerComponent } from './pdfviewer/pdfviewer.component';
     TopicComponent,
     AdminComponent,
     LogoComponent,
-    PdfviewerComponent
+    ViewerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgxExtendedPdfViewerModule,
+    PdfViewerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

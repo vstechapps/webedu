@@ -15,7 +15,7 @@ import { LoginGuard } from './login.guard';
 import { TopicsComponent } from './topics/topics.component';
 import { TopicComponent } from './topic/topic.component';
 import { AdminComponent } from './admin/admin.component';
-import { PdfviewerComponent } from './pdfviewer/pdfviewer.component';
+import { ViewerComponent } from './viewer/viewer.component';
 
 const routes: Routes = [
   {path:"",component:HomeComponent},
@@ -33,7 +33,7 @@ const routes: Routes = [
   {path:"courses/:id",component:CourseComponent,canActivate:[LoginGuard]},
   {path:"assessments",component:AssessmentsComponent},
   {path:"assessments/:id",component:AssessmentComponent},
-  {path:"pdfviewer",component:PdfviewerComponent}
+  {path:"pdfviewer",component:ViewerComponent}
 ];
 
 @NgModule({
