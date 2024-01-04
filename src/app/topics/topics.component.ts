@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Category, Topic } from '../app.model';
+import { Category, ContentType, Topic } from '../app.model';
 import { DocumentReference, addDoc, collection } from 'firebase/firestore';
 import { Collections, FirestoreService } from '../firestore.service';
 
@@ -11,7 +11,7 @@ import { Collections, FirestoreService } from '../firestore.service';
 export class TopicsComponent {
 
   addTopicModal:boolean=false;
-  topic:Topic = {name:"",description:"",lock:false,active:true};
+  topic:Topic = {name:"",description:"",lock:false,active:true,type:ContentType.HTML};
 
   topics:Topic[]=[];
 

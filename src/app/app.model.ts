@@ -1,3 +1,5 @@
+import { Type } from "@angular/core";
+
 export interface User{
     id:string;
     name:string;
@@ -63,6 +65,11 @@ export interface Topic{
     description:string;
     lock:boolean;
     active:boolean;
+    type:ContentType;
     pages?: string[];
   }
-  
+
+export enum ContentType{
+    HTML="HTMl",
+    PDF="PDF"
+}
