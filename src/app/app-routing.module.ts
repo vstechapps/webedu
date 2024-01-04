@@ -18,6 +18,7 @@ import { AdminComponent } from './admin/admin.component';
 import { ViewerComponent } from './viewer/viewer.component';
 
 const routes: Routes = [
+  {path:"",component:HomeComponent},
   {path:"home",component:HomeComponent},
   {path:"admin",component:AdminComponent},
   {path:"login",component:LoginComponent},
