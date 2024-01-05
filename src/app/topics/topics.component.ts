@@ -36,6 +36,9 @@ setTopics(topics:Topic[]){
 }
 
 addTopic(){
+  if(this.topic.url){
+    this.topic.type = ContentType.PDF;
+  }
   console.log(this.topic);
   if(this.validate()){
     addDoc(collection(this.firestore.firestore,Collections.TOPICS),this.topic).then((ref:DocumentReference)=>{

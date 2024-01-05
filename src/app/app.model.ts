@@ -67,6 +67,7 @@ export interface Topic{
     active:boolean;
     type:ContentType;
     pages?: string[];
+    url?:string;
   }
 
 export enum ContentType{
