@@ -53,6 +53,7 @@ export class FirestoreService {
       u = JSON.parse(u);
       this.user = u;
       this.isAdmin = this.user?.role==Role.ADMIN;
+      this.refreshUser.emit(this.user);
     }
   }
 
