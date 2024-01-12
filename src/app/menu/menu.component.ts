@@ -35,7 +35,7 @@ export class MenuComponent {
   load(){
     this.menus=[];
     if(!this.user){
-      this.menus.push({name:"Login",icon:"login",route:"login"});
+      this.menus.push({name:"Courses",icon:"menu_book",route:"home"});
     }
     else if(this.user.role=="ADMIN"){
       this.menus.push({name:"Home",icon:"home",route:"home"});
@@ -53,9 +53,9 @@ export class MenuComponent {
       this.menus.push({name:"Logout",icon:"logout",route:"logout"});
     }
     else if(this.user.role=="USER"){
-      this.menus.push({name:"Home",icon:"home",route:"home"});
-      this.menus.push({name:"Assessments",icon:"assignment",route:"assessments"});
-      this.menus.push({name:"Notifications",icon:"notifications",route:"notifications"});
+      this.menus.push({name:"Courses",icon:"menu_book",route:"home"});
+      this.menus.push({name:"Exams",icon:"assignment",route:"assessments"});
+      this.menus.push({name:"Jobs",icon:"jobs",route:"notifications"});
       this.menus.push({name:"Logout",icon:"logout",route:"logout"});
     }
   }
