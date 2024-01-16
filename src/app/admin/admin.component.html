@@ -11,7 +11,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Record Key</th>
+                    <th>Document Key</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -21,6 +21,10 @@
                     <td>
                         <i class="m-2 material-icons pointer" (click)="edit(doc)">edit</i>
                     </td>
+                </tr>
+                <tr>
+                    <th>Add New Document</th>
+                    <th><i class="material-icons mx-2 text-info pointer" (click)="edit({})">add</i></th>
                 </tr>
             </tbody>
         </table>

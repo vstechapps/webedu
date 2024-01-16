@@ -75,9 +75,9 @@ export class MenuComponent {
       this.menus.push({name:"Logout",icon:"logout",route:"logout"});
     }
     else if(this.user.role=="USER"){
-      this.menus.push({name:"Courses",icon:"menu_book",route:"home"});
-      this.menus.push({name:"Exams",icon:"assignment",route:"assessments"});
-      this.menus.push({name:"Jobs",icon:"jobs",route:"notifications"});
+      this.menus.push({name:"Design",icon:"architecture",route:"home/design"});
+      this.menus.push({name:"Develop",icon:"code",route:"home/develop"});
+      this.menus.push({name:"Deploy",icon:"construction",route:"home/deploy"});
       this.menus.push({name:"Logout",icon:"logout",route:"logout"});
     }
   }

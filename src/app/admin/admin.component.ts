@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DocumentData, QueryDocumentSnapshot, collection, deleteDoc, doc, getDocs, query, setDoc } from 'firebase/firestore';
+import { DocumentData, QueryDocumentSnapshot, addDoc, collection, deleteDoc, doc, getDocs, query, setDoc } from 'firebase/firestore';
 import { FirestoreService } from '../firestore.service';
 
 @Component({
@@ -48,12 +48,18 @@ export class AdminComponent {
       console.error(err);
       alert("Error while parsing document data, please check and retry");
     }
+    if(this.document?.id){
+      await setDoc(doc(collection(this.firestore.firestore,this.key), this.document?.id),JSON.parse(this.data));
+      alert("Document Updated.");
+    }else{
+      await addDoc(collection(this.firestore.firestore,this.key),JSON.parse(this.data));
+      alert("Document Added.");
+    }
     
-    await setDoc(doc(collection(this.firestore.firestore,this.key), this.document?.id),JSON.parse(this.data));
-    alert("Document Updated.");
     this.document=undefined;
 
   }
+
 
   async delete(){
     if(!this.data)return;
