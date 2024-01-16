@@ -20,6 +20,7 @@ import { ViewerComponent } from './viewer/viewer.component';
 const routes: Routes = [
   {path:"",component:HomeComponent},
   {path:"home",component:HomeComponent},
+  {path:"home/:focus",component:HomeComponent},
   {path:"admin",component:AdminComponent},
   {path:"login",component:LoginComponent},
   {path:"dashboard",component:DashboardComponent},

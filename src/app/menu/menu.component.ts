@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { FirestoreService } from '../firestore.service';
 import { User } from '../app.model';
+import { updateCurrentUser } from 'firebase/auth';
 
 @Component({
   selector: 'app-menu',
@@ -19,23 +20,44 @@ export class MenuComponent {
 
   menus:Menu[]=[];
 
-  constructor(public router:Router, public firestore: FirestoreService){
+  constructor(public router:Router, public route:ActivatedRoute, public firestore: FirestoreService){
     this.active = this.router.url;
     this.user = firestore.user;
     this.load();
-    router.events.subscribe(event=>{
+    this.router.events.subscribe(event=>{
       if(event instanceof NavigationEnd){
         this.active = this.router.url
+        this.updateView(this.active);
       }
     });
     
+    
     firestore.refreshUser.subscribe(user=>{this.user=user;this.load();});
+  }
+
+  updateView(url:string){
+    let focus=url && url.includes("/home/")?url.replace("/home/",""):null;
+    if(focus){
+      var el = document.getElementsByClassName(focus)[0];
+      if(el){
+        var rect= el.getBoundingClientRect();
+        var top = rect.top;
+        var pageTop = window.visualViewport?.pageTop
+        if(pageTop){
+          top+=pageTop;
+        }
+        window.scrollTo(rect.left,top-80);
+      }
+    }
+
   }
 
   load(){
     this.menus=[];
     if(!this.user){
-      this.menus.push({name:"Courses",icon:"menu_book",route:"home"});
+      this.menus.push({name:"Design",icon:"architecture",route:"home/design"});
+      this.menus.push({name:"Develop",icon:"code",route:"home/develop"});
+      this.menus.push({name:"Deploy",icon:"construction",route:"home/deploy"});
     }
     else if(this.user.role=="ADMIN"){
       this.menus.push({name:"Home",icon:"home",route:"home"});

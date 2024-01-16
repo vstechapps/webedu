@@ -17,15 +17,14 @@ export class LoginComponent {
     fs.refreshUser.subscribe(user=>{
       
       if(user!=null){
-        window.location.href="https://learn.vvsk.in";
-        /*var redirect:any = sessionStorage.getItem("redirect");
+        var redirect:any = sessionStorage.getItem("redirect");
         if(redirect){
           sessionStorage.removeItem("redirect");
           console.log('Redirecting to ', redirect);
           this.router.navigateByUrl(redirect);
         }else{
-          this.router.navigate(["dashboard"]);
-        }*/
+          this.router.navigate(["home"]);
+        }
       }else{
         this.router.navigate(["home"]);
       }

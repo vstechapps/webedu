@@ -11,4 +11,4 @@
         </div>
     </div>
 </div>
-<app-menu *ngIf="menu" (close)="menu=false"></app-menu>
+<app-menu [hidden]="!menu" (close)="menu=false"></app-menu>
