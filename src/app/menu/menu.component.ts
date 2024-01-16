@@ -42,7 +42,7 @@ export class MenuComponent {
       if(el){
         var rect= el.getBoundingClientRect();
         var top = rect.top;
-        var pageTop = window.visualViewport?.pageTop
+        var pageTop = window.visualViewport?.pageTop;
         if(pageTop){
           top+=pageTop;
         }
