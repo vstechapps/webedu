@@ -23,15 +23,16 @@ constructor(public firestore:FirestoreService){
     if(collection==Collections.COURSES){
       this.courses = this.firestore.data[Collections.COURSES];
       this.sortOrder();
-      this.design = this.courses.filter(c=>c.category=="design");
-      this.develop = this.courses.filter(c=>c.category=="develop");
-      this.deploy = this.courses.filter(c=>c.category=="deploy");
+      
     }
   });
 }
 
 sortOrder(){
   this.courses = this.courses.sort((a,b)=>a.order-b.order);
+  this.design = this.courses.filter(c=>c.category=="design");
+  this.develop = this.courses.filter(c=>c.category=="develop");
+  this.deploy = this.courses.filter(c=>c.category=="deploy");
 }
 
 }
