@@ -16,7 +16,6 @@ export class CourseComponent implements OnInit{
   topics:Topic[]=[];
 
   constructor(public firestore:FirestoreService,private route: ActivatedRoute){
-    window.location.href="https://learn.vvsk.in";
 
   }
 

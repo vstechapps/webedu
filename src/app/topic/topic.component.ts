@@ -20,7 +20,7 @@ export class TopicComponent {
   editPageModal:boolean = false;
 
   constructor(public firestore:FirestoreService,private route: ActivatedRoute){
-    
+    window.location.href="https://learn.vvsk.in";
   }
 
   ngOnDestroy(): void {

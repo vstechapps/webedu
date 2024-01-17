@@ -9,7 +9,6 @@
             <div class="card shadow">
                 <div class="card-body">
                     <h5 class="card-title fs-3 fw-bold pointer">{{t.name}}<i [routerLink]="'/topics/'+t.id" class="material-icons align-middle mx-2 pointer float-end">open_in_new</i></h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{t.description}}</h6>
                     <p class="card-text">     
                     </p>
                 </div>
@@ -36,9 +35,6 @@
             <div class="row">
                 <div class="col-12 my-2">
                     <input type="text" class="form-control x" [(ngModel)]="topic.name" placeholder="Name"/>
-                </div>
-                <div class="col-12 my-2">
-                    <input type="text" class="form-control x" [(ngModel)]="topic.description" placeholder="Description"/>
                 </div>
                 <div class="col-12 my-2">
                     <input type="text" class="form-control x" [(ngModel)]="topic.url" placeholder="PDF URL"/>

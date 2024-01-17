@@ -63,7 +63,6 @@ export enum Role{
 export interface Topic{
     id?:string;
     name:string;
-    description:string;
     lock:boolean;
     active:boolean;
     type:ContentType;

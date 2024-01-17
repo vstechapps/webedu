@@ -11,7 +11,7 @@ import { Collections, FirestoreService } from '../firestore.service';
 export class TopicsComponent {
 
   addTopicModal:boolean=false;
-  topic:Topic = {name:"",description:"",lock:false,active:true,type:ContentType.HTML};
+  topic:Topic = {name:"",lock:false,active:true,type:ContentType.HTML};
 
   topics:Topic[]=[];
 
@@ -53,7 +53,7 @@ addTopic(){
 }
 
 validate(){
-  return this.isNotEmpty(this.topic.name) && this.isNotEmpty(this.topic.description);
+  return this.isNotEmpty(this.topic.name);
 }
 
 isNotEmpty(str:string){
