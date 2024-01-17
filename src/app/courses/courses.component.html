@@ -5,8 +5,11 @@
     <div class="row m-0 px-3">
         <div class="col-12 col-sm-6 col-md-4" *ngFor="let c of design">
             <div class="m-2 p-3 border border-secondary bg-light">
-                <div class="n">{{c.name}}</div>
-                <div class="t"><b>Tech: </b>{{c.description}}</div>
+                <div class="n">{{c.name}}
+                    <span *ngIf="c.label" class="badge rounded-pill bg-info text-dark" 
+                    style="font-size: 10px;vertical-align: middle;">{{c.label}}</span>
+                </div>
+                <div class="t">{{c.description}}</div>
                 <div class="v pointer" [routerLink]="'/courses/'+c.id"><a>View Topics</a></div>
                 <div class="b text-center mt-2"><button class="btn btn-primary" [routerLink]="'/courses/'+c.id">Launch course</button></div> 
             </div>
@@ -18,8 +21,11 @@
     <div class="row m-0 px-3">
         <div class="col-12 col-sm-6 col-md-4" *ngFor="let c of develop">
             <div class="m-2 p-3 border border-secondary bg-light">
-                <div class="n">{{c.name}}</div>
-                <div class="t"><b>Tech: </b>{{c.description}}</div>
+                <div class="n">{{c.name}}
+                    <span *ngIf="c.label" class="badge rounded-pill bg-info text-dark" 
+                    style="font-size: 10px;vertical-align: middle;">{{c.label}}</span>
+                </div>
+                <div class="t">{{c.description}}</div>
                 <div class="v pointer" [routerLink]="'/courses/'+c.id"><a>View Topics</a></div>
                 <div class="b text-center mt-2"><button class="btn btn-primary" [routerLink]="'/courses/'+c.id">Launch course</button></div> 
             </div>
@@ -31,7 +37,10 @@
     <div class="row m-0 px-3">
         <div class="col-12 col-sm-6 col-md-4" *ngFor="let c of deploy">
             <div class="m-2 p-3 border border-secondary bg-light">
-                <div class="n">{{c.name}}</div>
+                <div class="n">{{c.name}}
+                    <span *ngIf="c.label" class="badge rounded-pill bg-info text-dark" 
+                    style="font-size: 10px;vertical-align: middle;">{{c.label}}</span>
+                </div>
                 <div class="t mt-2">{{c.description}}</div>
                 <div class="v mt-2 pointer" [routerLink]="'/courses/'+c.id"><a>View Topics</a></div>
                 <div class="b text-center mt-2"><button class="btn btn-primary" [routerLink]="'/courses/'+c.id">Launch course</button></div> 

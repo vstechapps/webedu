@@ -36,6 +36,7 @@ export interface Course{
     name:string;
     description:string;
     category:string;
+    label?:string;
     active:boolean;
     pages?:string[];
     image?:string;
