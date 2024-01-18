@@ -46,6 +46,7 @@ export class MenuComponent {
         if(pageTop){
           top+=pageTop;
         }
+        console.log(rect);
         window.scrollTo(rect.left,top-80);
       }
     }

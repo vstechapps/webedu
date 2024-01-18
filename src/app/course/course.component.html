@@ -1,8 +1,8 @@
 <div class="row m-0 px-2">
     <div class="col-12 mt-3" *ngIf="course">
-        <i class="material-icons ml-2 b i align-middle">home</i>
-        <i class="material-icons ml-2 b i align-middle">chevron_right</i>
-        <span class="b mx-2 align-middle d-inline-block">{{course.name}}</span>
+        <i class="material-icons ml-2 b i align-middle pointer" [routerLink]="'/home'">home</i>
+        <i class="material-icons ml-2 b i align-middle pointer">chevron_right</i>
+        <span class="b mx-2 align-middle d-inline-block text-decoration-underline pointer">{{course.name}}</span>
     </div>
 </div>
 <div class="container">

@@ -1,8 +1,14 @@
 <div class="c">
     <div class="row m-0 p-1 py-2 d1 design">
-        <div class="text-center">Design</div>
+        <div class="text-center">Design
+            <span class="float-end pointer" (click)="expand.d1=!expand.d1">
+                <i style="font-size: 40px;vertical-align: middle;" class="material-icons">
+                    {{expand.d1?"expand_less":"expand_more"}}
+                </i>
+            </span>
+        </div>
     </div>
-    <div class="row m-0 px-1">
+    <div class="row m-0 px-1" *ngIf="expand.d1">
         <div class="col-12 col-sm-6 col-md-4" *ngFor="let c of design">
             <div class="m-2 p-3 border border-secondary bg-light">
                 <div class="n">{{c.name}}
@@ -16,9 +22,15 @@
         </div>
     </div>
     <div class="row m-0 py-2 d2 develop">
-        <div class="text-center">Develop</div>
+        <div class="text-center">Develop
+            <span class="float-end pointer" (click)="expand.d2=!expand.d2">
+                <i style="font-size: 40px;vertical-align: middle;" class="material-icons">
+                    {{expand.d2?"expand_less":"expand_more"}}
+                </i>
+            </span>
+        </div>
     </div>
-    <div class="row m-0 px-1">
+    <div class="row m-0 px-1" *ngIf="expand.d2">
         <div class="col-12 col-sm-6 col-md-4" *ngFor="let c of develop">
             <div class="m-2 p-3 border border-secondary bg-light">
                 <div class="n">{{c.name}}
@@ -32,9 +44,15 @@
         </div>
     </div>
     <div class="row m-0 py-2 d3 deploy">
-        <div class="text-center">Deploy</div>
+        <div class="text-center">Deploy
+            <span class="float-end pointer" (click)="expand.d3=!expand.d3">
+                <i style="font-size: 40px;vertical-align: middle;" class="material-icons">
+                    {{expand.d3?"expand_less":"expand_more"}}
+                </i>
+            </span>
+        </div>
     </div>
-    <div class="row m-0 px-1">
+    <div class="row m-0 px-1" *ngIf="expand.d3">
         <div class="col-12 col-sm-6 col-md-4" *ngFor="let c of deploy">
             <div class="m-2 p-3 border border-secondary bg-light">
                 <div class="n">{{c.name}}
