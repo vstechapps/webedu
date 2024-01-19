@@ -10,6 +10,7 @@ import { PDFDocumentProxy } from 'ng2-pdf-viewer';
 export class ViewerComponent {
 
   url:string | null;
+  back:string | null;
 
   numPages: number = 0;
 
@@ -17,6 +18,7 @@ export class ViewerComponent {
 
   constructor(private route: ActivatedRoute){
     this.url = this.route.snapshot.queryParamMap.get("url");
+    this.back = this.route.snapshot.queryParamMap.get("back");
   }
 
   callBackFn(pdf: PDFDocumentProxy) {
