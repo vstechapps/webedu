@@ -11,7 +11,7 @@
             <tbody>
                 <tr *ngFor="let t of topics" style="border-bottom:solid 3px #6495ed">
                     <td>
-                        <span [routerLink]="'/topics/'+t.id" class="l fs-5 fw-bold pointer">{{t.name}}</span>
+                        <span (click)="launch(t)" class="l fs-5 fw-bold pointer">{{t.name}}</span>
                     </td>
                 </tr>
             </tbody>

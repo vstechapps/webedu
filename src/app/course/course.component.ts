@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Course, Topic } from '../app.model';
 import { Collections, FirestoreService } from '../firestore.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-course',
@@ -15,7 +15,7 @@ export class CourseComponent implements OnInit{
   id:string | null = null;
   topics:Topic[]=[];
 
-  constructor(public firestore:FirestoreService,private route: ActivatedRoute){
+  constructor(public firestore:FirestoreService,private route: ActivatedRoute, private router:Router){
 
   }
 
@@ -43,5 +43,14 @@ export class CourseComponent implements OnInit{
     let topics:Topic[] = [];
     topics = this.firestore.data[Collections.TOPICS];
     this.topics = topics.filter(t=>t.id!=null && this.course?.topics?.includes(t.id));
+  }
+
+  launch(t:Topic){
+    if(t.lock){
+      window.location.href="https://learn.vvsk.in";
+    }else{
+      this.router.navigateByUrl("/topics/"+t.id);
+    }
+    
   }
 }
