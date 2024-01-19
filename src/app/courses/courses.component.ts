@@ -15,7 +15,7 @@ develop:Course[] = [];
 deploy:Course[] = [];
 courses:Course[] = [];
 
-expand={d1:true,d2:true,d3:true}
+expand={d1:false,d2:false,d3:false}
 
 constructor(public firestore:FirestoreService, private router:Router){
   if(this.firestore.data[Collections.COURSES]!=null){
@@ -46,19 +46,18 @@ sortOrder(){
 updateView(url:string){
   let focus=url && url.includes("/home/")?url.replace("/home/",""):null;
   if(focus){
-    var el = document.getElementsByClassName(focus)[0];
-    console.log(el);
-    if(el){
-      var rect= el.getBoundingClientRect();
-      var top = rect.top;
-      var pageTop = window.visualViewport?.pageTop;
-      if(pageTop){
-        top+=pageTop;
-      }
-      console.log(rect);
-      console.log(top);
-      el.firstElementChild?.parentElement?.focus();
-      window.scrollTo(rect.left,top-80);
+    switch(focus){
+      case "design":
+        this.expand={d1:true,d2:false,d3:false};
+        break;
+      case "develop":
+        this.expand={d1:false,d2:true,d3:false};
+        break;
+      case "deploy":
+        this.expand={d1:false,d2:false,d3:true};
+        break;
+      default:
+        break;
     }
   }
 }
