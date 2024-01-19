@@ -67,7 +67,7 @@ export class MenuComponent {
 
   focus(view:string){
     this.router.navigate([view]);
-    this.close.emit(true);
+    setTimeout(()=>this.close.emit(),100);
   }
 
 }

@@ -40,7 +40,7 @@ sortOrder(){
   this.design = this.courses.filter(c=>c.category=="design");
   this.develop = this.courses.filter(c=>c.category=="develop");
   this.deploy = this.courses.filter(c=>c.category=="deploy");
-  this.updateView(this.router.url);
+  //this.updateView(this.router.url);
 }
 
 updateView(url:string){
@@ -57,6 +57,7 @@ updateView(url:string){
       }
       console.log(rect);
       console.log(top);
+      el.firstElementChild?.parentElement?.focus();
       window.scrollTo(rect.left,top-80);
     }
   }
