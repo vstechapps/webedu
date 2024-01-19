@@ -26,31 +26,12 @@ export class MenuComponent {
     this.load();
     this.router.events.subscribe(event=>{
       if(event instanceof NavigationEnd){
-        this.active = this.router.url
-        this.updateView(this.active);
+        this.active = this.router.url;
       }
     });
     
     
     firestore.refreshUser.subscribe(user=>{this.user=user;this.load();});
-  }
-
-  updateView(url:string){
-    let focus=url && url.includes("/home/")?url.replace("/home/",""):null;
-    if(focus){
-      var el = document.getElementsByClassName(focus)[0];
-      if(el){
-        var rect= el.getBoundingClientRect();
-        var top = rect.top;
-        var pageTop = window.visualViewport?.pageTop;
-        if(pageTop){
-          top+=pageTop;
-        }
-        console.log(rect);
-        window.scrollTo(rect.left,top-80);
-      }
-    }
-
   }
 
   load(){
