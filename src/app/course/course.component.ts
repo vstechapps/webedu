@@ -49,7 +49,7 @@ export class CourseComponent implements OnInit{
     if(t.lock){
       window.location.href="https://learn.vvsk.in";
     }else{
-      this.router.navigateByUrl("/topics/"+t.id);
+      window.location.href=window.location.origin+"/pdfviewer?url="+t.url+"&back="+window.location.href;
     }
     
   }
