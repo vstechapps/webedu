@@ -1,7 +1,7 @@
 <div *ngIf="url">
+  <div>
     <pdf-viewer
-
-    [src]="url"
+      [src]="url"
       [rotation]="0"
       [original-size]="false"
       [show-all]="false"
@@ -14,16 +14,16 @@
       [external-link-target]="'blank'"
       [autoresize]="true"
       [show-borders]="false"
-      (after-load-complete)="callBackFn($event)"
-      style="width: 100%; height: 600px;"
-    ></pdf-viewer>
-</div>
-<div class="row m-0 fo" *ngIf="url && numPages!=0">
-  <div class="col-6">
-      <span *ngIf="page>1" (click)="prev()"><i class="material-icons">chevron_left</i>PREV</span>
+      (after-load-complete)="callBackFn($event)">
+    </pdf-viewer>
   </div>
-  <div class="col-6">
-      <span *ngIf="page<numPages" style="float:right" (click)="next()" >NEXT<i class="material-icons">chevron_right</i></span>
-  </div>
+  <div class="row m-0 fo" *ngIf="numPages!=0">
+    <div class="col-6">
+        <span *ngIf="page>1" (click)="prev()"><i class="material-icons">chevron_left</i>PREV</span>
+    </div>
+    <div class="col-6">
+        <span *ngIf="page<numPages" style="float:right" (click)="next()" >NEXT<i class="material-icons">chevron_right</i></span>
+    </div>
+  </div>  
 </div>
   
