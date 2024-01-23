@@ -37,9 +37,8 @@ export class MenuComponent {
   load(){
     this.menus=[];
     if(!this.user){
-      this.menus.push({name:"Design",icon:"architecture",route:"home/design"});
-      this.menus.push({name:"Develop",icon:"code",route:"home/develop"});
-      this.menus.push({name:"Deploy",icon:"construction",route:"home/deploy"});
+      this.menus.push({name:"Home",icon:"home",route:"home"});
+      this.menus.push({name:"Login",icon:"login",route:"login"});
     }
     else if(this.user.role=="ADMIN"){
       this.menus.push({name:"Home",icon:"home",route:"home"});
