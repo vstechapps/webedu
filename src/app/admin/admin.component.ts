@@ -42,17 +42,22 @@ export class AdminComponent {
   async save(){
     if(!this.data)return;
     if(!this.key || !this.document)return;
+    var d = undefined;
     try{
-      JSON.parse(this.data);
+      d = JSON.parse(this.data);
     }catch(err){
       console.error(err);
       alert("Error while parsing document data, please check and retry");
+      return;
     }
     if(this.document?.id){
-      await setDoc(doc(collection(this.firestore.firestore,this.key), this.document?.id),JSON.parse(this.data));
+      await setDoc(doc(collection(this.firestore.firestore,this.key), this.document?.id),d);
       alert("Document Updated.");
+    }else if(d.id){
+      await setDoc(doc(collection(this.firestore.firestore,this.key), d.id),d);
+      alert("Document Added.");
     }else{
-      await addDoc(collection(this.firestore.firestore,this.key),JSON.parse(this.data));
+      await addDoc(collection(this.firestore.firestore,this.key),d);
       alert("Document Added.");
     }
     
