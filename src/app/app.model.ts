@@ -72,5 +72,6 @@ export interface Topic{
 
 export enum ContentType{
     HTML="HTMl",
-    PDF="PDF"
+    PDF="PDF",
+    URL="URL"
 }

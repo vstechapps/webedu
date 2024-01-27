@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Course, Topic } from '../app.model';
+import { ContentType, Course, Topic } from '../app.model';
 import { Collections, FirestoreService } from '../firestore.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -48,8 +48,10 @@ export class CourseComponent implements OnInit{
   launch(t:Topic){
     if(t.lock){
       window.location.href="https://learn.vvsk.in";
-    }else{
+    }else if(t.type==ContentType.PDF){
       window.location.href=window.location.origin+"/pdfviewer?url="+t.url+"&back="+window.location.href;
+    }else if(t.type==ContentType.URL){
+      window.open(t.url);
     }
     
   }
