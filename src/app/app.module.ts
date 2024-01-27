@@ -28,6 +28,7 @@ import { TopicComponent } from './topic/topic.component';
 import { AdminComponent } from './admin/admin.component';
 import { LogoComponent } from './logo/logo.component';
 import { ViewerComponent } from './viewer/viewer.component';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { ViewerComponent } from './viewer/viewer.component';
     TopicComponent,
     AdminComponent,
     LogoComponent,
-    ViewerComponent
+    ViewerComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

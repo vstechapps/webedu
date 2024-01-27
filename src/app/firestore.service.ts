@@ -7,6 +7,7 @@ import { Auth, getAuth } from "firebase/auth";
 
 import { CollectionReference, DocumentData, Firestore, collection, doc, getDoc, getDocs, setDoc, getFirestore, query} from "firebase/firestore";
 import { Category, Course, Role, User } from './app.model';
+import { LoaderService } from './loader/loader.service';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class FirestoreService {
 
   
 
-  constructor() {
+  constructor(public loader:LoaderService) {
     this.refreshUserSession();
     this.refresh(Collections.CATEGORIES);
     this.refresh(Collections.COURSES);
@@ -41,20 +42,22 @@ export class FirestoreService {
   }
 
   refreshUserSession(){
-    let u:any = sessionStorage.getItem("user");
-    let login:string | null = sessionStorage.getItem("login");
-    let check:boolean=false;
-    if(login!=null && login!=""){
-      let l = new Date(login).getTime();
-      let c = new Date().getTime();
-      check = (c - l) <= 20*60*60*1000;
-    }
-    if(check && u){
-      u = JSON.parse(u);
-      this.user = u;
-      this.isAdmin = this.user?.role==Role.ADMIN;
-      this.refreshUser.emit(this.user);
-    }
+    this.auth.onAuthStateChanged((authState:any)=>{
+      if(authState==null){
+        this.user=undefined;
+        this.isAdmin = false;
+        this.refreshUser.emit(undefined);
+      }else{
+        console.log("FirestoreService:refreshUserSession:: Auth State Changed ",authState);
+        // Show Loader
+        this.loader.show();
+        let user:any= authState;
+        // User has properties uid, email, displayName, phoneNumber, photoURL
+        let u: User = {id:user.uid,email:user.email,name:user.displayName,contact:user.phoneNumber,image:user.photoURL,role:Role.USER}
+        this.login(u);
+      }
+      
+    })
   }
 
   refresh(key:Collections){
@@ -82,10 +85,10 @@ export class FirestoreService {
       console.log("FirestoreService:login:: Existing User :", d);
       this.user = {id:d.id,name:d.name,email:d.email,contact:d.contact,role:d.role,image:d.image};
       this.refreshUser.emit(this.user);
-      sessionStorage.setItem("login",""+new Date().toLocaleString());
       sessionStorage.setItem("user", JSON.stringify(this.user));
-      this.log(Events.LOGIN,this.user);
       this.isAdmin = this.user.role==Role.ADMIN;
+      // Hide Loader
+      this.loader.hide();
     } else {
       // Create new user in firestore
       console.log("FirestoreService:login:: Create new user: "+user.email);
@@ -93,10 +96,10 @@ export class FirestoreService {
       await setDoc(doc(collection(this.firestore,"users"), user.id),this.user);
       console.log("FirestoreService:login:: Created new user: "+user.email);
       this.refreshUser.emit(this.user);
-      sessionStorage.setItem("login",new Date().toISOString());
       sessionStorage.setItem("user", JSON.stringify(this.user));
       this.log(Events.SIGN_UP,this.user);
-
+      // Hide Loader
+      this.loader.hide();
     }
 
   }
