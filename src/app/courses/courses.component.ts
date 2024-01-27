@@ -15,7 +15,7 @@ develop:Course[] = [];
 deploy:Course[] = [];
 courses:Course[] = [];
 
-expand={d1:false,d2:false,d3:false}
+expand={d1:true,d2:true,d3:true}
 
 constructor(public firestore:FirestoreService, private router:Router){
   if(this.firestore.data[Collections.COURSES]!=null){
