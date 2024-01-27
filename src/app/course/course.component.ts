@@ -42,7 +42,14 @@ export class CourseComponent implements OnInit{
   setTopics(){
     let topics:Topic[] = [];
     topics = this.firestore.data[Collections.TOPICS];
-    this.topics = topics.filter(t=>t.id!=null && this.course?.topics?.includes(t.id));
+    let filtered = topics.filter(t=>t.id!=null && this.course?.topics?.includes(t.id));
+    this.course?.topics?.forEach(t=>{
+      filtered.forEach(f=>{
+        if(t==f.id){
+          this.topics.push(f);
+        }
+      })
+    })
   }
 
   launch(t:Topic){

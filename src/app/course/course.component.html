@@ -10,7 +10,7 @@
         <table class="table table-bordered">
             <tbody>
                 <tr *ngFor="let t of topics" style="border-bottom:solid 3px #6495ed">
-                    <td>
+                    <td class="pointer">
                         <span (click)="launch(t)" class="l fs-5 fw-bold pointer">{{t.name}}</span>
                     </td>
                 </tr>
