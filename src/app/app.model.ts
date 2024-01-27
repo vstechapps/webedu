@@ -68,6 +68,7 @@ export interface Topic{
     type:ContentType;
     pages?: string[];
     url?:string;
+    cors?:boolean;
   }
 
 export enum ContentType{

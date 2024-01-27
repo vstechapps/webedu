@@ -56,7 +56,11 @@ export class CourseComponent implements OnInit{
     if(t.lock){
       window.location.href="https://learn.vvsk.in";
     }else if(t.type==ContentType.PDF){
-      window.location.href=window.location.origin+"/pdfviewer?url="+t.url+"&back="+window.location.href;
+      let u = window.location.origin+"/pdfviewer?url="+t.url+"&back="+window.location.href;
+      if(t.cors){
+        u+="&cors=true";
+      }
+      window.open(u);
     }else if(t.type==ContentType.URL){
       window.open(t.url);
     }
