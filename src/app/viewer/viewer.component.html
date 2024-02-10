@@ -1,5 +1,10 @@
 <div *ngIf="url">
   <div *ngIf="!isMobile">
+    <div class="text-center">
+      <span class="mx-1" *ngFor="let item of [].constructor(numPages); let i = index">
+        <button style="border:none; height:5px" [ngClass]="i+1==page?'bg-primary':'bg-secondary'"></button>
+      </span>
+    </div>
     <pdf-viewer
       [src]="url"
       [rotation]="0"
@@ -18,6 +23,11 @@
     </pdf-viewer>
   </div>
   <div *ngIf="isMobile">
+    <div class="text-center">
+      <span class="mx-1" *ngFor="let item of [].constructor(numPages); let i = index">
+        <button style="border:none; height:5px" [ngClass]="i+1==page?'bg-primary':'bg-secondary'"></button>
+      </span>
+    </div>
     <pdf-viewer
       [src]="url"
       [rotation]="0"
@@ -34,10 +44,13 @@
       [show-borders]="false"
       (after-load-complete)="callBackFn($event)">
     </pdf-viewer>
+    
   </div>
-  <div class="row m-0 p-absolute w-100" style="position: absolute; top:100px;">
-    <div class="col-6 p-0" style="height:100vh" (click)="prev()"></div>
-    <div class="col-6 p-0" style="height:100vh" (click)="next()"></div>
+  
+  <div class="row m-0 p-absolute w-100" style="position: absolute; top:10%;">
+    <div class="col-4 p-0" style="height:70vh" (click)="prev()"></div>
+    <div class="col-4 p-0" style="height:70vh"></div>
+    <div class="col-4 p-0" style="height:70vh" (click)="next()"></div>
   </div>
   <div class="row m-0 fo" *ngIf="numPages!=0">
     <div class="col-6">
