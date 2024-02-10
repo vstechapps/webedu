@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-carousel',
@@ -7,12 +7,9 @@ import { Component } from '@angular/core';
 })
 export class CarouselComponent {
 
-  texts=[
-    "Write - Event Driven Functions",
-    "Build - Reusable Components",
-    "Choose - Scalable Architecture",
-    "Design - Reliable Systems",
-    "Deploy - Cloud Ready Apps"
-  ];
+  @Input()
+  pages:string[]=[];
+
+
 
 }

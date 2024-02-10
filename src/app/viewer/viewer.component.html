@@ -35,13 +35,22 @@
       (after-load-complete)="callBackFn($event)">
     </pdf-viewer>
   </div>
+  <div class="row m-0 p-absolute w-100" style="position: absolute; top:100px;">
+    <div class="col-6 p-0" style="height:100vh" (click)="prev()"></div>
+    <div class="col-6 p-0" style="height:100vh" (click)="next()"></div>
+  </div>
   <div class="row m-0 fo" *ngIf="numPages!=0">
     <div class="col-6">
-        <span *ngIf="page>1" (click)="prev()"><i class="material-icons">chevron_left</i>PREV</span>
+        <span *ngIf="page>1" (click)="prev()">
+          <i class="material-icons">chevron_left</i>
+          <span class="align-midde">PREV</span>
+        </span>
     </div>
     <div class="col-6">
-        <span *ngIf="page<numPages" style="float:right" (click)="next()" >NEXT<i class="material-icons">chevron_right</i></span>
+        <span *ngIf="page<numPages" style="float:right" (click)="next()" >
+          <span class="align-midde">NEXT</span>
+          <i class="material-icons">chevron_right</i>
+        </span>
     </div>
   </div>  
 </div>
-  
