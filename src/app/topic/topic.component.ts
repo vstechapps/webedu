@@ -24,11 +24,9 @@ export class TopicComponent {
   }
 
   ngOnDestroy(): void {
-    window.postMessage("ToggleHeader");
   }
 
   ngOnInit(): void {
-    window.postMessage("ToggleHeader");
     this.id = this.route.snapshot.paramMap.get('id');
     console.log("Topic ID: "+this.id);
     if(this.firestore.data[Collections.TOPICS]==null){

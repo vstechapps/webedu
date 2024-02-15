@@ -32,7 +32,7 @@
     ></pdf-viewer>
 </div>
 
-<div class="row m-0 fo" *ngIf="topic">
+<div class="row m-0 fo" *ngIf="topic && topic.pages && topic.pages.length>1">
     <div class="col-6">
         <span (click)="prev()"><i class="material-icons">chevron_left</i>PREV</span>
     </div>
