@@ -24,7 +24,6 @@ import { CourseComponent } from './course/course.component';
 import { AssessmentComponent } from './assessment/assessment.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
-import { TopicsComponent } from './topics/topics.component';
 import { TopicComponent } from './topic/topic.component';
 import { AdminComponent } from './admin/admin.component';
 import { LogoComponent } from './logo/logo.component';
@@ -52,7 +51,6 @@ import { LoaderComponent } from './loader/loader.component';
     AssessmentComponent,
     LoginComponent,
     LogoutComponent,
-    TopicsComponent,
     TopicComponent,
     AdminComponent,
     LogoComponent,

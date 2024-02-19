@@ -63,6 +63,8 @@ export class CourseComponent implements OnInit{
       window.open(u);
     }else if(t.type==ContentType.URL){
       window.open(t.url);
+    }else if(t.type==ContentType.HTML){
+      this.router.navigateByUrl("pages/"+t.id);
     }
     
   }

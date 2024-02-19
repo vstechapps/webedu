@@ -67,12 +67,14 @@ export interface Topic{
     active:boolean;
     type:ContentType;
     pages?: string[];
+    html?:string;
     url?:string;
     cors?:boolean;
+    header?:boolean;
   }
 
 export enum ContentType{
-    HTML="HTMl",
+    HTML="HTML",
     PDF="PDF",
     URL="URL"
 }

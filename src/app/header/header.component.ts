@@ -12,4 +12,8 @@ export class HeaderComponent {
   constructor(public firestore:FirestoreService){
     
   }
+
+  home(){
+    window.location.href=window.location.origin;
+  }
 }

@@ -12,7 +12,6 @@ import { AssessmentComponent } from './assessment/assessment.component';
 import { AssessmentsComponent } from './assessments/assessments.component';
 import { CourseComponent } from './course/course.component';
 import { LoginGuard } from './login.guard';
-import { TopicsComponent } from './topics/topics.component';
 import { TopicComponent } from './topic/topic.component';
 import { AdminComponent } from './admin/admin.component';
 import { ViewerComponent } from './viewer/viewer.component';
@@ -28,8 +27,8 @@ const routes: Routes = [
   {path:"account",component:AccountComponent},
   {path:"profile",component:ProfileComponent},
   {path:"categories", component:CategoriesComponent},
-  {path:"topics",component:TopicsComponent},
   {path:"topics/:id",component:TopicComponent},
+  {path:"pages/:id",component:TopicComponent},
   {path:"courses",component:CoursesComponent},
   {path:"courses/:id",component:CourseComponent,canActivate:[LoginGuard]},
   {path:"assessments",component:AssessmentsComponent},
