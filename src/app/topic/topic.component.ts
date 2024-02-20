@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Topic } from '../app.model';
 import { collection, doc, setDoc } from 'firebase/firestore';
 import { Collections, FirestoreService } from '../firestore.service';
@@ -7,7 +7,8 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-topic',
   templateUrl: './topic.component.html',
-  styleUrls: ['./topic.component.less']
+  styleUrls: ['./topic.component.less'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TopicComponent {
 
