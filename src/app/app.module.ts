@@ -29,6 +29,7 @@ import { AdminComponent } from './admin/admin.component';
 import { LogoComponent } from './logo/logo.component';
 import { ViewerComponent } from './viewer/viewer.component';
 import { LoaderComponent } from './loader/loader.component';
+import { PageComponent } from './page/page.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { LoaderComponent } from './loader/loader.component';
     AdminComponent,
     LogoComponent,
     ViewerComponent,
-    LoaderComponent
+    LoaderComponent,
+    PageComponent
   ],
   imports: [
     BrowserModule,
