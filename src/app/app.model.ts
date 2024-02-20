@@ -70,7 +70,6 @@ export interface Topic{
     html?:string;
     url?:string;
     cors?:boolean;
-    header?:boolean;
   }
 
 export enum ContentType{
