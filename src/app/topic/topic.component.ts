@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-topic',
   templateUrl: './topic.component.html',
   styleUrls: ['./topic.component.less'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class TopicComponent {
 
@@ -51,6 +51,7 @@ export class TopicComponent {
     }
     if(this.topic?.pages && this.topic?.pages[0]){
       this.page = this.topic.pages[0];
+      this.updateView();
     }
   }
 
@@ -60,12 +61,21 @@ export class TopicComponent {
     }
   }
 
+  updateView(){
+    if(this.topic?.id){
+      var el= document.getElementById("3593661b72952003");
+      console.log(el);
+      if(el && this.page)el.innerHTML = this.page;
+    }
+  }
+
   next(){
     if(!this.topic) return;
     if(this.topic.pages==null) return;
     if(this.pageIndex==this.topic?.pages?.length-1)return;
     this.pageIndex++;
     this.page = this.topic.pages[this.pageIndex];
+    this.updateView();
   }
 
   prev(){
@@ -74,6 +84,7 @@ export class TopicComponent {
     if(this.pageIndex==0)return;
     this.pageIndex--;
     this.page = this.topic.pages[this.pageIndex];
+    this.updateView();
   }
 
   async addPage(){
