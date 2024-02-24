@@ -38,6 +38,9 @@ export class MenuComponent {
     this.menus=[];
     if(!this.user){
       this.menus.push({name:"Home",icon:"home",route:"home"});
+      this.menus.push({name:"Design",icon:"architecture",route:"home/design"});
+      this.menus.push({name:"Develop",icon:"code",route:"home/develop"});
+      this.menus.push({name:"Deploy",icon:"construction",route:"home/deploy"});
       this.menus.push({name:"Login",icon:"login",route:"login"});
     }
     else if(this.user.role=="ADMIN"){
@@ -55,6 +58,7 @@ export class MenuComponent {
       this.menus.push({name:"Logout",icon:"logout",route:"logout"});
     }
     else if(this.user.role=="USER"){
+      this.menus.push({name:"Home",icon:"home",route:"home"});
       this.menus.push({name:"Design",icon:"architecture",route:"home/design"});
       this.menus.push({name:"Develop",icon:"code",route:"home/develop"});
       this.menus.push({name:"Deploy",icon:"construction",route:"home/deploy"});

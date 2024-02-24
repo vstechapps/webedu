@@ -1,11 +1,37 @@
 <div class="c">
-    <div class="row m-0 p-1 py-2 d1 design">
-        <div class="text-center pointer" (click)="expand.d1=!expand.d1" >Design
+    <div class="row m-0 p-1 py-2 d design" *ngIf="expand.d">
+        <div class="text-center pointer" > Trending Courses
+            <!--
             <span class="float-end" >
                 <i style="font-size: 40px;vertical-align: middle;" class="material-icons">
                     {{expand.d1?"expand_less":"expand_more"}}
                 </i>
             </span>
+            -->
+        </div>
+    </div>
+    <div class="row m-0 px-1" *ngIf="expand.d">
+        <div class="col-12 col-sm-6 col-md-4" *ngFor="let c of trending">
+            <div class="m-2 p-3 border border-secondary bg-light">
+                <div class="n">{{c.name}}
+                    <span *ngIf="c.label" class="badge rounded-pill bg-info text-dark" 
+                    style="font-size: 10px;vertical-align: middle;">{{c.label}}</span>
+                </div>
+                <div class="t" *ngIf="c.description">{{c.description}}</div>
+                <div class="v pointer" *ngIf="c.link" [routerLink]="'/courses/'+c.id"><a>View Topics</a></div>
+                <div class="b text-center mt-2"><button class="btn btn-primary" [routerLink]="'/courses/'+c.id">{{c.btn?c.btn:"Launch course"}}</button></div> 
+            </div>
+        </div>
+    </div>
+    <div class="row m-0 p-1 py-2 d1 design" *ngIf="expand.d1">
+        <div class="text-center pointer" >Design
+            <!--
+            <span class="float-end" >
+                <i style="font-size: 40px;vertical-align: middle;" class="material-icons">
+                    {{expand.d1?"expand_less":"expand_more"}}
+                </i>
+            </span>
+            -->
         </div>
     </div>
     <div class="row m-0 px-1" *ngIf="expand.d1">
@@ -15,19 +41,21 @@
                     <span *ngIf="c.label" class="badge rounded-pill bg-info text-dark" 
                     style="font-size: 10px;vertical-align: middle;">{{c.label}}</span>
                 </div>
-                <div class="t">{{c.description}}</div>
-                <div class="v pointer" [routerLink]="'/courses/'+c.id"><a>View Topics</a></div>
-                <div class="b text-center mt-2"><button class="btn btn-primary" [routerLink]="'/courses/'+c.id">Launch course</button></div> 
+                <div class="t" *ngIf="c.description">{{c.description}}</div>
+                <div class="v pointer" *ngIf="c.link" [routerLink]="'/courses/'+c.id"><a>View Topics</a></div>
+                <div class="b text-center mt-2"><button class="btn btn-primary" [routerLink]="'/courses/'+c.id">{{c.btn?c.btn:"Launch course"}}</button></div> 
             </div>
         </div>
     </div>
-    <div class="row m-0 py-2 d2 develop">
-        <div class="text-center pointer" (click)="expand.d2=!expand.d2">Develop
+    <div class="row m-0 py-2 d2 develop" *ngIf="expand.d2">
+        <div class="text-center pointer">Develop
+            <!--
             <span class="float-end" >
                 <i style="font-size: 40px;vertical-align: middle;" class="material-icons">
                     {{expand.d2?"expand_less":"expand_more"}}
                 </i>
             </span>
+            -->
         </div>
     </div>
     <div class="row m-0 px-1" *ngIf="expand.d2">
@@ -37,19 +65,21 @@
                     <span *ngIf="c.label" class="badge rounded-pill bg-info text-dark" 
                     style="font-size: 10px;vertical-align: middle;">{{c.label}}</span>
                 </div>
-                <div class="t">{{c.description}}</div>
-                <div class="v pointer" [routerLink]="'/courses/'+c.id"><a>View Topics</a></div>
-                <div class="b text-center mt-2"><button class="btn btn-primary" [routerLink]="'/courses/'+c.id">Launch course</button></div> 
+                <div class="t" *ngIf="c.description">{{c.description}}</div>
+                <div class="v pointer" *ngIf="c.link" [routerLink]="'/courses/'+c.id"><a>View Topics</a></div>
+                <div class="b text-center mt-2"><button class="btn btn-primary" [routerLink]="'/courses/'+c.id">{{c.btn?c.btn:"Launch course"}}</button></div> 
             </div>
         </div>
     </div>
-    <div class="row m-0 py-2 d3 deploy">
-        <div class="text-center pointer" (click)="expand.d3=!expand.d3">Deploy
+    <div class="row m-0 py-2 d3 deploy" *ngIf="expand.d3">
+        <div class="text-center pointer">Deploy
+            <!--
             <span class="float-end" >
                 <i style="font-size: 40px;vertical-align: middle;" class="material-icons">
                     {{expand.d3?"expand_less":"expand_more"}}
                 </i>
             </span>
+            -->
         </div>
     </div>
     <div class="row m-0 px-1" *ngIf="expand.d3">
@@ -59,9 +89,9 @@
                     <span *ngIf="c.label" class="badge rounded-pill bg-info text-dark" 
                     style="font-size: 10px;vertical-align: middle;">{{c.label}}</span>
                 </div>
-                <div class="t mt-2">{{c.description}}</div>
-                <div class="v mt-2 pointer" [routerLink]="'/courses/'+c.id"><a>View Topics</a></div>
-                <div class="b text-center mt-2"><button class="btn btn-primary" [routerLink]="'/courses/'+c.id">Launch course</button></div> 
+                <div class="t mt-2"*ngIf="c.description">{{c.description}}</div>
+                <div class="v mt-2 pointer" *ngIf="c.link" [routerLink]="'/courses/'+c.id"><a>View Topics</a></div>
+                <div class="b text-center mt-2"><button class="btn btn-primary" [routerLink]="'/courses/'+c.id">{{c.btn?c.btn:"Launch course"}}</button></div> 
             </div>
         </div>
     </div>

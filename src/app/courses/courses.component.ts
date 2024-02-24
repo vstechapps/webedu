@@ -10,12 +10,13 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class CoursesComponent {
 
+trending:Course[] = [];
 design:Course[] = [];
 develop:Course[] = [];
 deploy:Course[] = [];
 courses:Course[] = [];
 
-expand={d1:true,d2:true,d3:true}
+expand={d:true,d1:false,d2:false,d3:false}
 
 constructor(public firestore:FirestoreService, private router:Router){
   if(this.firestore.data[Collections.COURSES]!=null){
@@ -37,9 +38,10 @@ constructor(public firestore:FirestoreService, private router:Router){
 
 sortOrder(){
   this.courses = this.courses.sort((a,b)=>a.order-b.order);
-  this.design = this.courses.filter(c=>c.category=="design");
-  this.develop = this.courses.filter(c=>c.category=="develop");
-  this.deploy = this.courses.filter(c=>c.category=="deploy");
+  this.trending = this.courses.filter(c=>c.category && c.category.includes("trending"));
+  this.design = this.courses.filter(c=>c.category && c.category.includes("design"));
+  this.develop = this.courses.filter(c=>c.category && c.category.includes("develop"));
+  this.deploy = this.courses.filter(c=>c.category && c.category.includes("deploy"));
   //this.updateView(this.router.url);
 }
 
@@ -48,15 +50,16 @@ updateView(url:string){
   if(focus){
     switch(focus){
       case "design":
-        this.expand={d1:true,d2:false,d3:false};
+        this.expand={d:false,d1:true,d2:false,d3:false};
         break;
       case "develop":
-        this.expand={d1:false,d2:true,d3:false};
+        this.expand={d:false,d1:false,d2:true,d3:false};
         break;
       case "deploy":
-        this.expand={d1:false,d2:false,d3:true};
+        this.expand={d:false,d1:false,d2:false,d3:true};
         break;
       default:
+        this.expand={d:true,d1:false,d2:false,d3:false};
         break;
     }
   }

@@ -37,6 +37,8 @@ export interface Course{
     description:string;
     category:string;
     label?:string;
+    link?:string;
+    btn?:string;
     active:boolean;
     pages?:string[];
     image?:string;

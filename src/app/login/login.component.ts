@@ -13,23 +13,24 @@ export class LoginComponent {
 
   private provider = new GoogleAuthProvider();
 
+
   constructor(private router:Router, private fs: FirestoreService){
+    var redirect:any = sessionStorage.getItem("redirect");
+    sessionStorage.removeItem("redirect");
+
     fs.refreshUser.subscribe(user=>{
-      
       if(user!=null){
-        var redirect:any = sessionStorage.getItem("redirect");
         if(redirect){
-          sessionStorage.removeItem("redirect");
-          console.log('Redirecting to ', redirect);
+          console.log('Login Success, Redirecting to ', redirect);
           this.router.navigateByUrl(redirect);
         }else{
+          console.log('Login Success, Redirecting to home');
           this.router.navigate(["home"]);
         }
       }else{
+        console.log('Login Success, Redirecting to home');
         this.router.navigate(["home"]);
       }
-
-      
     });
   }
 
