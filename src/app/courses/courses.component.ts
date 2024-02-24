@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Course } from '../app.model';
+import { ContentType, Course, Topic } from '../app.model';
 import { Collections, FirestoreService } from '../firestore.service';
 import { NavigationEnd, Router } from '@angular/router';
 
@@ -63,6 +63,39 @@ updateView(url:string){
         break;
     }
   }
+}
+
+launch(c:Course){
+  var topics:Topic[] = this.firestore.data[Collections.TOPICS];
+  if(c.topics==null || c.topics.length==0){
+    this.router.navigateByUrl("/pages/wip");
+  }
+  else if(c.topics!=null && c.topics.length==1){
+    var topic = topics.filter(t=>c.topics!=null && t.id==c.topics[0])[0];
+    if(topic){
+      this.launchTopic(topic);
+    }
+  }else{
+    this.router.navigateByUrl("courses/"+c.id);
+  }
+}
+
+
+launchTopic(t:Topic){
+  if(t.lock){
+    window.location.href="https://learn.vvsk.in";
+  }else if(t.type==ContentType.PDF){
+    let u = "/pdfviewer?url="+t.url+"&back="+window.location.href;
+    if(t.cors){
+      u+="&cors=true";
+    }
+    this.router.navigateByUrl(u);
+  }else if(t.type==ContentType.URL){
+    window.open(t.url);
+  }else if(t.type==ContentType.HTML){
+    this.router.navigateByUrl("pages/"+t.id);
+  }
+  
 }
 
 }

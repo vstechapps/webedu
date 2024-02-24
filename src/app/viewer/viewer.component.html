@@ -1,5 +1,8 @@
 <div *ngIf="url">
   <div *ngIf="!isMobile">
+    <span *ngIf="back" style="position: absolute; top: 80px; right:10px;z-index:1000;" (click)="goback()">
+      <i class="material-icons pointer" (click)="goback()">close</i>
+    </span>
     <div class="text-center">
       <span class="mx-1" *ngFor="let item of [].constructor(numPages); let i = index">
         <button style="border:none; height:5px" [ngClass]="i+1==page?'bg-primary':'bg-secondary'"></button>
@@ -23,6 +26,9 @@
     </pdf-viewer>
   </div>
   <div *ngIf="isMobile">
+    <span *ngIf="back" style="position: absolute; top: 80px; right:10px;z-index:1000;" (click)="goback()">
+      <i class="material-icons pointer" (click)="goback()">close</i>
+    </span>
     <div class="text-center">
       <span class="mx-1" *ngFor="let item of [].constructor(numPages); let i = index">
         <button style="border:none; height:5px" [ngClass]="i+1==page?'bg-primary':'bg-secondary'"></button>

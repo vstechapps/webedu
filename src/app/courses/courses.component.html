@@ -20,8 +20,8 @@
                     style="font-size: 10px;vertical-align: middle;">{{c.label}}</span>
                 </div>
                 <div class="t" *ngIf="c.description">{{c.description}}</div>
-                <div class="v pointer" *ngIf="c.link" [routerLink]="'/courses/'+c.id"><a>View Topics</a></div>
-                <div class="b text-center mt-2"><button class="btn btn-primary" [routerLink]="'/courses/'+c.id">{{c.btn?c.btn:"Launch course"}}</button></div> 
+                <div class="v pointer" *ngIf="c.link" (click)="launch(c)"><a>View Topics</a></div>
+                <div class="b text-center mt-2"><button class="btn btn-primary" (click)="launch(c)">{{c.btn?c.btn:"Launch course"}}</button></div> 
             </div>
         </div>
     </div>
@@ -45,8 +45,8 @@
                     style="font-size: 10px;vertical-align: middle;">{{c.label}}</span>
                 </div>
                 <div class="t" *ngIf="c.description">{{c.description}}</div>
-                <div class="v pointer" *ngIf="c.link" [routerLink]="'/courses/'+c.id"><a>View Topics</a></div>
-                <div class="b text-center mt-2"><button class="btn btn-primary" [routerLink]="'/courses/'+c.id">{{c.btn?c.btn:"Launch course"}}</button></div> 
+                <div class="v pointer" *ngIf="c.link" (click)="launch(c)"><a>View Topics</a></div>
+                <div class="b text-center mt-2"><button class="btn btn-primary" (click)="launch(c)">{{c.btn?c.btn:"Launch course"}}</button></div> 
             </div>
         </div>
     </div>
@@ -70,8 +70,8 @@
                     style="font-size: 10px;vertical-align: middle;">{{c.label}}</span>
                 </div>
                 <div class="t" *ngIf="c.description">{{c.description}}</div>
-                <div class="v pointer" *ngIf="c.link" [routerLink]="'/courses/'+c.id"><a>View Topics</a></div>
-                <div class="b text-center mt-2"><button class="btn btn-primary" [routerLink]="'/courses/'+c.id">{{c.btn?c.btn:"Launch course"}}</button></div> 
+                <div class="v pointer" *ngIf="c.link" (click)="launch(c)"><a>View Topics</a></div>
+                <div class="b text-center mt-2"><button class="btn btn-primary" (click)="launch(c)">{{c.btn?c.btn:"Launch course"}}</button></div> 
             </div>
         </div>
     </div>
@@ -95,8 +95,8 @@
                     style="font-size: 10px;vertical-align: middle;">{{c.label}}</span>
                 </div>
                 <div class="t mt-2"*ngIf="c.description">{{c.description}}</div>
-                <div class="v mt-2 pointer" *ngIf="c.link" [routerLink]="'/courses/'+c.id"><a>View Topics</a></div>
-                <div class="b text-center mt-2"><button class="btn btn-primary" [routerLink]="'/courses/'+c.id">{{c.btn?c.btn:"Launch course"}}</button></div> 
+                <div class="v mt-2 pointer" *ngIf="c.link" (click)="launch(c)"><a>View Topics</a></div>
+                <div class="b text-center mt-2"><button class="btn btn-primary" (click)="launch(c)">{{c.btn?c.btn:"Launch course"}}</button></div> 
             </div>
         </div>
     </div>

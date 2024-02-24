@@ -49,4 +49,10 @@ export class ViewerComponent {
     this.page--;
   }
 
+  goback(){
+    if(this.back){
+      console.log("redirecting to "+this.back);
+      window.location.href=this.back;
+    }
+  }
 }
