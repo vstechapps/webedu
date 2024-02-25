@@ -20,6 +20,8 @@ export class ViewerComponent {
 
   page:number = 1;
 
+  referenceWidth = window.innerWidth/3;
+
   constructor(private route: ActivatedRoute, private http:HttpClient){
     console.log("isMobile: "+this.isMobile);
     this.url = this.route.snapshot.queryParamMap.get("url");
@@ -39,6 +41,20 @@ export class ViewerComponent {
     this.numPages=pdf.numPages;
   }
 
+  react(event:MouseEvent){
+    console.log("Click Event: ",event);
+    let target:any = event.target;
+    if(target && target.id=="close"){
+      this.goback();
+    }
+    if(event.clientX<this.referenceWidth){
+      this.prev();
+    }else if(event.clientX>2*this.referenceWidth){
+      this.next();
+    }
+
+  }
+
   next(){
     if(this.page>=this.numPages)return;
     this.page++;
@@ -52,7 +68,7 @@ export class ViewerComponent {
   goback(){
     if(this.back){
       console.log("redirecting to "+this.back);
-      window.location.href=this.back;
+      //window.location.href=this.back;
     }
   }
 }

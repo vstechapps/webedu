@@ -1,7 +1,7 @@
-<div *ngIf="url">
+<div *ngIf="url" (click)="react($event)">
   <div *ngIf="!isMobile">
     <span *ngIf="back" style="position: absolute; top: 80px; right:10px;z-index:1000;" (click)="goback()">
-      <i class="material-icons pointer" (click)="goback()">close</i>
+      <i class="material-icons pointer" id="close">close</i>
     </span>
     <div class="text-center">
       <span class="mx-1" *ngFor="let item of [].constructor(numPages); let i = index">
@@ -51,12 +51,6 @@
       (after-load-complete)="callBackFn($event)">
     </pdf-viewer>
     
-  </div>
-  
-  <div class="row m-0 p-absolute w-100" style="position: absolute; top:10%;">
-    <div class="col-4 p-0" style="height:70vh" (click)="prev()"></div>
-    <div class="col-4 p-0" style="height:70vh"></div>
-    <div class="col-4 p-0" style="height:70vh" (click)="next()"></div>
   </div>
   <div class="row m-0 fo" *ngIf="numPages!=0">
     <div class="col-6">
