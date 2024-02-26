@@ -46,6 +46,7 @@ export class ViewerComponent {
     let target:any = event.target;
     if(target && target.id=="close"){
       this.goback();
+      event.stopImmediatePropagation();
     }
     if(event.clientX<this.referenceWidth){
       this.prev();
@@ -68,7 +69,7 @@ export class ViewerComponent {
   goback(){
     if(this.back){
       console.log("redirecting to "+this.back);
-      //window.location.href=this.back;
+      window.location.href=this.back;
     }
   }
 }

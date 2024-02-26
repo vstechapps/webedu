@@ -1,47 +1,22 @@
 <div *ngIf="url" (click)="react($event)">
-  <div *ngIf="!isMobile">
+  <div>
     <span *ngIf="back" style="position: absolute; top: 80px; right:10px;z-index:1000;" (click)="goback()">
-      <i class="material-icons pointer" id="close">close</i>
+      <i class="material-icons pointer text-primary" id="close">cancel</i>
     </span>
-    <div class="text-center">
+    <div class="text-center"  id="navs" >
       <span class="mx-1" *ngFor="let item of [].constructor(numPages); let i = index">
         <button style="border:none; height:5px" [ngClass]="i+1==page?'bg-primary':'bg-secondary'"></button>
       </span>
     </div>
     <pdf-viewer
+    *ngIf="!isMobile"
       [src]="url"
       [rotation]="0"
       [original-size]="false"
       [show-all]="false"
       [page]="page"
       [fit-to-page]="true"
-      [zoom]="0.5"
-      [zoom-scale]="'page-width'"
-      [stick-to-page]="false"
-      [render-text]="true"
-      [external-link-target]="'blank'"
-      [autoresize]="true"
-      [show-borders]="false"
-      (after-load-complete)="callBackFn($event)">
-    </pdf-viewer>
-  </div>
-  <div *ngIf="isMobile">
-    <span *ngIf="back" style="position: absolute; top: 80px; right:10px;z-index:1000;" (click)="goback()">
-      <i class="material-icons pointer" (click)="goback()">close</i>
-    </span>
-    <div class="text-center">
-      <span class="mx-1" *ngFor="let item of [].constructor(numPages); let i = index">
-        <button style="border:none; height:5px" [ngClass]="i+1==page?'bg-primary':'bg-secondary'"></button>
-      </span>
-    </div>
-    <pdf-viewer
-      [src]="url"
-      [rotation]="0"
-      [original-size]="false"
-      [show-all]="false"
-      [page]="page"
-      [fit-to-page]="false"
-      [zoom]="0.9"
+      [zoom]="1"
       [zoom-scale]="'page-height'"
       [stick-to-page]="false"
       [render-text]="true"
@@ -50,7 +25,23 @@
       [show-borders]="false"
       (after-load-complete)="callBackFn($event)">
     </pdf-viewer>
-    
+    <pdf-viewer
+    *ngIf="isMobile"
+      [src]="url"
+      [rotation]="0"
+      [original-size]="false"
+      [show-all]="false"
+      [page]="page"
+      [fit-to-page]="false"
+      [zoom]="0.8"
+      [zoom-scale]="'page-width'"
+      [stick-to-page]="false"
+      [render-text]="true"
+      [external-link-target]="'blank'"
+      [autoresize]="true"
+      [show-borders]="false"
+      (after-load-complete)="callBackFn($event)">
+    </pdf-viewer>
   </div>
   <div class="row m-0 fo" *ngIf="numPages!=0">
     <div class="col-6">

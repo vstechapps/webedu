@@ -6,7 +6,7 @@ import { Analytics, getAnalytics, logEvent } from "firebase/analytics";
 import { Auth, getAuth } from "firebase/auth";
 
 import { CollectionReference, DocumentData, Firestore, collection, doc, getDoc, getDocs, setDoc, getFirestore, query} from "firebase/firestore";
-import { Category, Course, Role, User } from './app.model';
+import { Role, User } from './app.model';
 import { LoaderService } from './loader/loader.service';
 
 @Injectable({
