@@ -5,7 +5,7 @@ import { Analytics, getAnalytics, logEvent } from "firebase/analytics";
 
 import { Auth, getAuth } from "firebase/auth";
 
-import { CollectionReference, DocumentData, Firestore, collection, doc, getDoc, getDocs, setDoc, getFirestore, query} from "firebase/firestore";
+import { CollectionReference, DocumentData, Firestore, collection, doc, getDoc, getDocs, setDoc, getFirestore, query, startAt, endBefore} from "firebase/firestore";
 import { Role, User } from './app.model';
 import { LoaderService } from './loader/loader.service';
 
@@ -27,6 +27,7 @@ export class FirestoreService {
   coursesCollection:CollectionReference<DocumentData> = collection(this.firestore,"courses");
 
   data:any = {};
+  cursors:any = {};
 
   refreshEvent:EventEmitter<Collections> = new EventEmitter<Collections>();
   refreshUser:EventEmitter<User> = new EventEmitter<User>();
@@ -35,10 +36,15 @@ export class FirestoreService {
 
   constructor(public loader:LoaderService) {
     this.refreshUserSession();
-    this.refresh(Collections.CATEGORIES);
-    this.refresh(Collections.COURSES);
-    this.refresh(Collections.TOPICS);
-    
+    var collections = [Collections.CATEGORIES, Collections.COURSES, Collections.TOPICS];
+    for(var i in collections){
+      this.init(collections[i])
+      this.refresh(collections[i]);
+    } 
+  }
+
+  init(key:Collections){
+    this.cursors.set(key,{start:0,count:10});
   }
 
   refreshUserSession(){
@@ -62,7 +68,7 @@ export class FirestoreService {
 
   refresh(key:Collections){
     let collect =  collection(this.firestore, key);
-    const q = query(collect);
+    const q = query(collect, startAt(this.cursors[key].start), endBefore(this.cursors[key].start+this.cursors[key].count));
     getDocs(q).then(res=>{
     this.data[key] =[];
     res.forEach(doc=>
