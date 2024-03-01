@@ -22,10 +22,6 @@ export class FirestoreService {
   user?:User;
   isAdmin:boolean=false;
 
-
-  categoryCollection:CollectionReference<DocumentData> = collection(this.firestore, "categories");
-  coursesCollection:CollectionReference<DocumentData> = collection(this.firestore,"courses");
-
   data:any = {};
   cursors:any = {};
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Category } from '../app.model';
 import { Collections, FirestoreService } from '../firestore.service';
-import { DocumentReference, addDoc, deleteDoc, doc, getDocs, query } from 'firebase/firestore';
+import { DocumentReference, addDoc, collection, deleteDoc, doc, getDocs, query } from 'firebase/firestore';
 
 @Component({
   selector: 'app-categories',
@@ -54,7 +54,7 @@ export class CategoriesComponent {
     if(this.isNotEmpty(this.categoryName)){
       let c: Category = {name:this.categoryName,active:true};
       if(this.category) c.parent=this.category.id;
-      addDoc(this.firestore.categoryCollection,c).then((ref:DocumentReference)=>{
+      addDoc(collection(this.firestore.firestore,Collections.CATEGORIES),c).then((ref:DocumentReference)=>{
         alert("Category has been added succesfully ID:"+ref.id);
         this.firestore.refresh(Collections.CATEGORIES);
       });
