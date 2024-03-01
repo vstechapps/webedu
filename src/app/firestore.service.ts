@@ -5,7 +5,7 @@ import { Analytics, getAnalytics, logEvent } from "firebase/analytics";
 
 import { Auth, getAuth } from "firebase/auth";
 
-import { CollectionReference, DocumentData, Firestore, collection, doc, getDoc, getDocs, setDoc, getFirestore, query, startAt, endBefore} from "firebase/firestore";
+import { Firestore, collection, doc, getDoc, getDocs, setDoc, getFirestore, query, limit} from "firebase/firestore";
 import { Role, User } from './app.model';
 import { LoaderService } from './loader/loader.service';
 
@@ -40,7 +40,7 @@ export class FirestoreService {
   }
 
   init(key:Collections){
-    this.cursors.set(key,{start:0,count:10});
+    this.cursors[key]={order:0,limit:20};
   }
 
   refreshUserSession(){
@@ -63,8 +63,9 @@ export class FirestoreService {
   }
 
   refresh(key:Collections){
+    console.log("Refreshing "+key)
     let collect =  collection(this.firestore, key);
-    const q = query(collect, startAt(this.cursors[key].start), endBefore(this.cursors[key].start+this.cursors[key].count));
+    const q = query(collect, limit(this.cursors[key].limit));
     getDocs(q).then(res=>{
     this.data[key] =[];
     res.forEach(doc=>
@@ -132,13 +133,6 @@ export class FirestoreService {
   
 }
 
-export enum Collections{
-  USERS="users",
-  CATEGORIES="categories",
-  COURSES="courses",
-  TOPICS="topics",
-  ASSESSMENTS="assessments"
-}
 
 export enum Events{
   PAGE_VIEW="PAGE_VIEW",
@@ -146,6 +140,14 @@ export enum Events{
   SIGN_UP="sign_up",
   LOGOUT="logout"
 
+}
+
+export enum Collections{
+  USERS="users",
+  CATEGORIES="categories",
+  COURSES="courses",
+  TOPICS="topics",
+  ASSESSMENTS="assessments"
 }
 
 const firebaseConfig = {
