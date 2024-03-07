@@ -20,8 +20,11 @@ export class TopicComponent {
   addPageModal:boolean = false;
   editPageModal:boolean = false;
 
+  back:string | null;
+  referenceWidth = window.innerWidth/3;
+
   constructor(public firestore:FirestoreService,private route: ActivatedRoute){
-    
+    this.back = this.route.snapshot.queryParamMap.get("back"); 
   }
 
   ngOnDestroy(): void {
@@ -68,6 +71,29 @@ export class TopicComponent {
       if(el && this.page)el.innerHTML = this.page;
     }
   }
+
+  react(event:MouseEvent){
+    console.log("Click Event: ",event);
+    let target:any = event.target;
+    if(target && target.id=="close"){
+      this.goback();
+      event.stopImmediatePropagation();
+    }
+    if(event.clientX<this.referenceWidth){
+      this.prev();
+    }else if(event.clientX>2*this.referenceWidth){
+      this.next();
+    }
+
+  }
+
+  goback(){
+    if(this.back){
+      console.log("redirecting to "+this.back);
+      window.location.href=this.back;
+    }
+  }
+
 
   next(){
     if(!this.topic) return;
