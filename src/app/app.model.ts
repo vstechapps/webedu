@@ -71,6 +71,7 @@ export interface Topic{
     pages?: string[];
     html?:string;
     url?:string;
+    head?:boolean;
     cors?:boolean;
   }
 

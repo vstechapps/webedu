@@ -25,6 +25,7 @@ export class TopicComponent {
 
   constructor(public firestore:FirestoreService,private route: ActivatedRoute){
     this.back = this.route.snapshot.queryParamMap.get("back"); 
+
   }
 
   ngOnDestroy(): void {
@@ -55,6 +56,7 @@ export class TopicComponent {
     if(this.topic?.pages && this.topic?.pages[0]){
       this.page = this.topic.pages[0];
       this.updateView();
+      if(topic.head){window.postMessage("ToggleHeader");}
     }
   }
 

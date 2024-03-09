@@ -20,6 +20,7 @@ export class AppComponent {
     window.addEventListener(
       "message",
       (event) => {
+        console.log('Window Message:',event);
         // Do we trust the sender of this message?  
         if (event.origin !== window.location.origin) return;
         // Show popup with content
