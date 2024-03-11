@@ -22,10 +22,11 @@ export class TopicComponent {
 
   back:string | null;
   referenceWidth = window.innerWidth/3;
+  
 
   constructor(public firestore:FirestoreService,private route: ActivatedRoute){
-    this.back = this.route.snapshot.queryParamMap.get("back"); 
-
+    this.back = this.route.snapshot.queryParamMap.get("back");    
+    
   }
 
   ngOnDestroy(): void {
@@ -71,6 +72,9 @@ export class TopicComponent {
       var el= document.getElementById("3593661b72952003");
       console.log(el);
       if(el && this.page)el.innerHTML = this.page;
+      if(el){
+        el.style.height= (window.innerHeight-130)+"px";
+      }
     }
   }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Utility } from '../app-utilt';
+import { Utility } from '../app-util';
 import { NavigationEnd, Router } from '@angular/router';
 
 @Component({

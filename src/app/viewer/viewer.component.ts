@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PDFDocumentProxy } from 'ng2-pdf-viewer';
-import { Utility } from '../app-utilt';
+import { Utility } from '../app-util';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
