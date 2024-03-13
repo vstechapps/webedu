@@ -32,7 +32,7 @@ export class FirestoreService {
 
   constructor(public loader:LoaderService) {
     this.refreshUserSession();
-    var collections = [Collections.CATEGORIES, Collections.COURSES, Collections.TOPICS];
+    var collections = [Collections.CATEGORIES, Collections.COURSES, Collections.TOPICS, Collections.PAGES];
     for(var i in collections){
       this.init(collections[i])
       this.refresh(collections[i]);
@@ -76,6 +76,14 @@ export class FirestoreService {
       });
       this.refreshEvent.emit(key);
     });
+  }
+
+  fetch(collection:Collections,key:string,value:string){
+    if(collection==null || key==null || value==null || this.data[collection]==null){
+      return undefined;
+    }else{
+      return this.data[collection].filter((c:any)=>c[key]==value)[0];
+    }
   }
 
   async login(user:User){
@@ -147,6 +155,7 @@ export enum Collections{
   CATEGORIES="categories",
   COURSES="courses",
   TOPICS="topics",
+  PAGES="pages",
   ASSESSMENTS="assessments"
 }
 

@@ -1,3 +1,5 @@
-<div [innerHTML]="html">
+<div *ngIf="page">
+    <div *ngIf="page.html" [innerHTML]="page.html">
 
+    </div>
 </div>

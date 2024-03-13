@@ -15,6 +15,7 @@ import { LoginGuard } from './login.guard';
 import { TopicComponent } from './topic/topic.component';
 import { AdminComponent } from './admin/admin.component';
 import { ViewerComponent } from './viewer/viewer.component';
+import { PageComponent } from './page/page.component';
 
 const routes: Routes = [
   {path:"",component:HomeComponent},
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path:"categories", component:CategoriesComponent},
   {path:"topics/:id",component:TopicComponent},
   {path:"pages/:id",component:TopicComponent},
+  {path:"page/:id",component:PageComponent},
   {path:"courses",component:CoursesComponent},
   {path:"courses/:id",component:CourseComponent,canActivate:[LoginGuard]},
   {path:"assessments",component:AssessmentsComponent},
