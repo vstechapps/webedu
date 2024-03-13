@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Collections, FirestoreService } from '../firestore.service';
-import { ActivatedRoute, ɵEmptyOutletComponent } from '@angular/router';
+import { ActivatedRoute, Router, ɵEmptyOutletComponent } from '@angular/router';
+import { collection, doc, setDoc } from 'firebase/firestore';
+import { HtmlParser } from '@angular/compiler';
 
 @Component({
   selector: 'app-page',
@@ -11,7 +13,11 @@ export class PageComponent {
   
   page?:Page;
 
-  constructor(public route:ActivatedRoute, public firestore:FirestoreService){
+  editPageModal:boolean = false;
+
+  editPageView:string = "html";
+
+  constructor(public router:Router,public route:ActivatedRoute, public firestore:FirestoreService){
 
   }
 
@@ -36,7 +42,10 @@ export class PageComponent {
 
   refresh(id:string){
     var page = this.firestore.fetch(Collections.PAGES,"id",id);
-    if(page){
+    if(page && page.auth){
+      this.router.navigate(["login"]);
+    }
+    else if(page){
       console.log(page);
       this.page = page;
       if(!page.header){window.postMessage("ToggleHeader");}
@@ -46,6 +55,19 @@ export class PageComponent {
         s.innerText = page.style;
         document.head.appendChild(s);
       }
+    }else{
+      this.router.navigate(["home"]);
+    }
+  }
+
+
+  async save(){
+    if(this.page){
+      this.editPageModal=false;
+      this.firestore.loader.show();
+      await setDoc(doc(collection(this.firestore.firestore,Collections.PAGES), this.page.id),this.page);
+      this.firestore.loader.hide();
+      alert('Page Updated');
     }
   }
 
@@ -54,6 +76,7 @@ export class PageComponent {
 export interface Page{
   id:string;
   name:string;
+  auth?:boolean;
   header?:boolean;
   html?:string;
   script?:string;
