@@ -20,10 +20,19 @@
         </div>
         <div class="modal-body">
             <div class="row">
-                <div class="col-12 mx-2">
-                    <div><span>Authentication:</span> <input type="checkbox" class="form-control" [(ngModel)]="page.auth" /> </div>
-                    <div><span>Header:</span> <input type="checkbox" class="form-control" [(ngModel)]="page.header" /> </div>
-                </div>
+                <div class="form-check">
+                      <input class="form-check-input" type="checkbox" [(ngModel)]="page.auth" id="flexCheck1">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Authentication
+                              </label>
+                              </div>
+
+                              <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" [(ngModel)]="page.header" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Header
+                                          </label>
+                                          </div>
             </div>
             <div class="row">
                 <div class="col-12">
