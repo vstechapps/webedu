@@ -20,6 +20,12 @@
         </div>
         <div class="modal-body">
             <div class="row">
+                <div class="col-12 mx-2">
+                    <div><span>Authentication:</span> <input type="checkbox" class="form-control" [(ngModel)]="page.auth" /> </div>
+                    <div><span>Header:</span> <input type="checkbox" class="form-control" [(ngModel)]="page.header" /> </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-12">
                     <span class="mx-2 pointer" [ngClass]="{'a':editPageView=='html'}" (click)="editPageView='html'">HTML</span>
                     <span class="mx-2 pointer" [ngClass]="{'a':editPageView=='script'}" (click)="editPageView='script'">Script</span>

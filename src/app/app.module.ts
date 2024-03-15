@@ -30,6 +30,7 @@ import { LogoComponent } from './logo/logo.component';
 import { ViewerComponent } from './viewer/viewer.component';
 import { LoaderComponent } from './loader/loader.component';
 import { PageComponent } from './page/page.component';
+import { PagesComponent } from './pages/pages.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { PageComponent } from './page/page.component';
     LogoComponent,
     ViewerComponent,
     LoaderComponent,
-    PageComponent
+    PageComponent,
+    PagesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Collections, FirestoreService } from '../firestore.service';
-import { ActivatedRoute, Router, ɵEmptyOutletComponent } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { collection, doc, setDoc } from 'firebase/firestore';
-import { HtmlParser } from '@angular/compiler';
 
 @Component({
   selector: 'app-page',
@@ -49,11 +48,15 @@ export class PageComponent {
       console.log(page);
       this.page = page;
       if(!page.header){window.postMessage("ToggleHeader");}
-      if(page.script){eval(page.script);}
+      if(page.script){
+        var sc = document.createElement("script");
+        sc.innerText = page.script;
+        document.body.appendChild(sc);
+      }
       if(page.style){
-        var s = document.createElement("style");
-        s.innerText = page.style;
-        document.head.appendChild(s);
+        var st = document.createElement("style");
+        st.innerText = page.style;
+        document.head.appendChild(st);
       }
     }else{
       this.router.navigate(["home"]);

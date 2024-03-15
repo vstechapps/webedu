@@ -47,6 +47,7 @@ export class MenuComponent {
       this.menus.push({name:"Home",icon:"home",route:"home"});
       this.menus.push({name:"Admin",icon:"settings",route:"admin"});
       this.menus.push({name:"Categories",icon:"category",route:"categories"});
+      this.menus.push({name:"Pages",icon:"web",route:"pages"});
       this.menus.push({name:"Courses",icon:"menu_book",route:"courses"});
       this.menus.push({name:"Notifications",icon:"notifications",route:"notifications"});
       this.menus.push({name:"Logout",icon:"logout",route:"logout"});
