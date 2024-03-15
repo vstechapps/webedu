@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Collections, FirestoreService } from '../firestore.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { collection, doc, setDoc } from 'firebase/firestore';
@@ -6,7 +6,8 @@ import { collection, doc, setDoc } from 'firebase/firestore';
 @Component({
   selector: 'app-page',
   templateUrl: './page.component.html',
-  styleUrls: ['./page.component.less']
+  styleUrls: ['./page.component.less'],
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class PageComponent {
   
