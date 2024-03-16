@@ -42,11 +42,17 @@ export class PageComponent {
 
   refresh(id:string){
     var page = this.firestore.fetch(Collections.PAGES,"id",id);
-    if(page && page.auth){
+    console.log(page);
+    if(page && page.auth && this.firestore.user==null){
+      console.log("Redirecting to Login");
+      if(this.route.snapshot.url.length>0){
+        let s:string[] = [];
+        this.route.snapshot.url.forEach(u=>s.push(u.path));
+        sessionStorage.setItem("redirect",s.join("/"));
+      }
       this.router.navigate(["login"]);
     }
     else if(page){
-      console.log(page);
       this.page = page;
       if(!page.header){window.postMessage("ToggleHeader");}
       if(page.html){
