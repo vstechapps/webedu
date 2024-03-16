@@ -45,13 +45,13 @@
   </div>
   <div class="row m-0 fo" *ngIf="numPages!=0">
     <div class="col-6">
-        <span *ngIf="page>1" (click)="prev()">
+        <span *ngIf="page>1" >
           <i class="material-icons">chevron_left</i>
           <span class="align-midde">PREV</span>
         </span>
     </div>
     <div class="col-6">
-        <span *ngIf="page<numPages" style="float:right" (click)="next()" >
+        <span *ngIf="page<numPages" style="float:right" >
           <span class="align-midde">NEXT</span>
           <i class="material-icons">chevron_right</i>
         </span>
