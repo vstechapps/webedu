@@ -49,6 +49,9 @@ export class PageComponent {
       console.log(page);
       this.page = page;
       if(!page.header){window.postMessage("ToggleHeader");}
+      if(page.html){
+        this.updateView();
+      }
       if(page.script){
         var sc = document.createElement("script");
         sc.innerText = page.script;
@@ -64,6 +67,11 @@ export class PageComponent {
     }
   }
 
+  updateView(){
+    var el= document.getElementById("3593661b72952004");
+    console.log(el);
+    if(el && this.page && this.page.html)el.innerHTML = this.page.html;
+  }
 
   async save(){
     if(this.page){
