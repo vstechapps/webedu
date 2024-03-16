@@ -17,6 +17,7 @@ import { AdminComponent } from './admin/admin.component';
 import { ViewerComponent } from './viewer/viewer.component';
 import { PageComponent } from './page/page.component';
 import { PagesComponent } from './pages/pages.component';
+import { BookComponent } from './book/book.component';
 
 const routes: Routes = [
   {path:"",component:HomeComponent},
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path:"pages",component:PagesComponent},
   {path:"pages/:id",component:PageComponent},
   {path:"topics/:id",component:TopicComponent},
+  {path:"book",component:BookComponent},
   
   {path:"courses",component:CoursesComponent},
   {path:"courses/:id",component:CourseComponent,canActivate:[LoginGuard]},

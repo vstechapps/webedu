@@ -8,8 +8,8 @@
     color: #000000;
   }
   .page {
-    width: 40vw;
-    height: 35vw;
+    width: 100vw;
+    height: 80vh;
     background-color: #111111;
     float: left;
     margin-bottom: 0.5em;
@@ -23,8 +23,8 @@
     perspective: 250vw;
   }
   .book .pages {
-    width: 80vw;
-    height: 35vw;
+    width: 200vw;
+    height: 80vh;
     position: relative;
     transform-style: preserve-3d;
     backface-visibility: hidden;
@@ -37,8 +37,8 @@
     margin: 0;
     position: absolute;
     top: 0;
-    width: 40vw;
-    height: 35vw;
+    width: 100vw;
+    height: 80vh;
     transform-origin: 0 0;
     transition: transform 1.4s;
     backface-visibility: hidden;
@@ -61,7 +61,7 @@
   .book .page:nth-child(odd) {
     pointer-events: all;
     transform: rotateY(0deg);
-    right: 0;
+    //right: 0;
     border-radius: 0 4px 4px 0;
     background-image: linear-gradient(to right, rgba(0,0,0,.15) 0%, rgba(0,0,0,0) 10%);
   }
@@ -75,6 +75,7 @@
     background: rgba(0, 0, 0, 0);
   }
   .book .page:nth-child(even) {
+    display: none;
     pointer-events: none;
     transform: rotateY(180deg);
     transform-origin: 100% 0;

@@ -29,8 +29,8 @@ export class BookComponent implements OnInit{
     for (var i = 0; i < a.pages.length; i++) {
       let p: any = a.pages[i];
       p.pageNum = i + 1;
-      p.onclick = function () {
-        if (this.pageNum % 2 === 0) {
+      p.onclick = function (event:any) {
+        if (event.clientX<(window.innerWidth/3)) {
           this.classList.remove('flipped');
           this.previousElementSibling.classList.remove('flipped');
         }
