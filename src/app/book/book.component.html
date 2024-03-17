@@ -33,4 +33,12 @@
     <div class="page"></div>
     <div class="page"></div>
     </div>
+    <div class="row m-0 fo" *ngIf="topic && topic.pages && topic.pages.length>1">
+        <div class="col-6">
+            <span><i class="material-icons">chevron_left</i>PREV</span>
+        </div>
+        <div class="col-6">
+            <span style="float:right">NEXT<i class="material-icons">chevron_right</i></span>
+        </div>
+    </div>
 </div>
