@@ -93,7 +93,7 @@ launchTopic(t:Topic){
   }else if(t.type==ContentType.URL){
     window.open(t.url);
   }else if(t.type==ContentType.HTML){
-    this.router.navigateByUrl("pages/"+t.id);
+    this.router.navigateByUrl("topics/"+t.id);
   }
   
 }
