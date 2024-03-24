@@ -32,7 +32,7 @@ export class FirestoreService {
 
   constructor(public loader:LoaderService) {
     this.refreshUserSession();
-    var collections = [Collections.CATEGORIES, Collections.COURSES, Collections.TOPICS, Collections.PAGES];
+    var collections = [Collections.COURSES, Collections.TOPICS, Collections.PAGES, Collections.MENU];
     for(var i in collections){
       this.init(collections[i])
       this.refresh(collections[i]);
@@ -40,7 +40,7 @@ export class FirestoreService {
   }
 
   init(key:Collections){
-    this.cursors[key]={order:0,limit:20};
+    this.cursors[key]={order:0,limit:100};
   }
 
   refreshUserSession(){
@@ -156,7 +156,8 @@ export enum Collections{
   COURSES="courses",
   TOPICS="topics",
   PAGES="pages",
-  ASSESSMENTS="assessments"
+  ASSESSMENTS="assessments",
+  MENU="menu",
 }
 
 const firebaseConfig = {

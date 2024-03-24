@@ -1,12 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { AccountComponent } from './account/account.component';
-import { ProfileComponent } from './profile/profile.component';
-import { CategoriesComponent } from './categories/categories.component';
 import { CoursesComponent } from './courses/courses.component';
 import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { LogoutComponent } from './logout/logout.component';
 import { AssessmentComponent } from './assessment/assessment.component';
 import { AssessmentsComponent } from './assessments/assessments.component';
@@ -25,21 +21,16 @@ const routes: Routes = [
   {path:"home/:focus",component:HomeComponent},
   {path:"admin",component:AdminComponent},
   {path:"login",component:LoginComponent},
-  {path:"dashboard",component:DashboardComponent},
   {path:"logout",component:LogoutComponent},
-  {path:"account",component:AccountComponent},
-  {path:"profile",component:ProfileComponent},
-  {path:"categories", component:CategoriesComponent},
   {path:"pages",component:PagesComponent},
   {path:"pages/:id",component:PageComponent},
+  {path:"p/:id",component:PageComponent},
   {path:"topics/:id",component:TopicComponent},
   {path:"book",component:BookComponent},
-  
   {path:"courses",component:CoursesComponent},
   {path:"courses/:id",component:CourseComponent,canActivate:[LoginGuard]},
-  {path:"assessments",component:AssessmentsComponent},
-  {path:"assessments/:id",component:AssessmentComponent},
-  {path:"pdfviewer",component:ViewerComponent}
+  {path:"pdfviewer",component:ViewerComponent},
+  {path:":id",component:PageComponent}
 ];
 
 @NgModule({

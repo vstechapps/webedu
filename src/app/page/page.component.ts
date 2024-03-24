@@ -54,7 +54,7 @@ export class PageComponent {
     }
     else if(page){
       this.page = page;
-      if(!page.header){window.postMessage("ToggleHeader");}
+      if(!page.header){window.postMessage("header");}
       if(page.html){
         this.updateView();
       }

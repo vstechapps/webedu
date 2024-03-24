@@ -14,7 +14,7 @@ export class AppComponent {
 
   header:boolean =true;
   
-  constructor(private firestore:FirestoreService,router: Router, viewportScroller: ViewportScroller){
+  constructor(private firestore:FirestoreService, public router: Router, public viewportScroller: ViewportScroller){
     this.firestore.log(Events.PAGE_VIEW);
     this.handleScroll(router,viewportScroller);
     window.addEventListener(
@@ -24,7 +24,15 @@ export class AppComponent {
         // Do we trust the sender of this message?  
         if (event.origin !== window.location.origin) return;
         // Show popup with content
-        if(event.data=="ToggleHeader") this.header=!this.header;
+        else if(event.data=="header"){
+          this.header=!this.header;
+        }
+        else if(event.data=="next"){
+          let url = sessionStorage.getItem("next");
+          if(url){
+            this.router.navigateByUrl(url);
+          }
+        } 
         // return back control
         return;
       },

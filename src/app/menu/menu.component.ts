@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { FirestoreService } from '../firestore.service';
+import { Collections, FirestoreService } from '../firestore.service';
 import { User } from '../app.model';
 import { updateCurrentUser } from 'firebase/auth';
+import { collection } from 'firebase/firestore';
 
 @Component({
   selector: 'app-menu',
@@ -20,6 +21,8 @@ export class MenuComponent {
 
   menus:Menu[]=[];
 
+  smenus:Menu[] = [];
+
   constructor(public router:Router, public route:ActivatedRoute, public firestore: FirestoreService){
     this.active = this.router.url;
     this.user = firestore.user;
@@ -30,12 +33,27 @@ export class MenuComponent {
       }
     });
     
+    firestore.refreshEvent.subscribe(c=>{
+      if(c==Collections.MENU){
+        this.smenus = firestore.data[Collections.MENU];
+        firestore.refreshUser.subscribe(user=>{this.user=user;this.load();});
+      }
+    });
     
-    firestore.refreshUser.subscribe(user=>{this.user=user;this.load();});
   }
 
   load(){
     this.menus=[];
+    for(var i in this.smenus){
+      var m:Menu = this.smenus[i];
+      if(m.role==null ||(this.user && this.user.role==m.role)){
+        this.menus.push({name:this.smenus[i].name,icon:this.smenus[i].icon,route:this.smenus[i].route})
+      }
+    }
+    if(!this.user){
+      this.menus.push({name:"Login",icon:"login",route:"login"});
+    }
+    /*
     if(!this.user){
       this.menus.push({name:"Home",icon:"home",route:"home"});
       this.menus.push({name:"Design",icon:"architecture",route:"home/design"});
@@ -65,6 +83,7 @@ export class MenuComponent {
       this.menus.push({name:"Deploy",icon:"construction",route:"home/deploy"});
       this.menus.push({name:"Logout",icon:"logout",route:"logout"});
     }
+    */ 
   }
 
 
@@ -79,4 +98,5 @@ type Menu = {
   name:string,
   icon:string,
   route:string
+  role?:string
 }

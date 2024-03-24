@@ -57,7 +57,7 @@ export class TopicComponent {
     if(this.topic?.pages && this.topic?.pages[0]){
       this.page = this.topic.pages[0];
       this.updateView();
-      if(topic.head){window.postMessage("ToggleHeader");}
+      if(topic.head){window.postMessage("header");}
     }
   }
 
