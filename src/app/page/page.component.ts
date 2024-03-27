@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Collections, FirestoreService } from '../firestore.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { collection, doc, setDoc } from 'firebase/firestore';
@@ -11,6 +11,9 @@ import { collection, doc, setDoc } from 'firebase/firestore';
 })
 export class PageComponent {
   
+  @Input()
+  id?:string;
+
   page?:Page;
 
   editPageModal:boolean = false;
@@ -22,7 +25,7 @@ export class PageComponent {
   }
 
   ngOnInit(): void {
-    let id = this.route.snapshot.paramMap.get('id');
+    let id = this.id? this.id: this.route.snapshot.paramMap.get('id');
     console.log("Loading Page: "+id);
     if(id){
       if(this.firestore.data[Collections.PAGES]==null){

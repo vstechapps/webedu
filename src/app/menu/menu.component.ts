@@ -45,6 +45,7 @@ export class MenuComponent {
 
   load(){
     this.menus=[];
+    this.menus.push({"name":"home",icon:"home",route:"home"});
     for(var i in this.smenus){
       var m:Menu = this.smenus[i];
       if((this.user== null && m.role==null) ||(this.user!=null && m.role!= null && m.role.indexOf(this.user.role)>-1)){
