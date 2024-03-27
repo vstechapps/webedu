@@ -53,6 +53,8 @@ export class MenuComponent {
     }
     if(!this.user){
       this.menus.push({name:"Login",icon:"login",route:"login"});
+    }else{
+      this.menus.push({name:"Logout",icon:"logout",route:"logout"});
     }
     /*
     if(!this.user){
