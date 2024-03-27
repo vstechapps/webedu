@@ -8,6 +8,7 @@ import { Auth, getAuth } from "firebase/auth";
 import { Firestore, collection, doc, getDoc, getDocs, setDoc, getFirestore, query, limit} from "firebase/firestore";
 import { Role, User } from './app.model';
 import { LoaderService } from './loader/loader.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -74,6 +75,7 @@ export class FirestoreService {
         d.id=doc.id;
         this.data[key].push(d);
       });
+      this.data[key].sort((a:any,b:any)=>{a.order<b.order});
       this.refreshEvent.emit(key);
     });
   }

@@ -36,6 +36,7 @@ export class MenuComponent {
     firestore.refreshEvent.subscribe(c=>{
       if(c==Collections.MENU){
         this.smenus = firestore.data[Collections.MENU];
+        this.load();
         firestore.refreshUser.subscribe(user=>{this.user=user;this.load();});
       }
     });
@@ -46,8 +47,8 @@ export class MenuComponent {
     this.menus=[];
     for(var i in this.smenus){
       var m:Menu = this.smenus[i];
-      if(m.role==null ||(this.user && this.user.role==m.role)){
-        this.menus.push({name:this.smenus[i].name,icon:this.smenus[i].icon,route:this.smenus[i].route})
+      if((this.user== null && m.role==null) ||(this.user!=null && m.role!= null && m.role.indexOf(this.user.role)>-1)){
+        this.menus.push({name:this.smenus[i].name,icon:this.smenus[i].icon,route:this.smenus[i].route});
       }
     }
     if(!this.user){
