@@ -75,7 +75,7 @@ export class FirestoreService {
         d.id=doc.id;
         this.data[key].push(d);
       });
-      this.data[key].sort((a:any,b:any)=>{a.order<b.order});
+      this.data[key].sort((a:any,b:any)=>{return a.order-b.order});
       this.refreshEvent.emit(key);
     });
   }
