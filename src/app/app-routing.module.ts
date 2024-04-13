@@ -16,9 +16,7 @@ import { PagesComponent } from './pages/pages.component';
 import { BookComponent } from './book/book.component';
 
 const routes: Routes = [
-  {path:"",component:HomeComponent},
-  {path:"home",component:HomeComponent},
-  {path:"home/:focus",component:HomeComponent},
+  {path:"",redirectTo:"home",pathMatch:"full"},
   {path:"admin",component:AdminComponent},
   {path:"login",component:LoginComponent},
   {path:"logout",component:LogoutComponent},

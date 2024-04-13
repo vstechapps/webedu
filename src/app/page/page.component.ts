@@ -1,6 +1,6 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Collections, FirestoreService } from '../firestore.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { collection, doc, setDoc } from 'firebase/firestore';
 
 @Component({
@@ -21,10 +21,19 @@ export class PageComponent {
   editPageView:string = "html";
 
   constructor(public router:Router,public route:ActivatedRoute, public firestore:FirestoreService){
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+          this.init();
+      }
+    });
 
   }
 
   ngOnInit(): void {
+  }
+
+  init(): void{
+    
     let id = this.id? this.id: this.route.snapshot.paramMap.get('id');
     console.log("Loading Page: "+id);
     if(id){
