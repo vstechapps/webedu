@@ -16,7 +16,8 @@ import { PagesComponent } from './pages/pages.component';
 import { BookComponent } from './book/book.component';
 
 const routes: Routes = [
-  {path:"",redirectTo:"home",pathMatch:"full"},
+  {path:"",redirectTo:"p/home",pathMatch:"full"},
+  {path:"home",redirectTo:"p/home",pathMatch:"full"},
   {path:"admin",component:AdminComponent},
   {path:"login",component:LoginComponent},
   {path:"logout",component:LogoutComponent},
@@ -27,8 +28,7 @@ const routes: Routes = [
   {path:"book",component:BookComponent},
   {path:"courses",component:CoursesComponent},
   {path:"courses/:id",component:CourseComponent,canActivate:[LoginGuard]},
-  {path:"pdfviewer",component:ViewerComponent},
-  {path:":id",component:PageComponent}
+  {path:"pdfviewer",component:ViewerComponent}
 ];
 
 @NgModule({
