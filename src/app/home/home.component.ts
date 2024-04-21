@@ -18,6 +18,8 @@ export class HomeComponent {
     if(redirect){
       sessionStorage.removeItem("redirect");
       this.router.navigateByUrl(redirect);
+    }else{
+      this.router.navigateByUrl("home");
     }
   }
 
