@@ -70,15 +70,11 @@ export class PageComponent {
       if(page.html){
         this.updateView();
       }
-      if(page.script){
-        var sc = document.createElement("script");
-        sc.innerText = page.script;
-        document.body.appendChild(sc);
+      if(page.style && page.style!=""){
+        this.updateStyle(page.style);
       }
-      if(page.style){
-        var st = document.createElement("style");
-        st.innerText = page.style;
-        document.head.appendChild(st);
+      if(page.script && page.script!=""){
+        this.updateScript(page.script);
       }
     }else{
       this.router.navigate(["home"]);
@@ -89,6 +85,20 @@ export class PageComponent {
     var el= document.getElementById("3593661b72952004");
     console.log(el);
     if(el && this.page && this.page.html)el.innerHTML = this.page.html;
+  }
+
+  updateStyle(style:string){
+    var el= document.getElementById("3593661b72952004");
+    var st = document.createElement("style");
+    st.innerText = style;
+    if(el)el.appendChild(st);
+  }
+
+  updateScript(script:string){
+    var el= document.getElementById("3593661b72952004");
+    var sc = document.createElement("script");
+    sc.innerText = script;
+    if(el)el.appendChild(sc);
   }
 
   async save(){
