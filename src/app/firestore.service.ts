@@ -5,7 +5,7 @@ import { Analytics, getAnalytics, logEvent } from "firebase/analytics";
 
 import { Auth, getAuth } from "firebase/auth";
 
-import { Firestore, collection, doc, getDoc, getDocs, setDoc, getFirestore, query, limit} from "firebase/firestore";
+import { Firestore, collection, doc, getDoc, getDocs, setDoc, getFirestore, query, limit, addDoc} from "firebase/firestore";
 import { Role, User } from './app.model';
 import { LoaderService } from './loader/loader.service';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -117,6 +117,10 @@ export class FirestoreService {
 
   }
 
+  async save(data:SaveData){
+    await addDoc(collection(this.firestore,data.col),data.doc);
+  }
+
   async logout(){
     console.log("FirestoreService:logout:: Logging out user: "+this.user?.email);
     this.user=undefined;
@@ -141,6 +145,12 @@ export class FirestoreService {
   }
 
   
+}
+
+export interface SaveData{
+  id:string;
+  col:string;
+  doc:any
 }
 
 

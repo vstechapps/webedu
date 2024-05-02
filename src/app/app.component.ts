@@ -30,9 +30,19 @@ export class AppComponent {
         else if(event.data=="next"){
           let url = sessionStorage.getItem("next");
           if(url){
+            sessionStorage.removeItem("next");
             this.router.navigateByUrl(url);
           }
-        } 
+        }else if(event.data=="save"){
+          let data= sessionStorage.getItem("save");
+          if(data!=null && data!=""){
+            let d:any = JSON.parse(data);
+            sessionStorage.removeItem("save");
+            if(d.col && d.doc){
+              this.firestore.save(d);
+            }
+          }
+        }
         // return back control
         return;
       },
