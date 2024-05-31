@@ -173,7 +173,7 @@ export enum Collections{
 }
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCKKFA4iBcqm_RaojG8mBCIwRwiP_caKCE",
+  apiKey: "${{ secrets.APPNAME_SECRETNAME }}",
   authDomain: "impulse-develop.firebaseapp.com",
   projectId: "impulse-develop",
   storageBucket: "impulse-develop.appspot.com",
