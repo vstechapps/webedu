@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateFn, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FirestoreService } from './firestore.service';
+import { Role } from './app.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginGuard {
+export class AdminGuard {
 
   constructor(private firestore:FirestoreService, public router:Router){
 
@@ -15,13 +16,9 @@ export class LoginGuard {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if(this.firestore.user==null){
-      if(route.url.length>0){
-        let s:string[] = [];
-        route.url.forEach(u=>s.push(u.path));
-        sessionStorage.setItem("redirect",s.join("/"));
-      }
-      this.router.navigateByUrl("login");
+    if(this.firestore.user==null || this.firestore.user.role==null || this.firestore.user.role!=Role.ADMIN){
+      this.router.navigateByUrl("");
+      return false;
     }
     return true;
   }

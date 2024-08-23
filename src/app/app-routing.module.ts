@@ -4,8 +4,6 @@ import { HomeComponent } from './home/home.component';
 import { CoursesComponent } from './courses/courses.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
-import { AssessmentComponent } from './assessment/assessment.component';
-import { AssessmentsComponent } from './assessments/assessments.component';
 import { CourseComponent } from './course/course.component';
 import { LoginGuard } from './login.guard';
 import { TopicComponent } from './topic/topic.component';
@@ -14,11 +12,12 @@ import { ViewerComponent } from './viewer/viewer.component';
 import { PageComponent } from './page/page.component';
 import { PagesComponent } from './pages/pages.component';
 import { BookComponent } from './book/book.component';
+import { AdminGuard } from './admin.guard';
 
 const routes: Routes = [
   {path:"",component:HomeComponent},
   {path:"home",redirectTo:"p/home",pathMatch:"full"},
-  {path:"admin",component:AdminComponent},
+  {path:"admin",component:AdminComponent,canActivate:[AdminGuard]},
   {path:"login",component:LoginComponent},
   {path:"logout",component:LogoutComponent},
   {path:"pages",component:PagesComponent},

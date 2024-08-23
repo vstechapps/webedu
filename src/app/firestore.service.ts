@@ -33,14 +33,14 @@ export class FirestoreService {
 
   constructor(public loader:LoaderService) {
     this.refreshUserSession();
-    var collections = [Collections.COURSES, Collections.TOPICS, Collections.PAGES, Collections.MENU];
+    var collections = [Collections.COURSES, Collections.TOPICS, Collections.PAGES, Collections.MENU, Collections.PERMISSIONS];
     for(var i in collections){
       this.init(collections[i])
       this.refresh(collections[i]);
     } 
   }
 
-  init(key:Collections){
+  private init(key:Collections){
     this.cursors[key]={order:0,limit:100};
   }
 
@@ -170,6 +170,7 @@ export enum Collections{
   PAGES="pages",
   ASSESSMENTS="assessments",
   MENU="menu",
+  PERMISSIONS="permissions"
 }
 
 const firebaseConfig = {
