@@ -3,6 +3,7 @@ import { Events, FirestoreService } from './firestore.service';
 import { Router, Scroll } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { delay, filter } from 'rxjs';
+import { DataService } from './data.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ export class AppComponent {
 
   header:boolean =true;
   
-  constructor(private firestore:FirestoreService, public router: Router, public viewportScroller: ViewportScroller){
+  constructor(private firestore:FirestoreService, public router: Router, public viewportScroller: ViewportScroller, private dataService:DataService){
     this.firestore.log(Events.PAGE_VIEW);
     this.handleScroll(router,viewportScroller);
     window.addEventListener(

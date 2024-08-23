@@ -16,7 +16,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class FirestoreService {
   
   app: FirebaseApp= initializeApp(firebaseConfig);
-  analytics: Analytics = getAnalytics(this.app);
+  //analytics: Analytics = getAnalytics(this.app);
   firestore: Firestore = getFirestore(this.app);
   auth: Auth = getAuth(this.app);
   
@@ -32,6 +32,7 @@ export class FirestoreService {
   
 
   constructor(public loader:LoaderService) {
+    console.log("Loading FirestoreService")
     this.refreshUserSession();
     var collections = [Collections.COURSES, Collections.TOPICS, Collections.PAGES, Collections.MENU, Collections.PERMISSIONS];
     for(var i in collections){
@@ -141,7 +142,7 @@ export class FirestoreService {
       message.data=data;
     }
     console.log("Sending Event to Analytics: ",message);
-    logEvent(this.analytics, event, message);
+    //logEvent(this.analytics, event, message);
   }
 
   
